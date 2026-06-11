@@ -1,0 +1,8 @@
+{
+  "name": "Remix: Nzila Academy",
+  "description": "Nzila Academy is a high-tech educational system featuring an immersive student learning portal and an executive admin suite.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
