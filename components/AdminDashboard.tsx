@@ -403,7 +403,7 @@ export default function AdminDashboard() {
     return { title: c.title, count: enrollments, pct: `${pct}%` };
   });
 
-  const activeStudentsCount = students.filter(s => s.status === 'Ativo' || s.status === 'Em Andamento').length;
+  const activeStudentsCount = students.filter(s => s.status === 'Novos' || s.status === 'Em Andamento').length;
   const engagementFactor = totalStudents > 0 ? ((activeStudentsCount / totalStudents) * 100).toFixed(1) : '0.0';
 
   const { activityLogs } = useApp();
