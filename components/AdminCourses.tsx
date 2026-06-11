@@ -458,9 +458,14 @@ export default function AdminCourses() {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const blobUrl = URL.createObjectURL(file);
-    setNewCourseImage(blobUrl);
-    setCoverProgress(100);
+    setCoverProgress(25);
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const base64String = event.target?.result as string;
+      setNewCourseImage(base64String);
+      setCoverProgress(100);
+    };
+    reader.readAsDataURL(file);
   };
 
   const triggerEditCoverFileInput = () => {
@@ -471,9 +476,14 @@ export default function AdminCourses() {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const blobUrl = URL.createObjectURL(file);
-    setEditCourseImage(blobUrl);
-    setEditCoverProgress(100);
+    setEditCoverProgress(25);
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const base64String = event.target?.result as string;
+      setEditCourseImage(base64String);
+      setEditCoverProgress(100);
+    };
+    reader.readAsDataURL(file);
   };
 
   // Add material row inline

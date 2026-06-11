@@ -42,7 +42,7 @@ function getEmbedUrl(url: string | undefined): string | null {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     const match = trimmed.match(regExp);
     if (match && match[2].length === 11) {
-      return `https://www.youtube.com/embed/${match[2]}`;
+      return `https://www.youtube.com/embed/${match[2]}?controls=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&fs=1&disablekb=0`;
     }
   } catch (e) {
     // Fail silently, return original

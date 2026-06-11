@@ -138,14 +138,7 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
           </p>
 
           <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-            <button 
-              onClick={handleStartClass}
-              className="px-6 py-3 bg-white hover:bg-gray-100 text-purple-950 rounded-xl text-xs sm:text-sm font-mono font-bold flex items-center justify-center gap-2 shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98] hover:cursor-pointer"
-              id="vitrine-btn-resume"
-            >
-              <Play className="w-4 h-4 fill-purple-950 text-purple-950" />
-              RETOMAR PRÓXIMA AULA
-            </button>
+            {/* Botão Retomar Aula removido. O utilizador entra ao clicar no card do curso na vitrine. */}
             <button
               onClick={() => handleCourseClick(enrolledCourse)}
               className="px-5 py-3 bg-purple-900/45 hover:bg-purple-800/60 border border-purple-500/30 text-white rounded-xl text-xs sm:text-sm font-mono font-bold flex items-center justify-center gap-1.5 backdrop-blur-sm transition-all hover:scale-[1.02] active:scale-[0.98] hover:cursor-pointer"
@@ -199,12 +192,6 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
             </div>
 
             <div className="mt-4 pt-3 border-t border-purple-950/20 flex items-center justify-between text-xs font-mono">
-              <button 
-                onClick={handleStartClass}
-                className="text-cyan-400 hover:text-cyan-300 font-bold flex items-center gap-1 cursor-pointer transition-colors"
-              >
-                Fazer Aulas Agora <ArrowUpRight className="w-3.5 h-3.5" />
-              </button>
               <span className="text-gray-400 text-[10px] font-mono">Último acesso: Hoje</span>
             </div>
           </div>

@@ -396,10 +396,15 @@ export default function AdminDashboard() {
   ];
 
   const courseStats = courses.map(c => {
-    const enrollments = students.filter(s => s.courseId === c.id).length;
+    const enrollments = students.filter(s => 
+      s.courseId === c.id || s.enrolledCourses?.some(ec => ec.courseId === c.id)
+    ).length;
     const pct = totalStudents > 0 ? Math.round((enrollments / totalStudents) * 100) : 0;
     return { title: c.title, count: enrollments, pct: `${pct}%` };
   });
+
+  const activeStudentsCount = students.filter(s => s.status === 'Ativo' || s.status === 'Em Andamento').length;
+  const engagementFactor = totalStudents > 0 ? ((activeStudentsCount / totalStudents) * 100).toFixed(1) : '0.0';
 
   const { activityLogs } = useApp();
   const recentEvents = activityLogs.slice(0, 4).map(log => ({
@@ -1150,8 +1155,8 @@ export default function AdminDashboard() {
           </div>
 
           <div className="flex justify-between p-3.5 rounded-lg bg-purple-950/10 border border-purple-500/5 text-xs text-purple-300 font-mono">
-            <span className="block">Fator de Engajamento Global: 89.2%</span>
-            <span className="block text-gray-500">• 4 Classes de Masters</span>
+            <span className="block">Fator de Engajamento Global: {engagementFactor}%</span>
+            <span className="block text-gray-500">• {courses.length} Classes de Masters</span>
           </div>
 
           {/* SECÇÃO 4.B: Novos Alunos Cadastrados Hoje (MELHORIA ADICIONADA) */}

@@ -206,6 +206,25 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         if (dbStudents !== null) {
           setStudents(dbStudents);
           localStorage.setItem('nz_students', JSON.stringify(dbStudents));
+          
+          // VERIFICAÇÃO DE SEGURANÇA: Se o aluno atual foi apagado do banco de dados, expulsar da sessão.
+          if (typeof window !== 'undefined') {
+            const storedUser = localStorage.getItem('nz_current_user');
+            if (storedUser) {
+              try {
+                const userObj = JSON.parse(storedUser);
+                if (userObj && userObj.role !== 'admin') {
+                  const stillExists = dbStudents.some((s: Student) => s.email.trim().toLowerCase() === userObj.email.trim().toLowerCase());
+                  if (!stillExists) {
+                    console.warn("Segurança: Estudante não encontrado na base de dados. Sessão invalidada.");
+                    localStorage.removeItem('nz_current_user');
+                    setCurrentUser(null);
+                    if (supabase) supabase.auth.signOut();
+                  }
+                }
+              } catch(e) {}
+            }
+          }
         }
         if (dbPosts !== null) {
           setPosts(dbPosts);
@@ -563,12 +582,19 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const logout = () => {
+  const logout = async () => {
     setCurrentUser(null);
     setIsAdmin(false);
     if (typeof window !== 'undefined') {
       localStorage.removeItem('nz_current_user');
       localStorage.setItem('nz_is_admin', 'false');
+    }
+    if (supabase) {
+      try {
+        await supabase.auth.signOut();
+      } catch (err) {
+        console.error("Erro ao fazer signout no Supabase:", err);
+      }
     }
   };
 
@@ -614,10 +640,19 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     sync('nz_access_codes', updatedCodes);
   };
 
-  const deleteCode = (codeToDelete: string) => {
+  const deleteCode = async (codeToDelete: string) => {
     const updatedCodes = accessCodes.filter(c => c.code !== codeToDelete);
     setAccessCodes(updatedCodes);
     sync('nz_access_codes', updatedCodes);
+    
+    if (supabase) {
+      const isConnected = await dbService.testConnection();
+      if (isConnected) {
+        supabase.from('access_codes').delete().eq('code', codeToDelete).then(({ error }: { error: any }) => {
+          if (error) console.warn("Erro ao deletar código no Supabase:", error);
+        });
+      }
+    }
   };
 
   const updateStudentStatus = (studentId: string, newStatus: Student['status']) => {
