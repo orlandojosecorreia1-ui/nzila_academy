@@ -729,7 +729,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     if (supabase) {
       dbService.testConnection().then(isConnected => {
         if (isConnected) {
-          supabase.from('courses').delete().eq('id', courseId).then(({ error }) => {
+          supabase.from('courses').delete().eq('id', courseId).then(({ error }: { error: any }) => {
             if (error) console.warn("Supabase course delete error:", error);
             else console.log(`☁️ Supabase: Curso ${courseId} deletado com sucesso.`);
           });
@@ -747,7 +747,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     if (supabase) {
       dbService.testConnection().then(isConnected => {
         if (isConnected) {
-          supabase.from('students').delete().eq('id', studentId).then(({ error }) => {
+          supabase.from('students').delete().eq('id', studentId).then(({ error }: { error: any }) => {
             if (error) console.warn("Supabase student delete error:", error);
             else console.log(`☁️ Supabase: Aluno ${studentId} deletado com sucesso.`);
           });
