@@ -1,18 +1,18 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { NextRequest, NextResponse } from "next/server";
 
-// Initialize client with key and the build User-Agent for custom telemetry
-const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY,
-  httpOptions: {
-    headers: {
-      'User-Agent': 'aistudio-build',
-    }
-  }
-});
-
 export async function POST(req: NextRequest) {
   try {
+    // Initialize client inside the handler to prevent 500 crashes if key is undefined at startup
+    const ai = new GoogleGenAI({
+      apiKey: process.env.GEMINI_API_KEY || "dummy_key_to_prevent_crash",
+      httpOptions: {
+        headers: {
+          'User-Agent': 'aistudio-build',
+        }
+      }
+    });
+
     const { prompt, courses } = await req.json();
 
     if (!prompt) {
