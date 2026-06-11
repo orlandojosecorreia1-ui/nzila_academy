@@ -77,7 +77,6 @@ export default function Home() {
   // Student Navigation Side-Links definitions
   const studentNavItems = [
     { id: 'vitrine', label: 'Ementas e Grade', icon: GraduationCap },
-    { id: 'player', label: 'Player de Aula', icon: Video },
     { id: 'feed', label: 'Feed Comunidade', icon: MessageSquare },
     { id: 'settings', label: 'Perfil e Alertas', icon: Settings }
   ];

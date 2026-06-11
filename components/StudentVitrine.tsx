@@ -138,13 +138,19 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
           </p>
 
           <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-            {/* Botão Retomar Aula removido. O utilizador entra ao clicar no card do curso na vitrine. */}
             <button
-              onClick={() => handleCourseClick(enrolledCourse)}
-              className="px-5 py-3 bg-purple-900/45 hover:bg-purple-800/60 border border-purple-500/30 text-white rounded-xl text-xs sm:text-sm font-mono font-bold flex items-center justify-center gap-1.5 backdrop-blur-sm transition-all hover:scale-[1.02] active:scale-[0.98] hover:cursor-pointer"
+              onClick={handleStartClass}
+              className="px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-xl text-xs sm:text-sm font-mono font-bold flex items-center justify-center gap-2 transition-all hover:scale-[1.02] active:scale-[0.98] hover:cursor-pointer shadow-lg shadow-purple-900/40"
+            >
+              <Play className="w-4 h-4 fill-white" />
+              Assistir
+            </button>
+            <button
+              onClick={() => setSelectedPreviewCourse(enrolledCourse)}
+              className="px-5 py-3 bg-white/10 hover:bg-white/15 border border-white/20 text-white rounded-xl text-xs sm:text-sm font-mono font-bold flex items-center justify-center gap-1.5 backdrop-blur-sm transition-all hover:scale-[1.02] active:scale-[0.98] hover:cursor-pointer"
             >
               <Info className="w-4 h-4" />
-              Saber Mais
+              Mais informações
             </button>
           </div>
 
@@ -366,10 +372,12 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
         </div>
       </div>
 
-      {/* 4. Interactive Details Modal (Access Block for non-assigned courses) */}
+      {/* 4. Interactive Details Modal */}
       <AnimatePresence>
-        {selectedPreviewCourse && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        {selectedPreviewCourse && (() => {
+          const isEnrolledInPreview = isCourseEnrolled(selectedPreviewCourse.id);
+          return (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4">
             {/* Backdrop blur layer */}
             <motion.div 
               initial={{ opacity: 0 }}
@@ -384,7 +392,7 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
               initial={{ opacity: 0, scale: 0.95, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
-              className="relative w-full max-w-lg bg-[#0e0a1f] border border-purple-500/25 rounded-2xl overflow-hidden shadow-2xl z-10 font-sans"
+              className="relative w-full max-w-lg bg-[#0e0a1f] border border-purple-500/25 rounded-2xl overflow-hidden shadow-2xl z-10 font-sans max-h-[90vh] overflow-y-auto custom-scrollbar"
             >
               {/* Close button */}
               <button 
@@ -395,7 +403,7 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
               </button>
 
               {/* Poster Cover Banner */}
-              <div className="relative h-48 w-full select-none">
+              <div className="relative h-40 sm:h-48 w-full select-none flex-shrink-0">
                 <img 
                   src={selectedPreviewCourse.image} 
                   alt={selectedPreviewCourse.title} 
@@ -405,21 +413,27 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0e0a1f] via-transparent to-transparent" />
                 
                 {/* Visual Label Tag */}
-                <div className="absolute bottom-4 left-4 flex gap-2">
+                <div className="absolute bottom-4 left-4 flex flex-wrap gap-2">
                   <span className={`border text-[10px] font-mono px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider ${categoriesColors[selectedPreviewCourse.category] || 'bg-purple-950/20 text-purple-300 border-purple-500/20'}`}>
                     {selectedPreviewCourse.category}
                   </span>
-                  <span className="bg-red-950/80 border border-red-500/20 text-red-400 text-[10px] font-mono px-2.5 py-0.5 rounded-full font-bold flex items-center gap-1">
-                    <Lock className="w-3 h-3" /> ACESSO RESTRITO
-                  </span>
+                  {isEnrolledInPreview ? (
+                    <span className="bg-emerald-950/80 border border-emerald-500/20 text-emerald-400 text-[10px] font-mono px-2.5 py-0.5 rounded-full font-bold flex items-center gap-1">
+                      <CheckCircle className="w-3 h-3" /> INSCRITO
+                    </span>
+                  ) : (
+                    <span className="bg-red-950/80 border border-red-500/20 text-red-400 text-[10px] font-mono px-2.5 py-0.5 rounded-full font-bold flex items-center gap-1">
+                      <Lock className="w-3 h-3" /> ACESSO RESTRITO
+                    </span>
+                  )}
                 </div>
               </div>
 
               {/* Information body container */}
-              <div className="p-6 space-y-4">
+              <div className="p-4 sm:p-6 space-y-4">
                 <div className="space-y-1.5 text-left">
                   <span className="text-purple-400 text-xs font-mono font-semibold block uppercase tracking-wider">Masterclass Corporativa</span>
-                  <h3 className="text-xl font-display font-black text-white leading-tight">
+                  <h3 className="text-lg sm:text-xl font-display font-black text-white leading-tight">
                     {selectedPreviewCourse.title}
                   </h3>
                   <p className="text-xs text-gray-400 font-mono">
@@ -434,60 +448,100 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
                   </p>
                 </div>
 
-                {solicitationSuccess ? (
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="bg-emerald-950/30 border border-emerald-500/35 p-4 rounded-xl flex items-start gap-3"
-                  >
-                    <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-                    <div className="space-y-1 text-left">
-                      <span className="block text-xs font-bold text-emerald-400">Solicitação Registrada!</span>
-                      <span className="block text-[11px] text-gray-300 leading-normal">
-                        O administrador já recebeu seu pedido de matrícula para <strong>{selectedPreviewCourse.title}</strong> e fará a análise em instantes.
-                      </span>
-                    </div>
-                  </motion.div>
-                ) : (
-                  /* Locker Instruction & Request callout */
-                  <div className="bg-purple-950/20 border border-purple-500/20 p-4 rounded-xl flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-purple-500/10 border border-purple-500/20 flex items-center justify-center flex-shrink-0 text-purple-300">
-                      <Lock className="w-4.5 h-4.5 text-purple-400 animate-pulse" />
-                    </div>
-                    <div className="space-y-1 text-left">
-                      <span className="block text-xs font-bold text-white">Solicitar Matrícula</span>
-                      <span className="block text-[11px] text-gray-300 leading-normal">
-                        Você ainda não possui acesso ativo a esta trilha. Por favor, <strong>consulte o administrador ou tutor pedagógico</strong> para te dar o acesso em seu crachá digital.
-                      </span>
+                {/* Course Structure — modules and lessons listing (only for enrolled) */}
+                {isEnrolledInPreview && selectedPreviewCourse.lessonsList && selectedPreviewCourse.lessonsList.length > 0 && (
+                  <div className="space-y-3">
+                    <span className="text-[10px] font-mono text-cyan-400 uppercase tracking-widest block font-bold">Estrutura Curricular</span>
+                    <div className="space-y-2 max-h-48 overflow-y-auto custom-scrollbar pr-1">
+                      {selectedPreviewCourse.lessonsList.map((mod, modIdx) => (
+                        <div key={modIdx} className="bg-[#0a0716]/60 border border-purple-950/30 rounded-lg p-3 space-y-2">
+                          <div className="flex items-center gap-2 text-xs font-mono font-bold text-purple-300">
+                            <BookOpen className="w-3.5 h-3.5 text-purple-400 flex-shrink-0" />
+                            <span className="line-clamp-1">{mod.moduleName}</span>
+                          </div>
+                          <div className="space-y-1 pl-5">
+                            {mod.lessons.map((lesson, lIdx) => (
+                              <div key={lIdx} className="flex items-center gap-2 text-[11px] text-gray-400">
+                                <Play className="w-2.5 h-2.5 text-cyan-500 flex-shrink-0" />
+                                <span className="line-clamp-1">{lesson.title}</span>
+                                {lesson.duration && <span className="text-[9px] text-gray-500 ml-auto flex-shrink-0">{lesson.duration}</span>}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 )}
 
-                {/* Quick actions for calling administrator */}
-                <div className="grid grid-cols-2 gap-3 pt-1">
-                  <a
-                    href="https://wa.me/244900000000?text=Ol%C3%A1%21+Gostaria+de+solicitar+o+acesso+ao+curso+de+Masterclass+no+portal+Nzila"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="py-2.5 px-4 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-bold flex items-center justify-center gap-1.5 transition-all hover:scale-[1.01]"
-                  >
-                    <MessageCircle className="w-4 h-4" /> Whatsapp 💬
-                  </a>
+                {/* Actions */}
+                {isEnrolledInPreview ? (
                   <button
                     onClick={() => {
-                      setSolicitationSuccess(true);
-                      addActivityLog(`Solicitou matrícula no curso: "${selectedPreviewCourse.title}"`, 'courses');
+                      onSelectCourse(selectedPreviewCourse.id);
+                      setSelectedPreviewCourse(null);
                     }}
-                    disabled={solicitationSuccess}
-                    className="py-2.5 px-4 rounded-lg bg-purple-600 hover:bg-purple-500 disabled:bg-purple-950 disabled:text-gray-500 text-white font-mono text-xs font-bold transition-all hover:scale-[1.01] cursor-pointer"
+                    className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-mono text-sm font-bold flex items-center justify-center gap-2 transition-all hover:scale-[1.01] cursor-pointer shadow-lg shadow-purple-900/30"
                   >
-                    {solicitationSuccess ? 'Enviado ✔' : 'Solicitar pelo Portal'}
+                    <Play className="w-4 h-4 fill-white" /> Assistir Aulas
                   </button>
-                </div>
+                ) : (
+                  <>
+                    {solicitationSuccess ? (
+                      <motion.div 
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="bg-emerald-950/30 border border-emerald-500/35 p-4 rounded-xl flex items-start gap-3"
+                      >
+                        <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                        <div className="space-y-1 text-left">
+                          <span className="block text-xs font-bold text-emerald-400">Solicitação Registrada!</span>
+                          <span className="block text-[11px] text-gray-300 leading-normal">
+                            O administrador já recebeu seu pedido de matrícula para <strong>{selectedPreviewCourse.title}</strong> e fará a análise em instantes.
+                          </span>
+                        </div>
+                      </motion.div>
+                    ) : (
+                      <div className="bg-purple-950/20 border border-purple-500/20 p-4 rounded-xl flex items-start gap-3">
+                        <div className="w-8 h-8 rounded-full bg-purple-500/10 border border-purple-500/20 flex items-center justify-center flex-shrink-0 text-purple-300">
+                          <Lock className="w-4 h-4 text-purple-400 animate-pulse" />
+                        </div>
+                        <div className="space-y-1 text-left">
+                          <span className="block text-xs font-bold text-white">Solicitar Matrícula</span>
+                          <span className="block text-[11px] text-gray-300 leading-normal">
+                            Você ainda não possui acesso ativo a esta trilha. Por favor, <strong>consulte o administrador ou tutor pedagógico</strong> para te dar o acesso em seu crachá digital.
+                          </span>
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="grid grid-cols-2 gap-3 pt-1">
+                      <a
+                        href="https://wa.me/244900000000?text=Ol%C3%A1%21+Gostaria+de+solicitar+o+acesso+ao+curso+de+Masterclass+no+portal+Nzila"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="py-2.5 px-4 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-bold flex items-center justify-center gap-1.5 transition-all hover:scale-[1.01]"
+                      >
+                        <MessageCircle className="w-4 h-4" /> Whatsapp 💬
+                      </a>
+                      <button
+                        onClick={() => {
+                          setSolicitationSuccess(true);
+                          addActivityLog(`Solicitou matrícula no curso: "${selectedPreviewCourse.title}"`, 'courses');
+                        }}
+                        disabled={solicitationSuccess}
+                        className="py-2.5 px-4 rounded-lg bg-purple-600 hover:bg-purple-500 disabled:bg-purple-950 disabled:text-gray-500 text-white font-mono text-xs font-bold transition-all hover:scale-[1.01] cursor-pointer"
+                      >
+                        {solicitationSuccess ? 'Enviado ✔' : 'Solicitar pelo Portal'}
+                      </button>
+                    </div>
+                  </>
+                )}
               </div>
             </motion.div>
           </div>
-        )}
+          );
+        })()}
       </AnimatePresence>
 
     </div>

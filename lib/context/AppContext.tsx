@@ -63,6 +63,7 @@ export interface Student {
   registeredAt: string;
   codeUsed: string;
   enrolledCourses?: { courseId: string; courseTitle: string }[];
+  isHighlightedNetworking?: boolean;
 }
 
 export interface Post {
@@ -131,6 +132,7 @@ interface AppContextType {
   updateStudentStatus: (studentId: string, newStatus: Student['status']) => void;
   updateStudent: (studentId: string, updatedFields: Partial<Student>) => void;
   deleteStudent: (studentId: string) => void;
+  toggleStudentNetworkingStatus: (studentId: string) => void;
   addCourseToStudent: (studentId: string, courseId: string) => void;
   enrollExistingStudentDirectly: (student: Omit<Student, 'id' | 'registeredAt'>) => void;
   addNewCourse: (course: Course) => void;
@@ -792,6 +794,26 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     addActivityLog(`Aluno removido do sistema: "${studentName}"`, 'system');
   };
 
+  const toggleStudentNetworkingStatus = (studentId: string) => {
+    const updatedStudents = students.map(s => {
+      if (s.id === studentId) {
+        return { ...s, isHighlightedNetworking: !s.isHighlightedNetworking };
+      }
+      return s;
+    });
+    setStudents(updatedStudents);
+    sync('nz_students', updatedStudents);
+    const student = updatedStudents.find(s => s.id === studentId);
+    if (student) {
+      addActivityLog(
+        student.isHighlightedNetworking
+          ? `Aluno "${student.name}" adicionado aos Destaques de Networking`
+          : `Aluno "${student.name}" removido dos Destaques de Networking`,
+        'system'
+      );
+    }
+  };
+
   const addNewPost = (content: string, tags: string[]) => {
     const authorName = currentUser?.name || 'Fulano de Tal';
     const authorTitle = currentUser?.role === 'admin' ? 'Administrador Co-Founder' : 'Aluno Pro';
@@ -952,6 +974,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       updateCourse,
       deleteCourse,
       deleteStudent,
+      toggleStudentNetworkingStatus,
       addNewPost,
       likePost,
       addComment,
