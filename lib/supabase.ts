@@ -21,12 +21,7 @@ if (typeof window !== "undefined") {
 // Initialize instantly if keys are ready in scope (from env or LocalStorage)
 if (supabaseUrl && supabaseAnonKey) {
   try {
-    supabase = createClient(supabaseUrl, supabaseAnonKey, {
-      auth: {
-        persistSession: false,
-        autoRefreshToken: false,
-      },
-    });
+    supabase = createClient(supabaseUrl, supabaseAnonKey);
   } catch (err) {
     console.warn("Initial Supabase client creation failed:", err);
   }
@@ -116,12 +111,7 @@ export async function initializeSupabaseDynamic(): Promise<boolean> {
           supabaseUrl = data.supabaseUrl;
           supabaseAnonKey = data.supabaseAnonKey;
 
-          supabase = createClient(supabaseUrl, supabaseAnonKey, {
-            auth: {
-              persistSession: false,
-              autoRefreshToken: false,
-            },
-          });
+          supabase = createClient(supabaseUrl, supabaseAnonKey);
 
           console.log("⚡ Dynamic Supabase client re-initialized successfully!");
         }
@@ -219,4 +209,31 @@ export const dbService = {
       return false;
     }
   },
+
+  async uploadFile(bucket: string, path: string, file: File): Promise<string | null> {
+    const activeClient = supabase;
+    if (!activeClient) return null;
+    try {
+      const { data, error } = await activeClient.storage
+        .from(bucket)
+        .upload(path, file, {
+          cacheControl: '3600',
+          upsert: true
+        });
+        
+      if (error) {
+        console.error(`Error uploading to bucket "${bucket}":`, error.message);
+        return null;
+      }
+
+      const { data: publicData } = activeClient.storage
+        .from(bucket)
+        .getPublicUrl(path);
+
+      return publicData?.publicUrl || null;
+    } catch (err) {
+      console.error(`Exception uploading file:`, err);
+      return null;
+    }
+  }
 };

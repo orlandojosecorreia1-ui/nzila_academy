@@ -43,7 +43,8 @@ CREATE TABLE IF NOT EXISTS students (
     status TEXT DEFAULT 'Novos', -- 'Novos' | 'Em Andamento' | 'Concluídos' | 'Inativos'
     registered_at TEXT,
     code_used TEXT,
-    enrolled_courses JSONB DEFAULT '[]'::jsonb
+    enrolled_courses JSONB DEFAULT '[]'::jsonb,
+    is_highlighted_networking BOOLEAN DEFAULT false
 );
 
 -- 4. Posts Table
@@ -105,34 +106,50 @@ ALTER TABLE activity_logs ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Allow public select on courses" ON courses;
 CREATE POLICY "Allow public select on courses" ON courses FOR SELECT USING (true);
 DROP POLICY IF EXISTS "Allow public all on courses" ON courses;
-CREATE POLICY "Allow public all on courses" ON courses FOR ALL USING (true);
+CREATE POLICY "Allow public all on courses" ON courses FOR ALL USING (true) WITH CHECK (true);
 
 DROP POLICY IF EXISTS "Allow public select on access_codes" ON access_codes;
 CREATE POLICY "Allow public select on access_codes" ON access_codes FOR SELECT USING (true);
 DROP POLICY IF EXISTS "Allow public all on access_codes" ON access_codes;
-CREATE POLICY "Allow public all on access_codes" ON access_codes FOR ALL USING (true);
+CREATE POLICY "Allow public all on access_codes" ON access_codes FOR ALL USING (true) WITH CHECK (true);
 
 DROP POLICY IF EXISTS "Allow public select on students" ON students;
 CREATE POLICY "Allow public select on students" ON students FOR SELECT USING (true);
 DROP POLICY IF EXISTS "Allow public all on students" ON students;
-CREATE POLICY "Allow public all on students" ON students FOR ALL USING (true);
+CREATE POLICY "Allow public all on students" ON students FOR ALL USING (true) WITH CHECK (true);
 
 DROP POLICY IF EXISTS "Allow public select on posts" ON posts;
 CREATE POLICY "Allow public select on posts" ON posts FOR SELECT USING (true);
 DROP POLICY IF EXISTS "Allow public all on posts" ON posts;
-CREATE POLICY "Allow public all on posts" ON posts FOR ALL USING (true);
+CREATE POLICY "Allow public all on posts" ON posts FOR ALL USING (true) WITH CHECK (true);
 
 DROP POLICY IF EXISTS "Allow public select on transactions" ON transactions;
 CREATE POLICY "Allow public select on transactions" ON transactions FOR SELECT USING (true);
 DROP POLICY IF EXISTS "Allow public all on transactions" ON transactions;
-CREATE POLICY "Allow public all on transactions" ON transactions FOR ALL USING (true);
+CREATE POLICY "Allow public all on transactions" ON transactions FOR ALL USING (true) WITH CHECK (true);
 
 DROP POLICY IF EXISTS "Allow public select on notifications" ON notifications;
 CREATE POLICY "Allow public select on notifications" ON notifications FOR SELECT USING (true);
 DROP POLICY IF EXISTS "Allow public all on notifications" ON notifications;
-CREATE POLICY "Allow public all on notifications" ON notifications FOR ALL USING (true);
+CREATE POLICY "Allow public all on notifications" ON notifications FOR ALL USING (true) WITH CHECK (true);
 
 DROP POLICY IF EXISTS "Allow public select on activity_logs" ON activity_logs;
 CREATE POLICY "Allow public select on activity_logs" ON activity_logs FOR SELECT USING (true);
 DROP POLICY IF EXISTS "Allow public all on activity_logs" ON activity_logs;
-CREATE POLICY "Allow public all on activity_logs" ON activity_logs FOR ALL USING (true);
+CREATE POLICY "Allow public all on activity_logs" ON activity_logs FOR ALL USING (true) WITH CHECK (true);
+
+-- ==========================================
+-- STORAGE BUCKETS (FOR VIDEO UPLOADS)
+-- ==========================================
+INSERT INTO storage.buckets (id, name, public) 
+VALUES ('videos', 'videos', true)
+ON CONFLICT (id) DO NOTHING;
+
+DROP POLICY IF EXISTS "Allow public select on videos bucket" ON storage.objects;
+CREATE POLICY "Allow public select on videos bucket" ON storage.objects FOR SELECT USING (bucket_id = 'videos');
+DROP POLICY IF EXISTS "Allow public insert on videos bucket" ON storage.objects;
+CREATE POLICY "Allow public insert on videos bucket" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'videos');
+DROP POLICY IF EXISTS "Allow public update on videos bucket" ON storage.objects;
+CREATE POLICY "Allow public update on videos bucket" ON storage.objects FOR UPDATE USING (bucket_id = 'videos');
+DROP POLICY IF EXISTS "Allow public delete on videos bucket" ON storage.objects;
+CREATE POLICY "Allow public delete on videos bucket" ON storage.objects FOR DELETE USING (bucket_id = 'videos');

@@ -27,19 +27,9 @@ export default function AdminDashboard() {
     enrollExistingStudentDirectly, 
     addActivityLog, 
     triggerSystemNotification,
-    supabaseConnected,
-    factoryReset
+    supabaseConnected
   } = useApp();
 
-  const [syncStatus, setSyncStatus] = React.useState<{loading: boolean; success?: boolean; error?: string | null}>({ loading: false });
-
-
-  const handleFactoryReset = async () => {
-    if (window.confirm("ATENÇÃO: Isto apagará TODOS os cursos, alunos, vouchers e faturamentos do banco de dados permanentemente. Continuar?")) {
-      setSyncStatus({ loading: true, error: null });
-      await factoryReset();
-    }
-  };
 
   const totalStudents = students.length;
   const redeemedVouchers = accessCodes.filter(c => c.status === 'resgatado').length;
@@ -443,24 +433,7 @@ export default function AdminDashboard() {
           </div>
 
           <div className="flex gap-2">
-            <button
-              onClick={handleFactoryReset}
-              disabled={syncStatus.loading}
-              className="text-[10px] font-mono font-bold tracking-wide uppercase px-2.5 py-1.5 bg-rose-950/40 border border-rose-500/30 text-rose-400 hover:bg-rose-900/60 transition rounded-lg flex items-center gap-1.5"
-              title="Apagar todo o banco de dados (Cursos, Alunos, Cupons, etc)"
-            >
-              {syncStatus.loading ? '⌛ Apagando...' : '🔴 Resetar Sistema'}
-            </button>
-            {syncStatus.error && (
-              <div className="text-[9px] font-mono text-rose-400 bg-rose-950/50 border border-rose-500/30 px-2 py-1 rounded w-full sm:w-auto">
-                ⚠ {syncStatus.error.slice(0, 50)}...
-              </div>
-            )}
-            {syncStatus.success && (
-              <div className="text-[9px] font-mono text-emerald-400 bg-emerald-950/50 border border-emerald-500/30 px-2 py-1 rounded w-full sm:w-auto">
-                ✔️ Sucesso operado!
-              </div>
-            )}
+            {/* Botões de sincronização manual foram removidos, o sistema opera 100% em tempo real */}
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import { useApp, Course, Lesson } from '@/lib/context/AppContext';
+import { dbService } from '@/lib/supabase';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   BookOpen, 
@@ -406,13 +407,23 @@ export default function AdminCourses() {
     fileInputRef.current?.click();
   };
 
-  const handleFileUploadChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUploadChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     setUploadedFileName(file.name);
-    const blobUrl = URL.createObjectURL(file);
-    setLessonEditVideoUrl(blobUrl);
+    setUploadProgress(25);
+
+    const publicUrl = await dbService.uploadFile('videos', `lessons/${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.\-_]/g, '')}`, file);
+
+    if (publicUrl) {
+      setLessonEditVideoUrl(publicUrl);
+    } else {
+      // Fallback
+      const blobUrl = URL.createObjectURL(file);
+      setLessonEditVideoUrl(blobUrl);
+    }
+    
     setUploadProgress(100);
   };
 

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useApp, Course, Lesson } from '@/lib/context/AppContext';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
@@ -34,15 +34,57 @@ interface StudentPlayerProps {
 // Helper to convert watch links or short links to proper iframe embed syntax
 function getEmbedUrl(url: string | undefined): string | null {
   if (!url) return null;
-  const trimmed = url.trim();
+  let trimmed = url.trim();
+
+  // Se o utilizador colar o código HTML do iframe completo, extrair a URL do atributo src
+  if (trimmed.includes('<iframe') && trimmed.includes('src=')) {
+    const srcMatch = trimmed.match(/src=["']([^"']+)["']/);
+    if (srcMatch) {
+      trimmed = srcMatch[1];
+    }
+  }
+
+  // Vimeo URL parsing and custom clean parameters
+  if (trimmed.includes('vimeo.com') || trimmed.includes('player.vimeo.com')) {
+    // Extract video ID
+    const vimeoMatch = trimmed.match(/vimeo\.com\/(?:video\/)?([0-9]+)/) || trimmed.match(/player\.vimeo\.com\/video\/([0-9]+)/);
+    if (vimeoMatch) {
+      const videoId = vimeoMatch[1];
+      let hash = "";
+      
+      // Try to extract privacy hash if present
+      // Example: vimeo.com/123456789/abcdef1234 or vimeo.com/video/123456789?h=abcdef1234
+      const hashMatch = trimmed.match(/\/([a-zA-Z0-9]{10,})$/) || trimmed.match(/[?&]h=([a-zA-Z0-9]+)/);
+      if (hashMatch && hashMatch[1] !== videoId) {
+        hash = hashMatch[1];
+      } else {
+        // Fallback check if it's in the format vimeo.com/123456789/abcdef1234 where slash format is used
+        const parts = trimmed.split('/');
+        const idIndex = parts.indexOf(videoId);
+        if (idIndex !== -1 && parts[idIndex + 1]) {
+          const cleanPart = parts[idIndex + 1].split(/[?#]/)[0];
+          if (cleanPart && cleanPart !== "video" && cleanPart.length > 3) {
+            hash = cleanPart;
+          }
+        }
+      }
+
+      let embedUrl = `https://player.vimeo.com/video/${videoId}?autoplay=0&title=0&byline=0&portrait=0&badge=0&controls=1&share=0&dnt=1`;
+      if (hash) {
+        embedUrl += `&h=${hash}`;
+      }
+      return embedUrl;
+    }
+    return trimmed;
+  }
+
   if (trimmed.includes('/embed/')) return trimmed;
-  if (trimmed.includes('player.vimeo.com')) return trimmed;
   
   try {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     const match = trimmed.match(regExp);
     if (match && match[2].length === 11) {
-      return `https://www.youtube.com/embed/${match[2]}?controls=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&fs=1&disablekb=0`;
+      return `https://www.youtube.com/embed/${match[2]}?controls=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&fs=1&disablekb=0&enablejsapi=1`;
     }
   } catch (e) {
     // Fail silently, return original
@@ -64,6 +106,59 @@ export default function StudentPlayer({ initialCourseId, onGoBack, onGoToCommuni
   const [selectedLesson, setSelectedLesson] = useState<Lesson>(firstLesson);
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoProgress, setVideoProgress] = useState(0);
+
+  // Refs for the right-click blocker overlay system
+  const videoContainerRef = useRef<HTMLDivElement>(null);
+  const rightClickOverlayRef = useRef<HTMLDivElement>(null);
+
+  // Right-click blocker: detect right-mousedown anywhere in the video container,
+  // temporarily activate a full-coverage overlay to intercept the contextmenu event,
+  // then deactivate it so normal left-click interactions (play, pause, volume, timeline, fullscreen) work.
+  useEffect(() => {
+    const container = videoContainerRef.current;
+    const overlay = rightClickOverlayRef.current;
+    if (!container || !overlay) return;
+
+    let timer: ReturnType<typeof setTimeout> | null = null;
+
+    const onMouseDown = (e: MouseEvent) => {
+      if (e.button === 2) {
+        // Right-click detected: activate overlay immediately
+        overlay.style.pointerEvents = 'auto';
+        // Clear any pending deactivation
+        if (timer) clearTimeout(timer);
+      }
+    };
+
+    const onContextMenu = (e: Event) => {
+      // Block the context menu entirely
+      e.preventDefault();
+      e.stopPropagation();
+      // Deactivate overlay after a brief delay so it doesn't linger
+      timer = setTimeout(() => {
+        if (overlay) overlay.style.pointerEvents = 'none';
+      }, 100);
+    };
+
+    const onMouseUp = () => {
+      // Safety net: deactivate overlay on any mouseup
+      timer = setTimeout(() => {
+        if (overlay) overlay.style.pointerEvents = 'none';
+      }, 200);
+    };
+
+    // Use capture phase so we intercept before the iframe can consume it
+    container.addEventListener('mousedown', onMouseDown, true);
+    container.addEventListener('contextmenu', onContextMenu, true);
+    container.addEventListener('mouseup', onMouseUp, true);
+
+    return () => {
+      container.removeEventListener('mousedown', onMouseDown, true);
+      container.removeEventListener('contextmenu', onContextMenu, true);
+      container.removeEventListener('mouseup', onMouseUp, true);
+      if (timer) clearTimeout(timer);
+    };
+  }, [selectedLesson]);
 
   // Ebook-specific configurations
   const [readingSize, setReadingSize] = useState<'text-xs' | 'text-sm' | 'text-base' | 'text-lg' | 'text-xl'>('text-base');
@@ -211,7 +306,12 @@ export default function StudentPlayer({ initialCourseId, onGoBack, onGoToCommuni
           {/* CONTENT ACCORDING TO LESSON TYPE (VIDEO VS EBOOK) */}
           {!isEbook ? (
             // ================== VIDEO PLAYER ==================
-            <div className="aspect-video w-full rounded-2xl glass-card relative flex flex-col items-center justify-center overflow-hidden border border-amber-500/15 bg-black/50 group">
+            <div 
+              ref={videoContainerRef}
+              onContextMenu={(e) => e.preventDefault()}
+              className="aspect-video w-full rounded-2xl glass-card relative flex flex-col items-center justify-center overflow-hidden border border-amber-500/15 bg-black/50 group select-none"
+              id="nzila-video-player-container"
+            >
               
               {/* If we have a valid converted video url (like an iframe embed for youtube/vimeo) */}
               {parsedVideoEmbed && (parsedVideoEmbed.startsWith('http') || parsedVideoEmbed.includes('embed')) ? (
@@ -223,14 +323,33 @@ export default function StudentPlayer({ initialCourseId, onGoBack, onGoToCommuni
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
                   />
+                  {/* Full-coverage invisible overlay: pointer-events is 'none' by default
+                      so ALL normal interactions (play, pause, volume slider, timeline, fullscreen)
+                      pass through to the iframe. On right-click, the useEffect mousedown handler
+                      temporarily sets pointer-events to 'auto' so this div intercepts the
+                      contextmenu event and blocks it, then immediately deactivates again. */}
+                  <div 
+                    ref={rightClickOverlayRef}
+                    className="absolute inset-0 z-10 bg-transparent"
+                    style={{ pointerEvents: 'none' }}
+                    onContextMenu={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                    }}
+                  />
                 </div>
               ) : selectedLesson.videoUrl ? (
                 // Direct video player for uploaded files
-                <div className="absolute inset-0 w-full h-full bg-black">
+                <div 
+                  onContextMenu={(e) => e.preventDefault()}
+                  className="absolute inset-0 w-full h-full bg-black"
+                >
                   <video 
                     src={selectedLesson.videoUrl} 
                     controls 
                     className="w-full h-full object-contain"
+                    onContextMenu={(e) => e.preventDefault()}
+                    controlsList="nodownload"
                   />
                 </div>
               ) : (

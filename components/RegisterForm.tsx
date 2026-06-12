@@ -3,16 +3,15 @@
 import React, { useState } from 'react';
 import { useApp } from '@/lib/context/AppContext';
 import { motion } from 'motion/react';
-import { ShieldCheck, User, Mail, MessageSquare, Ticket, Lock, ArrowRight, UserCheck, Settings, ExternalLink } from 'lucide-react';
+import { ShieldCheck, User, Mail, MessageSquare, Ticket, Lock, ArrowRight, UserCheck } from 'lucide-react';
 
 export default function RegisterForm() {
-  const { registerStudent, login, accessCodes, courses } = useApp();
+  const { registerStudent, login } = useApp();
   
   const [isLogin, setIsLogin] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
-  const [courseId, setCourseId] = useState(courses[0]?.id || '');
   const [accessCode, setAccessCode] = useState('');
   const [password, setPassword] = useState('');
   
@@ -20,16 +19,12 @@ export default function RegisterForm() {
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
 
-
-
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setSuccess('');
 
-    const finalCourseId = courseId || (courses.length > 0 ? courses[0].id : '');
-
-    if (!name || !email || !whatsapp || !finalCourseId || !accessCode || !password) {
+    if (!name || !email || !whatsapp || !accessCode || !password) {
       setError('Por favor, preencha todos os campos obrigatórios.');
       return;
     }
@@ -37,7 +32,8 @@ export default function RegisterForm() {
     setLoading(true);
 
     try {
-      const res = await registerStudent(name, email, whatsapp, finalCourseId, accessCode, password);
+      // O curso é determinado automaticamente pelo código de acesso
+      const res = await registerStudent(name, email, whatsapp, '', accessCode, password);
       setLoading(false);
       if (res.success) {
         setSuccess(res.message);
@@ -46,7 +42,7 @@ export default function RegisterForm() {
       }
     } catch (err: any) {
       setLoading(false);
-      setError(`Erro no registro: ${err.message || 'Falha de conexão com o banco de dados'}`);
+      setError('Não foi possível concluir o cadastro. Tente novamente mais tarde.');
     }
   };
 
@@ -56,7 +52,7 @@ export default function RegisterForm() {
     setSuccess('');
 
     if (!email || !password) {
-      setError('Por favor, digite seu e-mail e senha de acesso legítimo.');
+      setError('Por favor, digite seu e-mail e palavra-passe.');
       return;
     }
 
@@ -72,7 +68,7 @@ export default function RegisterForm() {
       }
     } catch (err: any) {
       setLoading(false);
-      setError(`Erro no login: ${err.message || 'Falha de conexão com o banco de dados'}`);
+      setError('Não foi possível iniciar sessão. Verifique os seus dados e tente novamente.');
     }
   };
 
@@ -142,20 +138,18 @@ export default function RegisterForm() {
                   )}
                 </button>
               </div>
-
-
             </div>
 
             {/* Error & Success Alerts */}
             {error && (
-              <div className="mb-4 p-3 rounded-lg bg-red-950/40 border border-red-500/20 text-red-200 text-xs font-mono flex gap-2">
-                <span className="font-bold flex-shrink-0">⚠️ ERRO:</span>
+              <div className="mb-4 p-3 rounded-lg bg-red-950/40 border border-red-500/20 text-red-200 text-xs flex gap-2">
+                <span className="font-bold flex-shrink-0">⚠️</span>
                 <span>{error}</span>
               </div>
             )}
             {success && (
-              <div className="mb-4 p-3 rounded-lg bg-green-950/40 border border-green-500/20 text-green-200 text-xs font-mono flex gap-2">
-                <span className="font-bold flex-shrink-0">✅ SUCESSO:</span>
+              <div className="mb-4 p-3 rounded-lg bg-green-950/40 border border-green-500/20 text-green-200 text-xs flex gap-2">
+                <span className="font-bold flex-shrink-0">✅</span>
                 <span>{success}</span>
               </div>
             )}
@@ -165,7 +159,7 @@ export default function RegisterForm() {
               // REGISTRATION FORM
               <form onSubmit={handleRegister} className="space-y-4">
                 <p className="text-xs text-gray-400 mb-2">
-                  Preencha os dados e valide seu código de acesso Nzila (`NZ-XXXX-X`) para receber matrícula imediata no curso desejado.
+                  Preencha os seus dados e insira o código de acesso recebido para se matricular automaticamente no curso correspondente.
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -188,13 +182,13 @@ export default function RegisterForm() {
                   {/* Email */}
                   <div className="space-y-1.5">
                     <label className="text-xs font-medium text-gray-300 flex items-center gap-1.5">
-                      <Mail className="w-3.5 h-3.5 text-amber-400" /> E-mail Profissional
+                      <Mail className="w-3.5 h-3.5 text-amber-400" /> E-mail
                     </label>
                     <input 
                       type="email" 
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="nome@empresa.com"
+                      placeholder="nome@email.com"
                       className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-3.5 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500/20"
                       required
                       id="register-input-email"
@@ -212,7 +206,7 @@ export default function RegisterForm() {
                       type="tel" 
                       value={whatsapp}
                       onChange={(e) => setWhatsapp(e.target.value)}
-                      placeholder="+55 11 99999-9999"
+                      placeholder="+244 9XX XXX XXX"
                       className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-3.5 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500/20"
                       required
                       id="register-input-whatsapp"
@@ -222,7 +216,7 @@ export default function RegisterForm() {
                   {/* Password */}
                   <div className="space-y-1.5">
                     <label className="text-xs font-medium text-gray-300 flex items-center gap-1.5">
-                      <Lock className="w-3.5 h-3.5 text-amber-400" /> Senha de Segurança
+                      <Lock className="w-3.5 h-3.5 text-amber-400" /> Palavra-passe
                     </label>
                     <input 
                       type="password" 
@@ -236,54 +230,21 @@ export default function RegisterForm() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-1 gap-4">
-                  {/* Course Selector */}
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-medium text-gray-300 flex items-center gap-1.5">
-                      Curso de Ingresso
-                    </label>
-                    <select 
-                      value={courseId}
-                      onChange={(e) => setCourseId(e.target.value)}
-                      className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500/20 appearance-none"
-                      style={{ backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b5cf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 12px center', backgroundSize: '16px' }}
-                      id="register-select-course"
-                      disabled={courses.length === 0}
-                    >
-                      {courses.length === 0 ? (
-                        <option value="" disabled className="bg-[#0e0722] text-rose-300">
-                          Nenhum curso disponível. Crie um curso primeiro.
-                        </option>
-                      ) : (
-                        courses.map(course => (
-                          <option key={course.id} value={course.id} className="bg-[#0e0722] text-white">
-                            [{course.category.toUpperCase()}] {course.title}
-                          </option>
-                        ))
-                      )}
-                    </select>
-                    {courses.length === 0 && (
-                      <p className="text-[10px] text-rose-400 mt-1">
-                        ⚠️ Você apagou todos os cursos! Volte para o painel de administrador e crie pelo menos um curso e gere códigos de acesso para permitir novos cadastros.
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Access Token Code */}
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-medium text-gray-300 flex items-center gap-1.5">
-                      <Ticket className="w-3.5 h-3.5 text-cyan-400" /> Código de Acesso Voucher
-                    </label>
-                    <input 
-                      type="text" 
-                      value={accessCode}
-                      onChange={(e) => setAccessCode(e.target.value.toUpperCase())}
-                      placeholder="Formato NZ-XXXX-X"
-                      className="w-full font-mono bg-[#0a0715] border border-cyan-900/30 rounded-lg px-3.5 py-2 text-sm text-cyan-300 placeholder-gray-600 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20"
-                      required
-                      id="register-input-access-code"
-                    />
-                  </div>
+                {/* Access Token Code - Full Width */}
+                <div className="space-y-1.5">
+                  <label className="text-xs font-medium text-gray-300 flex items-center gap-1.5">
+                    <Ticket className="w-3.5 h-3.5 text-cyan-400" /> Código de Acesso
+                  </label>
+                  <input 
+                    type="text" 
+                    value={accessCode}
+                    onChange={(e) => setAccessCode(e.target.value.toUpperCase())}
+                    placeholder="Insira o seu código (ex: NZ-XXXX-X)"
+                    className="w-full font-mono bg-[#0a0715] border border-cyan-900/30 rounded-lg px-3.5 py-2.5 text-sm text-cyan-300 placeholder-gray-600 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20"
+                    required
+                    id="register-input-access-code"
+                  />
+                  <p className="text-[10px] text-gray-500 mt-1">O curso será atribuído automaticamente com base no código de acesso.</p>
                 </div>
 
                 {/* Submit button */}
@@ -297,7 +258,7 @@ export default function RegisterForm() {
                     <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                   ) : (
                     <>
-                      Ativar Ingresso e Matricular-se <ArrowRight className="w-4 h-4" />
+                      Criar Conta e Matricular-se <ArrowRight className="w-4 h-4" />
                     </>
                   )}
                 </button>
@@ -306,28 +267,27 @@ export default function RegisterForm() {
               // LOGIN FORM
               <form onSubmit={handleLogin} className="space-y-5">
                 <p className="text-xs text-gray-400 mb-2">
-                  Se você já realizou seu registro prévio, digite seu e-mail de acesso. O sistema verificará suas credenciais e fará o login automático.
+                  Insira o seu e-mail e palavra-passe para aceder à sua conta.
                 </p>
 
                 <div className="space-y-1.5">
                   <label className="text-xs font-medium text-gray-300 flex items-center gap-1.5">
-                    <Mail className="w-4 h-4 text-amber-400" /> E-mail de Matrícula
+                    <Mail className="w-4 h-4 text-amber-400" /> E-mail
                   </label>
                   <input 
                     type="email" 
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="user@exemplo.com"
+                    placeholder="nome@email.com"
                     className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500/20"
                     required
                     id="login-input-email"
                   />
-
                 </div>
 
                 <div className="space-y-1.5">
                   <label className="text-xs font-medium text-gray-300 flex items-center gap-1.5">
-                    <Lock className="w-4 h-4 text-amber-400" /> Senha de Segurança
+                    <Lock className="w-4 h-4 text-amber-400" /> Palavra-passe
                   </label>
                   <input 
                     type="password" 
@@ -355,7 +315,6 @@ export default function RegisterForm() {
                 </button>
               </form>
             )}
-
 
           </motion.div>
         </div>

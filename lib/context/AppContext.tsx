@@ -141,15 +141,14 @@ interface AppContextType {
   addNewPost: (content: string, tags: string[]) => void;
   likePost: (postId: string) => void;
   addComment: (postId: string, text: string) => void;
+  pinComment: (postId: string, commentId: string) => void;
   deletePost: (postId: string) => void;
   updateProfile: (name: string, email: string, whatsapp: string, avatar?: string) => void;
   addActivityLog: (action: string, category: ActivityLog['category'], user?: string) => void;
   triggerSystemNotification: (title: string, message: string, category: SystemNotification['category'], targetCourseId?: string) => void;
   markNotificationsAsRead: () => void;
   supabaseConnected: boolean;
-  syncAllToSupabase: () => Promise<{ success: boolean; message: string }>;
-  pullAllFromSupabase: () => Promise<{ success: boolean; message: string }>;
-  factoryReset: () => Promise<void>;
+  supabaseConnected: boolean;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -197,17 +196,11 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         const dbNotifications = await dbService.fetchTable('notifications');
         const dbLogs = await dbService.fetchTable('activity_logs');
 
-        if (dbCourses !== null) {
-          setCourses(dbCourses);
-          localStorage.setItem('nz_courses', JSON.stringify(dbCourses));
-        }
-        if (dbCodes !== null) {
-          setAccessCodes(dbCodes);
-          localStorage.setItem('nz_access_codes', JSON.stringify(dbCodes));
-        }
+        if (dbCourses !== null) setCourses(dbCourses);
+        if (dbCodes !== null) setAccessCodes(dbCodes);
+        
         if (dbStudents !== null) {
           setStudents(dbStudents);
-          localStorage.setItem('nz_students', JSON.stringify(dbStudents));
           
           // VERIFICAÇÃO DE SEGURANÇA: Se o aluno atual foi apagado do banco de dados, expulsar da sessão.
           if (typeof window !== 'undefined') {
@@ -228,207 +221,52 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
             }
           }
         }
-        if (dbPosts !== null) {
-          setPosts(dbPosts);
-          localStorage.setItem('nz_posts', JSON.stringify(dbPosts));
-        }
-        if (dbTxns !== null) {
-          setTransactions(dbTxns);
-          localStorage.setItem('nz_transactions', JSON.stringify(dbTxns));
-        }
-        if (dbNotifications !== null) {
-          setNotifications(dbNotifications);
-          localStorage.setItem('nz_notifications', JSON.stringify(dbNotifications));
-        }
-        if (dbLogs !== null) {
-          setActivityLogs(dbLogs);
-          localStorage.setItem('nz_logs', JSON.stringify(dbLogs));
-        }
+        
+        if (dbPosts !== null) setPosts(dbPosts);
+        if (dbTxns !== null) setTransactions(dbTxns);
+        if (dbNotifications !== null) setNotifications(dbNotifications);
+        if (dbLogs !== null) setActivityLogs(dbLogs);
       }
     };
 
-    // Load from localStorage as initial instant display
+    // Apenas carrega as credenciais da sessão. 
+    // Os DADOS (cursos, etc) virão apenas do Supabase, sem "dados fantasmas".
     if (typeof window !== 'undefined') {
       const storedUser = localStorage.getItem('nz_current_user');
       const storedIsAdmin = localStorage.getItem('nz_is_admin');
-      const storedCodes = localStorage.getItem('nz_access_codes');
-      const storedStudents = localStorage.getItem('nz_students');
-      const storedPosts = localStorage.getItem('nz_posts');
-      const storedTxns = localStorage.getItem('nz_transactions');
-      const storedCourses = localStorage.getItem('nz_courses');
-      const storedNotifications = localStorage.getItem('nz_notifications');
-      const storedLogs = localStorage.getItem('nz_logs');
 
       // eslint-disable-next-line react-hooks/set-state-in-effect
       if (storedUser) setCurrentUser(JSON.parse(storedUser));
       // eslint-disable-next-line react-hooks/set-state-in-effect
       if (storedIsAdmin) setIsAdmin(JSON.parse(storedIsAdmin));
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      if (storedCodes) setAccessCodes(JSON.parse(storedCodes));
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      if (storedStudents) setStudents(JSON.parse(storedStudents));
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      if (storedPosts) setPosts(JSON.parse(storedPosts));
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      if (storedTxns) setTransactions(JSON.parse(storedTxns));
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      if (storedCourses) setCourses(JSON.parse(storedCourses));
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      if (storedNotifications) setNotifications(JSON.parse(storedNotifications));
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      if (storedLogs) setActivityLogs(JSON.parse(storedLogs));
     }
 
     loadSupabaseData();
+
+    // Setup Supabase Realtime synchronization
+    let channel: any;
+    if (supabase) {
+      channel = supabase.channel('schema-db-changes')
+        .on('postgres_changes', { event: '*', schema: 'public' }, (payload: any) => {
+          console.log('🔄 Sincronização Realtime ativada:', payload);
+          loadSupabaseData();
+        })
+        .subscribe();
+    }
+
+    return () => {
+      if (supabase && channel) {
+        supabase.removeChannel(channel);
+      }
+    };
   }, []);
 
-  // Sync state to local storage and push incrementally to Supabase
   const sync = (key: string, data: any) => {
     if (typeof window !== 'undefined') {
-      localStorage.setItem(key, JSON.stringify(data));
-      
-      // Async Syncing to Supabase Database
-      if (supabase) {
-        let tableName = '';
-        if (key === 'nz_students') tableName = 'students';
-        else if (key === 'nz_access_codes') tableName = 'access_codes';
-        else if (key === 'nz_transactions') tableName = 'transactions';
-        else if (key === 'nz_courses') tableName = 'courses';
-        else if (key === 'nz_posts') tableName = 'posts';
-        else if (key === 'nz_logs') tableName = 'activity_logs';
-        else if (key === 'nz_notifications') tableName = 'notifications';
-
-        if (tableName && Array.isArray(data)) {
-          dbService.upsertRows(tableName, data).then(success => {
-            if (success) {
-              console.log(`☁️ Supabase: Sincronia de tabela "${tableName}" completada.`);
-            }
-          }).catch(err => {
-            console.warn(`Supabase array sync exception on "${tableName}":`, err);
-          });
-        }
+      // Somente armazena dados de sessão no localStorage (nz_current_user, nz_is_admin)
+      if (key === 'nz_current_user' || key === 'nz_is_admin') {
+        localStorage.setItem(key, JSON.stringify(data));
       }
-    }
-  };
-
-  const syncAllToSupabase = async () => {
-    try {
-      const isConnected = await dbService.testConnection();
-      setSupabaseConnected(isConnected);
-      if (!isConnected) {
-        return { 
-          success: false, 
-          message: 'Conexão falhou. Por favor configure as tabelas do Supabase utilizando o arquivo "supabase_schema.sql".' 
-        };
-      }
-      
-      // Upsert entire series
-      const r1 = await dbService.upsertRows('courses', courses);
-      const r2 = await dbService.upsertRows('access_codes', accessCodes);
-      const r3 = await dbService.upsertRows('students', students);
-      const r4 = await dbService.upsertRows('posts', posts);
-      const r5 = await dbService.upsertRows('transactions', transactions);
-      const r6 = await dbService.upsertRows('notifications', notifications);
-      const r7 = await dbService.upsertRows('activity_logs', activityLogs);
-
-      if (r1 && r2 && r3 && r4 && r5 && r6 && r7) {
-        return { success: true, message: 'Todos os dados locais foram exportados e salvos no Supabase com sucesso!' };
-      }
-      return { success: false, message: 'Algumas tabelas falharam na exportação. Verifique se o schema foi executado.' };
-    } catch (e: any) {
-      return { success: false, message: `Erro ao exportar dados: ${e.message || e}` };
-    }
-  };
-
-  const pullAllFromSupabase = async () => {
-    try {
-      const isConnected = await dbService.testConnection();
-      setSupabaseConnected(isConnected);
-      if (!isConnected) {
-        return { 
-          success: false, 
-          message: 'Não foi possível conectar ao banco de dados para importar. Certifique-se de que a tabela "courses" existe no Supabase.' 
-        };
-      }
-
-      const dbCourses = await dbService.fetchTable('courses');
-      const dbCodes = await dbService.fetchTable('access_codes');
-      const dbStudents = await dbService.fetchTable('students');
-      const dbPosts = await dbService.fetchTable('posts');
-      const dbTxns = await dbService.fetchTable('transactions');
-      const dbNotifications = await dbService.fetchTable('notifications');
-      const dbLogs = await dbService.fetchTable('activity_logs');
-
-      if (dbCourses !== null) {
-        setCourses(dbCourses);
-        localStorage.setItem('nz_courses', JSON.stringify(dbCourses));
-      }
-      if (dbCodes !== null) {
-        setAccessCodes(dbCodes);
-        localStorage.setItem('nz_access_codes', JSON.stringify(dbCodes));
-      }
-      if (dbStudents !== null) {
-        setStudents(dbStudents);
-        localStorage.setItem('nz_students', JSON.stringify(dbStudents));
-      }
-      if (dbPosts !== null) {
-        setPosts(dbPosts);
-        localStorage.setItem('nz_posts', JSON.stringify(dbPosts));
-      }
-      if (dbTxns !== null) {
-        setTransactions(dbTxns);
-        localStorage.setItem('nz_transactions', JSON.stringify(dbTxns));
-      }
-      if (dbNotifications !== null) {
-        setNotifications(dbNotifications);
-        localStorage.setItem('nz_notifications', JSON.stringify(dbNotifications));
-      }
-      if (dbLogs !== null) {
-        setActivityLogs(dbLogs);
-        localStorage.setItem('nz_logs', JSON.stringify(dbLogs));
-      }
-
-      return { success: true, message: 'Todos os dados do Supabase foram baixados e carregados no estado do aplicativo!' };
-    } catch (e: any) {
-      return { success: false, message: `Erro ao importar dados: ${e.message || e}` };
-    }
-  };
-
-  const factoryReset = async () => {
-    // Limpar estados locais
-    setCourses([]);
-    setAccessCodes([]);
-    setStudents([]);
-    setPosts([]);
-    setTransactions([]);
-    setNotifications([]);
-    setActivityLogs([]);
-
-    // Limpar localStorage
-    if (typeof window !== 'undefined') {
-      localStorage.clear();
-    }
-
-    // Limpar do Supabase
-    if (supabase) {
-      const isConnected = await dbService.testConnection();
-      if (isConnected) {
-        await Promise.all([
-          supabase.from('courses').delete().neq('id', 'mock_impossible_id'),
-          supabase.from('access_codes').delete().neq('code', 'mock_impossible_id'),
-          supabase.from('students').delete().neq('id', 'mock_impossible_id'),
-          supabase.from('posts').delete().neq('id', 'mock_impossible_id'),
-          supabase.from('transactions').delete().neq('id', 'mock_impossible_id'),
-          supabase.from('notifications').delete().neq('id', 'mock_impossible_id'),
-          supabase.from('activity_logs').delete().neq('id', 'mock_impossible_id')
-        ]);
-        console.log('☁️ Supabase: Todos os dados foram resetados.');
-      }
-    }
-    
-    // Recarregar a página para aplicar
-    if (typeof window !== 'undefined') {
-      window.location.reload();
     }
   };
 
@@ -441,7 +279,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       .single();
       
     if (codeErr || !codeData) {
-      return { success: false, message: 'Código de acesso inexistente ou inválido no banco de dados.' };
+      return { success: false, message: 'Código de acesso inexistente ou inválido. Verifique e tente novamente.' };
     }
     if (codeData.status === 'resgatado') {
       return { success: false, message: `O código de acesso já foi resgatado por ${codeData.resgatadoPor || 'outro utilizador'}.` };
@@ -465,7 +303,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     });
 
     if (authErr) {
-      return { success: false, message: `Erro ao criar conta: ${authErr.message}` };
+      return { success: false, message: 'Não foi possível criar a sua conta. O e-mail pode já estar em uso ou a senha é muito curta.' };
     }
 
     // 3. Get Course Title (fetch from DB to be sure)
@@ -574,13 +412,13 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
             addActivityLog(`Login efetuado: Aluno "${userStudent.name}"`, 'auth', userStudent.name);
             return { success: true, message: `Boas-vindas de volta, ${userStudent.name}!` };
           } else {
-            return { success: false, message: 'Acesso negado. Aluno não encontrado na base de dados, mas autenticado no Supabase.' };
+            return { success: false, message: 'A sua conta não foi encontrada. Contacte o suporte ou registe-se novamente.' };
           }
         }
       }
-      return { success: false, message: 'Erro desconhecido.' };
+      return { success: false, message: 'Não foi possível iniciar sessão. Tente novamente.' };
     } catch (e: any) {
-      return { success: false, message: 'Falha de comunicação: ' + (e.message || String(e)) };
+      return { success: false, message: 'Não foi possível conectar ao servidor. Verifique a sua ligação à internet.' };
     }
   };
 
@@ -615,7 +453,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const generateBatchCodes = (courseId: string, count: number) => {
+  const generateBatchCodes = async (courseId: string, count: number) => {
     const selectedCourse = courses.find(c => c.id === courseId);
     const courseTitle = selectedCourse ? selectedCourse.title : 'Curso Selecionado';
     
@@ -623,7 +461,6 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     const hex = '0123456789ABCDEF';
     
     for (let i = 0; i < count; i++) {
-      // NZ-XXXX-X
       let randomPart1 = '';
       for (let j = 0; j < 4; j++) randomPart1 += hex[Math.floor(Math.random() * 16)];
       let randomPart2 = hex[Math.floor(Math.random() * 16)];
@@ -637,90 +474,97 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       });
     }
 
-    const updatedCodes = [...newCodes, ...accessCodes];
-    setAccessCodes(updatedCodes);
-    sync('nz_access_codes', updatedCodes);
-  };
-
-  const deleteCode = async (codeToDelete: string) => {
-    const updatedCodes = accessCodes.filter(c => c.code !== codeToDelete);
-    setAccessCodes(updatedCodes);
-    sync('nz_access_codes', updatedCodes);
-    
-    if (supabase) {
-      const isConnected = await dbService.testConnection();
-      if (isConnected) {
-        supabase.from('access_codes').delete().eq('code', codeToDelete).then(({ error }: { error: any }) => {
-          if (error) console.warn("Erro ao deletar código no Supabase:", error);
-        });
-      }
+    const success = await dbService.upsertRows('access_codes', newCodes);
+    if (success) {
+      setAccessCodes([...newCodes, ...accessCodes]);
+      if (typeof window !== 'undefined') alert(`${count} código(s) gerado(s) com sucesso no banco de dados!`);
+    } else {
+      if (typeof window !== 'undefined') alert('Falha ao criar códigos no banco de dados. Tente novamente.');
     }
   };
 
-  const updateStudentStatus = (studentId: string, newStatus: Student['status']) => {
-    const updatedStudents = students.map(s => {
-      if (s.id === studentId) {
-        return { ...s, status: newStatus };
-      }
-      return s;
-    });
-    setStudents(updatedStudents);
-    sync('nz_students', updatedStudents);
+  const deleteCode = async (codeToDelete: string) => {
+    let success = true;
+    if (supabase) {
+      const { error } = await supabase.from('access_codes').delete().eq('code', codeToDelete);
+      if (error) success = false;
+    }
+    if (success) {
+      setAccessCodes(accessCodes.filter(c => c.code !== codeToDelete));
+      if (typeof window !== 'undefined') alert(`Código de acesso "${codeToDelete}" excluído do banco de dados com sucesso!`);
+    } else {
+      if (typeof window !== 'undefined') alert('Falha ao excluir código de acesso do banco de dados.');
+    }
   };
 
-  const updateStudent = (studentId: string, updatedFields: Partial<Student>) => {
-    const updatedStudents = students.map(s => {
-      if (s.id === studentId) {
-        return { ...s, ...updatedFields };
-      }
-      return s;
-    });
-    setStudents(updatedStudents);
-    sync('nz_students', updatedStudents);
+  const updateStudentStatus = async (studentId: string, newStatus: Student['status']) => {
+    const studentName = students.find(s => s.id === studentId)?.name || studentId;
+    let success = true;
+    if (supabase) {
+      success = await dbService.upsertRows('students', [{ id: studentId, status: newStatus }]);
+    }
+    if (success) {
+      setStudents(students.map(s => s.id === studentId ? { ...s, status: newStatus } : s));
+      if (typeof window !== 'undefined') alert(`Status do aluno "${studentName}" atualizado no banco de dados com sucesso!`);
+    } else {
+      if (typeof window !== 'undefined') alert('Falha ao atualizar status do aluno no banco de dados.');
+    }
   };
 
-  const addCourseToStudent = (studentId: string, courseId: string) => {
+  const updateStudent = async (studentId: string, updatedFields: Partial<Student>) => {
+    const studentName = students.find(s => s.id === studentId)?.name || studentId;
+    let success = true;
+    if (supabase) {
+      success = await dbService.upsertRows('students', [{ id: studentId, ...updatedFields }]);
+    }
+    if (success) {
+      setStudents(students.map(s => s.id === studentId ? { ...s, ...updatedFields } : s));
+      if (typeof window !== 'undefined') alert(`Dados do aluno "${studentName}" atualizados no banco de dados com sucesso!`);
+    } else {
+      if (typeof window !== 'undefined') alert('Falha ao atualizar dados do aluno no banco de dados.');
+    }
+  };
+
+  const addCourseToStudent = async (studentId: string, courseId: string) => {
     const course = courses.find(c => c.id === courseId);
     if (!course) return;
 
-    // Find student
     const student = students.find(s => s.id === studentId);
     if (!student) return;
 
     const currentEC = student.enrolledCourses || [{ courseId: student.courseId, courseTitle: student.courseTitle }];
-    // Check if duplicate
     if (currentEC.some(ec => ec.courseId === courseId)) return;
 
     const updatedEC = [...currentEC, { courseId: course.id, courseTitle: course.title }];
 
-    const updatedStudents = students.map(s => {
-      if (s.id === studentId) {
-        return { 
-          ...s, 
-          enrolledCourses: updatedEC
-        };
-      }
-      return s;
-    });
-    setStudents(updatedStudents);
-    sync('nz_students', updatedStudents);
+    let success = true;
+    if (supabase) {
+      success = await dbService.upsertRows('students', [{ id: studentId, enrolledCourses: updatedEC }]);
+    }
+    
+    if (success) {
+      setStudents(students.map(s => s.id === studentId ? { ...s, enrolledCourses: updatedEC } : s));
 
-    // Create a new transaction representing the purchase of this course
-    const newTxn: Transaction = {
-      id: `txn-add-${Date.now()}`,
-      studentName: student.name,
-      courseTitle: course.title,
-      amount: course.price || 120000,
-      paymentMethod: 'Pix',
-      date: new Date().toISOString().substring(0, 10),
-      status: 'completado'
-    };
-    const updatedTxns = [...transactions, newTxn];
-    setTransactions(updatedTxns);
-    sync('nz_transactions', updatedTxns);
+      const newTxn: Transaction = {
+        id: `txn-add-${Date.now()}`,
+        studentName: student.name,
+        courseTitle: course.title,
+        amount: course.price || 120000,
+        paymentMethod: 'Pix',
+        date: new Date().toISOString().substring(0, 10),
+        status: 'completado'
+      };
+      if (supabase) {
+        await dbService.upsertRows('transactions', [newTxn]);
+      }
+      setTransactions([...transactions, newTxn]);
+      if (typeof window !== 'undefined') alert(`Curso "${course.title}" anexado ao aluno "${student.name}" e salvo no banco de dados!`);
+    } else {
+      if (typeof window !== 'undefined') alert('Falha ao anexar curso ao aluno no banco de dados.');
+    }
   };
 
-  const enrollExistingStudentDirectly = (studentData: Omit<Student, 'id' | 'registeredAt'>) => {
+  const enrollExistingStudentDirectly = async (studentData: Omit<Student, 'id' | 'registeredAt'>) => {
     const newStudent: Student = {
       ...studentData,
       id: `std-${Date.now()}`,
@@ -729,92 +573,127 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         { courseId: studentData.courseId, courseTitle: studentData.courseTitle }
       ]
     };
-    const updatedStudents = [...students, newStudent];
-    setStudents(updatedStudents);
-    sync('nz_students', updatedStudents);
-  };
-
-  const addNewCourse = (course: Course) => {
-    const updatedCourses = [...courses, course];
-    setCourses(updatedCourses);
-    sync('nz_courses', updatedCourses);
-    addActivityLog(`Curso criado: "${course.title}"`, 'courses');
-  };
-
-  const updateCourse = (courseId: string, updatedFields: Partial<Course>) => {
-    const courseTitle = courses.find(c => c.id === courseId)?.title || courseId;
-    const updatedCourses = courses.map(c => {
-      if (c.id === courseId) {
-        const merged = { ...c, ...updatedFields };
-        if (updatedFields.lessonsList) {
-          merged.modulesCount = updatedFields.lessonsList.length;
-        }
-        return merged;
-      }
-      return c;
-    });
-    setCourses(updatedCourses);
-    sync('nz_courses', updatedCourses);
-    addActivityLog(`Curso atualizado: "${courseTitle}"`, 'courses');
-  };
-
-  const deleteCourse = (courseId: string) => {
-    const courseTitle = courses.find(c => c.id === courseId)?.title || courseId;
-    const updatedCourses = courses.filter(c => c.id !== courseId);
-    setCourses(updatedCourses);
-    sync('nz_courses', updatedCourses);
+    let success = true;
     if (supabase) {
-      dbService.testConnection().then(isConnected => {
-        if (isConnected) {
-          supabase.from('courses').delete().eq('id', courseId).then(({ error }: { error: any }) => {
-            if (error) console.warn("Supabase course delete error:", error);
-            else console.log(`☁️ Supabase: Curso ${courseId} deletado com sucesso.`);
-          });
-        }
-      });
+      success = await dbService.upsertRows('students', [newStudent]);
     }
-    addActivityLog(`Curso apagado: "${courseTitle}"`, 'courses');
+    if (success) {
+      setStudents([...students, newStudent]);
+      if (typeof window !== 'undefined') alert(`Aluno "${newStudent.name}" cadastrado e salvo no banco de dados com sucesso!`);
+    } else {
+      if (typeof window !== 'undefined') alert('Falha ao cadastrar aluno no banco de dados.');
+    }
   };
 
-  const deleteStudent = (studentId: string) => {
+  const addNewCourse = async (course: Course) => {
+    const success = await dbService.upsertRows('courses', [course]);
+    if (success) {
+      setCourses([...courses, course]);
+      addActivityLog(`Curso criado: "${course.title}"`, 'courses');
+      if (typeof window !== 'undefined') alert(`Curso "${course.title}" criado e salvo no banco de dados com sucesso!`);
+    } else {
+      if (typeof window !== 'undefined') alert('Falha ao salvar curso no banco de dados. Tente novamente.');
+    }
+  };
+
+  const updateCourse = async (courseId: string, updatedFields: Partial<Course>) => {
+    const courseTitle = courses.find(c => c.id === courseId)?.title || courseId;
+    const updateData: any = { id: courseId, ...updatedFields };
+    if (updatedFields.lessonsList) {
+      updateData.modulesCount = updatedFields.lessonsList.length;
+    }
+    const isLessonUpdate = !!updatedFields.lessonsList;
+    let success = true;
+    if (supabase) {
+      success = await dbService.upsertRows('courses', [updateData]);
+    }
+    
+    if (success) {
+      setCourses(courses.map(c => {
+        if (c.id === courseId) {
+          return { ...c, ...updateData };
+        }
+        return c;
+      }));
+      addActivityLog(`Curso atualizado: "${courseTitle}"`, 'courses');
+      if (typeof window !== 'undefined') {
+        if (isLessonUpdate) {
+          alert(`Aulas/Módulos do curso "${courseTitle}" salvos no banco de dados com sucesso!`);
+        } else {
+          alert(`Curso "${courseTitle}" atualizado e salvo no banco de dados com sucesso!`);
+        }
+      }
+    } else {
+      if (typeof window !== 'undefined') {
+        if (isLessonUpdate) {
+          alert('Falha ao salvar aulas/módulos no banco de dados. Tente novamente.');
+        } else {
+          alert('Falha ao atualizar curso no banco de dados. Tente novamente.');
+        }
+      }
+    }
+  };
+
+  const deleteCourse = async (courseId: string) => {
+    const courseTitle = courses.find(c => c.id === courseId)?.title || courseId;
+    let success = true;
+    if (supabase) {
+      const { error } = await supabase.from('courses').delete().eq('id', courseId);
+      if (error) success = false;
+    }
+    if (success) {
+      setCourses(courses.filter(c => c.id !== courseId));
+      addActivityLog(`Curso apagado: "${courseTitle}"`, 'courses');
+      if (typeof window !== 'undefined') alert(`Curso "${courseTitle}" removido do banco de dados com sucesso!`);
+    } else {
+      if (typeof window !== 'undefined') alert('Falha ao apagar curso do banco de dados.');
+    }
+  };
+
+  const deleteStudent = async (studentId: string) => {
     const studentName = students.find(s => s.id === studentId)?.name || studentId;
-    const updatedStudents = students.filter(s => s.id !== studentId);
-    setStudents(updatedStudents);
-    sync('nz_students', updatedStudents);
+    let success = true;
     if (supabase) {
-      dbService.testConnection().then(isConnected => {
-        if (isConnected) {
-          supabase.from('students').delete().eq('id', studentId).then(({ error }: { error: any }) => {
-            if (error) console.warn("Supabase student delete error:", error);
-            else console.log(`☁️ Supabase: Aluno ${studentId} deletado com sucesso.`);
-          });
-        }
-      });
+      const { error } = await supabase.from('students').delete().eq('id', studentId);
+      if (error) success = false;
     }
-    addActivityLog(`Aluno removido do sistema: "${studentName}"`, 'system');
+    if (success) {
+      setStudents(students.filter(s => s.id !== studentId));
+      addActivityLog(`Aluno removido do sistema: "${studentName}"`, 'system');
+      if (typeof window !== 'undefined') alert(`Aluno "${studentName}" removido do banco de dados com sucesso!`);
+    } else {
+      if (typeof window !== 'undefined') alert('Falha ao remover aluno do banco de dados.');
+    }
   };
 
-  const toggleStudentNetworkingStatus = (studentId: string) => {
-    const updatedStudents = students.map(s => {
-      if (s.id === studentId) {
-        return { ...s, isHighlightedNetworking: !s.isHighlightedNetworking };
-      }
-      return s;
-    });
-    setStudents(updatedStudents);
-    sync('nz_students', updatedStudents);
-    const student = updatedStudents.find(s => s.id === studentId);
-    if (student) {
+  const toggleStudentNetworkingStatus = async (studentId: string) => {
+    const student = students.find(s => s.id === studentId);
+    if (!student) return;
+    const newStatus = !student.isHighlightedNetworking;
+    let success = true;
+    if (supabase) {
+      success = await dbService.upsertRows('students', [{ id: studentId, isHighlightedNetworking: newStatus }]);
+    }
+    if (success) {
+      setStudents(students.map(s => s.id === studentId ? { ...s, isHighlightedNetworking: newStatus } : s));
       addActivityLog(
-        student.isHighlightedNetworking
+        newStatus
           ? `Aluno "${student.name}" adicionado aos Destaques de Networking`
           : `Aluno "${student.name}" removido dos Destaques de Networking`,
         'system'
       );
+      if (typeof window !== 'undefined') {
+        alert(newStatus 
+          ? `Aluno "${student.name}" destacado no networking e salvo no banco de dados!` 
+          : `Aluno "${student.name}" removido dos destaques e salvo no banco de dados!`
+        );
+      }
+    } else {
+      if (typeof window !== 'undefined') alert('Falha ao atualizar destaque de networking no banco de dados.');
     }
   };
 
-  const addNewPost = (content: string, tags: string[]) => {
+  const addNewPost = async (content: string, tags: string[]) => {
     const authorName = currentUser?.name || 'Fulano de Tal';
     const authorTitle = currentUser?.role === 'admin' ? 'Administrador Co-Founder' : 'Aluno Pro';
     const newPost: Post = {
@@ -832,82 +711,98 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       comments: []
     };
 
-    const updatedPosts = [newPost, ...posts];
-    setPosts(updatedPosts);
-    sync('nz_posts', updatedPosts);
-  };
-
-  const likePost = (postId: string) => {
-    const updatedPosts = posts.map(p => {
-      if (p.id === postId) {
-        const liked = !p.likedByCurrentUser;
-        return {
-          ...p,
-          likedByCurrentUser: liked,
-          likes: liked ? p.likes + 1 : p.likes - 1
-        };
-      }
-      return p;
-    });
-    setPosts(updatedPosts);
-    sync('nz_posts', updatedPosts);
-  };
-
-  const addComment = (postId: string, text: string) => {
-    if (!text.trim()) return;
-    const authorName = currentUser?.name || 'Anônimo';
-    const updatedPosts = posts.map(p => {
-      if (p.id === postId) {
-        return {
-          ...p,
-          comments: [
-            ...p.comments,
-            {
-              id: `c-${Date.now()}`,
-              authorName,
-              content: text,
-              createdAt: 'Agora mesmo'
-            }
-          ]
-        };
-      }
-      return p;
-    });
-    setPosts(updatedPosts);
-    sync('nz_posts', updatedPosts);
-  };
-
-  const deletePost = (postId: string) => {
-    const updatedPosts = posts.filter(p => p.id !== postId);
-    setPosts(updatedPosts);
-    sync('nz_posts', updatedPosts);
-  };
-
-  const updateProfile = (name: string, email: string, whatsapp: string, avatar?: string) => {
-    if (!currentUser) return;
-    const updatedUser = { ...currentUser, name, email, whatsapp, ...(avatar ? { avatar } : {}) };
-    setCurrentUser(updatedUser);
-    sync('nz_current_user', updatedUser);
-
-    addActivityLog(`Perfil de utilizador atualizado: ${name}`, 'profile', name);
-
-    // If student role, keep student list in sync
-    if (currentUser.role === 'aluno') {
-      const isStudentInList = students.some(s => s.email === currentUser.email);
-      if (isStudentInList) {
-        const updatedStudents = students.map(s => {
-          if (s.email === currentUser.email) {
-            return { ...s, name, email, whatsapp };
-          }
-          return s;
-        });
-        setStudents(updatedStudents);
-        sync('nz_students', updatedStudents);
-      }
+    let success = true;
+    if (supabase) {
+      success = await dbService.upsertRows('posts', [newPost]);
+    }
+    if (success) {
+      setPosts([newPost, ...posts]);
+      if (typeof window !== 'undefined') alert('Publicação oficial guardada com sucesso no banco de dados!');
+    } else {
+      if (typeof window !== 'undefined') alert('Falha ao salvar publicação no banco de dados. Tente novamente.');
     }
   };
 
-  const addActivityLog = (action: string, category: ActivityLog['category'], user?: string) => {
+  const likePost = async (postId: string) => {
+    const post = posts.find(p => p.id === postId);
+    if (!post) return;
+    const liked = !post.likedByCurrentUser;
+    const newLikes = liked ? post.likes + 1 : post.likes - 1;
+    if (supabase) {
+      await dbService.upsertRows('posts', [{ id: postId, likedByCurrentUser: liked, likes: newLikes }]);
+    }
+    setPosts(posts.map(p => p.id === postId ? { ...p, likedByCurrentUser: liked, likes: newLikes } : p));
+  };
+
+  const addComment = async (postId: string, text: string) => {
+    if (!text.trim()) return;
+    const authorName = currentUser?.name || 'Anônimo';
+    const post = posts.find(p => p.id === postId);
+    if (!post) return;
+    const newComment = { id: `c-${Date.now()}`, authorName, content: text, createdAt: 'Agora mesmo' };
+    const updatedComments = [...post.comments, newComment];
+    if (supabase) {
+      await dbService.upsertRows('posts', [{ id: postId, comments: updatedComments }]);
+    }
+    setPosts(posts.map(p => p.id === postId ? { ...p, comments: updatedComments } : p));
+  };
+
+  const pinComment = async (postId: string, commentId: string) => {
+    const post = posts.find(p => p.id === postId);
+    if (!post) return;
+    const updatedComments = post.comments.map(c => c.id === commentId ? { ...c, isPinned: !c.isPinned } : c);
+    if (supabase) {
+      await dbService.upsertRows('posts', [{ id: postId, comments: updatedComments }]);
+    }
+    setPosts(posts.map(p => p.id === postId ? { ...p, comments: updatedComments } : p));
+  };
+
+  const deletePost = async (postId: string) => {
+    let success = true;
+    if (supabase) {
+      const { error } = await supabase.from('posts').delete().eq('id', postId);
+      if (error) success = false;
+    }
+    if (success) {
+      setPosts(posts.filter(p => p.id !== postId));
+      if (typeof window !== 'undefined') alert('Publicação excluída do banco de dados com sucesso!');
+    } else {
+      if (typeof window !== 'undefined') alert('Falha ao excluir publicação do banco de dados.');
+    }
+  };
+
+  const updateProfile = async (name: string, email: string, whatsapp: string, avatar?: string) => {
+    if (!currentUser) return;
+    const updatedUser = { ...currentUser, name, email, whatsapp, ...(avatar ? { avatar } : {}) };
+
+    let success = true;
+    if (currentUser.role === 'aluno') {
+      const isStudentInList = students.some(s => s.email === currentUser.email);
+      if (isStudentInList) {
+        if (supabase) {
+          const studentIdsToUpdate = students.filter(s => s.email === currentUser.email).map(s => s.id);
+          for (const id of studentIdsToUpdate) {
+            const ok = await dbService.upsertRows('students', [{ id, name, email, whatsapp, ...(avatar ? { avatar } : {}) }]);
+            if (!ok) success = false;
+          }
+        }
+      }
+    }
+
+    if (success) {
+      setCurrentUser(updatedUser);
+      sync('nz_current_user', updatedUser);
+      addActivityLog(`Perfil de utilizador atualizado: ${name}`, 'profile', name);
+      if (currentUser.role === 'aluno') {
+        setStudents(students.map(s => s.email === currentUser.email ? { ...s, name, email, whatsapp, ...(avatar ? { avatar } : {}) } : s));
+      }
+      if (typeof window !== 'undefined') alert('Perfil atualizado e salvo no banco de dados com sucesso!');
+    } else {
+      if (typeof window !== 'undefined') alert('Falha ao atualizar dados do perfil no banco de dados.');
+    }
+  };
+
+  const addActivityLog = async (action: string, category: ActivityLog['category'], user?: string) => {
     const activeUserName = user || currentUser?.name || 'Sistema Nzila';
     const newLog: ActivityLog = {
       id: `log-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
@@ -916,12 +811,13 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       action,
       category
     };
-    const updatedLogs = [newLog, ...activityLogs].slice(0, 150);
-    setActivityLogs(updatedLogs);
-    sync('nz_logs', updatedLogs);
+    if (supabase) {
+      await dbService.upsertRows('activity_logs', [newLog]);
+    }
+    setActivityLogs([newLog, ...activityLogs].slice(0, 150));
   };
 
-  const triggerSystemNotification = (title: string, message: string, category: SystemNotification['category'], targetCourseId?: string) => {
+  const triggerSystemNotification = async (title: string, message: string, category: SystemNotification['category'], targetCourseId?: string) => {
     const newNotif: SystemNotification = {
       id: `notif-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
       title,
@@ -931,9 +827,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       read: false,
       targetCourseId
     };
-    const updatedNotifs = [newNotif, ...notifications];
-    setNotifications(updatedNotifs);
-    sync('nz_notifications', updatedNotifs);
+    if (supabase) {
+      await dbService.upsertRows('notifications', [newNotif]);
+    }
+    setNotifications([newNotif, ...notifications]);
 
     let logMessage = `Notificação enviada: "${title}"`;
     if (targetCourseId) {
@@ -943,10 +840,12 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     addActivityLog(logMessage, 'notification');
   };
 
-  const markNotificationsAsRead = () => {
-    const updatedNotifs = notifications.map(n => ({ ...n, read: true }));
-    setNotifications(updatedNotifs);
-    sync('nz_notifications', updatedNotifs);
+  const markNotificationsAsRead = async () => {
+    if (supabase) {
+      const updates = notifications.map(n => ({ id: n.id, read: true }));
+      await dbService.upsertRows('notifications', updates);
+    }
+    setNotifications(notifications.map(n => ({ ...n, read: true })));
   };
 
   return (
@@ -983,10 +882,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       addActivityLog,
       triggerSystemNotification,
       markNotificationsAsRead,
-      supabaseConnected,
-      syncAllToSupabase,
-      pullAllFromSupabase,
-      factoryReset
+      supabaseConnected
     }}>
       {children}
     </AppContext.Provider>

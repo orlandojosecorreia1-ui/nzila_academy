@@ -261,9 +261,7 @@ export default function StudentFeed() {
                         <span>{post.comments.length}</span>
                       </button>
 
-                      <button className="flex items-center gap-1 sm:gap-1.5 hover:text-gray-200 ml-auto transition-colors">
-                        <Share2 className="w-3 sm:w-3.5 h-3 sm:h-3.5" /> <span className="hidden sm:inline">Compartilhar</span>
-                      </button>
+
                     </div>
 
                     {/* Comments section expands */}
@@ -278,10 +276,13 @@ export default function StudentFeed() {
                           {/* List existing comments */}
                           {post.comments.length > 0 && (
                             <div className="space-y-2 sm:space-y-2.5 max-h-40 overflow-y-auto pr-1">
-                              {post.comments.map(c => (
-                                <div key={c.id} className="text-xs p-2 sm:p-2.5 rounded bg-[#0d0a1b]/80 border border-amber-950/10 space-y-1">
+                              {[...post.comments].sort((a: any, b: any) => (b.isPinned ? 1 : 0) - (a.isPinned ? 1 : 0)).map(c => (
+                                <div key={c.id} className={`text-xs p-2 sm:p-2.5 rounded border space-y-1 ${c.isPinned ? 'bg-amber-950/20 border-amber-500/30' : 'bg-[#0d0a1b]/80 border-amber-950/10'}`}>
                                   <div className="flex justify-between items-center text-[9px] sm:text-[10px] font-mono">
-                                    <span className="text-amber-300 font-medium truncate">{c.authorName}</span>
+                                    <div className="flex items-center gap-1">
+                                      {c.isPinned && <Pin className="w-2.5 h-2.5 text-amber-400" />}
+                                      <span className="text-amber-300 font-medium truncate">{c.authorName}</span>
+                                    </div>
                                     <span className="text-gray-500 flex-shrink-0 ml-2">{c.createdAt}</span>
                                   </div>
                                   <p className="text-gray-400 leading-normal text-[11px] sm:text-xs">{c.content}</p>
@@ -353,14 +354,18 @@ export default function StudentFeed() {
                       </div>
                     </div>
                     
-                    {student.whatsapp ? (
+                    {student.email === currentUser?.email ? (
+                      <span className="text-[9px] font-mono text-yellow-500/80 bg-yellow-500/10 px-2 py-1 rounded border border-yellow-500/20 flex-shrink-0 flex items-center gap-1">
+                        <Star className="w-2.5 h-2.5" /> Teu Perfil em Destaque
+                      </span>
+                    ) : student.whatsapp ? (
                       <a 
                         href={`https://wa.me/${student.whatsapp.replace(/[^0-9]/g, '')}`}
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="px-2 sm:px-2.5 py-1 sm:py-1.5 bg-cyan-950/15 border border-cyan-800/30 rounded text-[9px] sm:text-[10px] font-mono text-cyan-400 hover:bg-cyan-500/10 flex items-center gap-1 flex-shrink-0"
                       >
-                        Conectar <ExternalLink className="w-2.5 h-2.5" />
+                        Fazer Network <ExternalLink className="w-2.5 h-2.5" />
                       </a>
                     ) : (
                       <span className="text-[9px] font-mono text-gray-500 flex-shrink-0">Sem contato</span>
