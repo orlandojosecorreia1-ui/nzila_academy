@@ -108,7 +108,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row bg-[#0A0A0A] relative select-none">
+    <div className="min-h-screen flex flex-col md:flex-row bg-[#0A0A0A] relative select-none overflow-x-hidden">
       
       {/* 1. Subtle Orbital Ambient Lights */}
       <div className="absolute top-10 right-10 w-96 h-96 bg-amber-900/5 rounded-full blur-[140px] pointer-events-none" />
