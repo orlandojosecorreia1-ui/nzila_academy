@@ -80,6 +80,7 @@ export interface Post {
     authorName: string;
     content: string;
     createdAt: string;
+    isPinned?: boolean;
   }[];
   tags: string[];
   isPinned?: boolean;
