@@ -363,14 +363,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setTransactions(updatedTxns);
     await dbService.upsertRows('transactions', [newTxn]);
 
-    // 7. Login Student
-    const studentUser = { name, email, whatsapp, courseId: resolvedCourseId, role: 'aluno' as const };
-    setCurrentUser(studentUser);
-    sync('nz_current_user', studentUser);
-    setIsAdmin(false);
-    sync('nz_is_admin', false);
-
-    return { success: true, message: 'Cadastro bem-sucedido! Código validado no servidor.' };
+    // 7. Success message - DO NOT auto login, wait for email confirmation.
+    return { success: true, message: 'Cadastro bem-sucedido! Verifique a sua caixa de e-mail (e a pasta de spam) e clique no link de confirmação para ativar a sua conta antes de entrar no sistema.' };
   };
 
   const login = async (email: string, passwordString: string) => {
@@ -381,6 +375,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       });
 
       if (error) {
+        if (error.message.toLowerCase().includes('email not confirmed')) {
+          return { success: false, message: 'Precisa de confirmar o seu e-mail antes de iniciar sessão. Verifique a sua caixa de entrada.' };
+        }
         return { success: false, message: 'Autenticação falhou: ' + error.message };
       }
 
