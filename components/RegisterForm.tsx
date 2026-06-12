@@ -80,33 +80,33 @@ export default function RegisterForm() {
     <div className="min-h-screen w-full flex items-center justify-center p-4 relative overflow-hidden bg-[#07040d]">
       
       {/* Dynamic Ambient Mesh Glow Background */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[450px] sm:w-[550px] h-[450px] sm:h-[550px] rounded-full bg-purple-900/15 blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[450px] sm:w-[550px] h-[450px] sm:h-[550px] rounded-full bg-amber-900/15 blur-[120px] pointer-events-none" />
       <div className="absolute bottom-10 left-10 w-[250px] sm:w-[350px] h-[250px] sm:h-[350px] rounded-full bg-cyan-950/20 blur-[90px] pointer-events-none" />
 
       <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10 my-4 sm:my-8">
         
         {/* Left Hand: App branding detail */}
         <div className="lg:col-span-5 text-left flex flex-col justify-center space-y-6">
-          <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full border border-purple-500/20 bg-purple-500/5 text-purple-300 text-xs font-mono font-medium tracking-wide w-fit">
-            <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
-            NZILA ACADEMY V3.5 CORE
+          <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full border border-amber-500/20 bg-amber-500/5 text-amber-300 text-xs font-mono font-medium tracking-wide w-fit">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+            NZILA DIGITAL
           </div>
           
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-white tracking-tight leading-[1.1] neon-text-purple">
-            Próxima Geração de Engenheiros de <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400">Software & IA</span>
+            Próxima Geração de Engenheiros de <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-pink-400 to-cyan-400">Software & IA</span>
           </h1>
           
           <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
             Uma plataforma imposta com arquiteturas neurais, segurança post-quantum e sharding global de infraestrutura. Acesse masters ministradas pelos arquitetos de sistemas líderes do setor.
           </p>
 
-          <div className="hidden lg:flex flex-col gap-4 border-t border-purple-950/40 pt-5 mt-4">
+          <div className="hidden lg:flex flex-col gap-4 border-t border-amber-950/40 pt-5 mt-4">
             <div className="flex items-center gap-3 text-xs text-gray-400 font-mono">
               <ShieldCheck className="w-4 h-4 text-cyan-400" />
               <span>Validador de Tokens off-line criptografados</span>
             </div>
             <div className="flex items-center gap-3 text-xs text-gray-400 font-mono">
-              <UserCheck className="w-4 h-4 text-purple-400" />
+              <UserCheck className="w-4 h-4 text-amber-400" />
               <span>CRM Integrado e Kanban de Alunos</span>
             </div>
           </div>
@@ -118,10 +118,10 @@ export default function RegisterForm() {
             initial={{ opacity: 0, y: 15 }} 
             animate={{ opacity: 1, y: 0 }} 
             transition={{ duration: 0.5 }}
-            className="w-full glass-card p-6 sm:p-8 rounded-2xl relative border border-purple-500/10"
+            className="w-full glass-card p-6 sm:p-8 rounded-2xl relative border border-amber-500/10"
           >
             {/* Action Top bar toggle */}
-            <div className="flex border-b border-purple-950/40 pb-5 mb-6 justify-between items-center text-sm">
+            <div className="flex border-b border-amber-950/40 pb-5 mb-6 justify-between items-center text-sm">
               <div className="flex gap-4">
                 <button 
                   onClick={() => { setIsLogin(false); setError(''); setSuccess(''); }}
@@ -129,7 +129,7 @@ export default function RegisterForm() {
                 >
                   Registo Seguro
                   {!isLogin && (
-                    <motion.div layoutId="form-tab-border" className="absolute bottom-[-21px] left-0 right-0 h-[2px] bg-gradient-to-r from-purple-500 to-cyan-400" />
+                    <motion.div layoutId="form-tab-border" className="absolute bottom-[-21px] left-0 right-0 h-[2px] bg-gradient-to-r from-amber-500 to-cyan-400" />
                   )}
                 </button>
                 <button 
@@ -138,7 +138,7 @@ export default function RegisterForm() {
                 >
                   Entrar na Conta
                   {isLogin && (
-                    <motion.div layoutId="form-tab-border" className="absolute bottom-[-21px] left-0 right-0 h-[2px] bg-gradient-to-r from-purple-500 to-cyan-400" />
+                    <motion.div layoutId="form-tab-border" className="absolute bottom-[-21px] left-0 right-0 h-[2px] bg-gradient-to-r from-amber-500 to-cyan-400" />
                   )}
                 </button>
               </div>
@@ -172,14 +172,14 @@ export default function RegisterForm() {
                   {/* Name */}
                   <div className="space-y-1.5">
                     <label className="text-xs font-medium text-gray-300 flex items-center gap-1.5">
-                      <User className="w-3.5 h-3.5 text-purple-400" /> Nome Completo
+                      <User className="w-3.5 h-3.5 text-amber-400" /> Nome Completo
                     </label>
                     <input 
                       type="text" 
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Ex: João Silva"
-                      className="w-full bg-[#0a0715] border border-purple-900/30 rounded-lg px-3.5 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500/20"
+                      className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-3.5 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500/20"
                       required
                       id="register-input-name"
                     />
@@ -188,14 +188,14 @@ export default function RegisterForm() {
                   {/* Email */}
                   <div className="space-y-1.5">
                     <label className="text-xs font-medium text-gray-300 flex items-center gap-1.5">
-                      <Mail className="w-3.5 h-3.5 text-purple-400" /> E-mail Profissional
+                      <Mail className="w-3.5 h-3.5 text-amber-400" /> E-mail Profissional
                     </label>
                     <input 
                       type="email" 
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="nome@empresa.com"
-                      className="w-full bg-[#0a0715] border border-purple-900/30 rounded-lg px-3.5 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500/20"
+                      className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-3.5 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500/20"
                       required
                       id="register-input-email"
                     />
@@ -206,14 +206,14 @@ export default function RegisterForm() {
                   {/* WhatsApp */}
                   <div className="space-y-1.5">
                     <label className="text-xs font-medium text-gray-300 flex items-center gap-1.5">
-                      <MessageSquare className="w-3.5 h-3.5 text-purple-400" /> Número WhatsApp
+                      <MessageSquare className="w-3.5 h-3.5 text-amber-400" /> Número WhatsApp
                     </label>
                     <input 
                       type="tel" 
                       value={whatsapp}
                       onChange={(e) => setWhatsapp(e.target.value)}
                       placeholder="+55 11 99999-9999"
-                      className="w-full bg-[#0a0715] border border-purple-900/30 rounded-lg px-3.5 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500/20"
+                      className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-3.5 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500/20"
                       required
                       id="register-input-whatsapp"
                     />
@@ -222,14 +222,14 @@ export default function RegisterForm() {
                   {/* Password */}
                   <div className="space-y-1.5">
                     <label className="text-xs font-medium text-gray-300 flex items-center gap-1.5">
-                      <Lock className="w-3.5 h-3.5 text-purple-400" /> Senha de Segurança
+                      <Lock className="w-3.5 h-3.5 text-amber-400" /> Senha de Segurança
                     </label>
                     <input 
                       type="password" 
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="••••••••"
-                      className="w-full bg-[#0a0715] border border-purple-900/30 rounded-lg px-3.5 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500/20"
+                      className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-3.5 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500/20"
                       required
                       id="register-input-password"
                     />
@@ -245,7 +245,7 @@ export default function RegisterForm() {
                     <select 
                       value={courseId}
                       onChange={(e) => setCourseId(e.target.value)}
-                      className="w-full bg-[#0a0715] border border-purple-900/30 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500/20 appearance-none"
+                      className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500/20 appearance-none"
                       style={{ backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b5cf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 12px center', backgroundSize: '16px' }}
                       id="register-select-course"
                       disabled={courses.length === 0}
@@ -290,7 +290,7 @@ export default function RegisterForm() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full h-11 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-sm font-medium rounded-lg font-display flex items-center justify-center gap-2 transition-all mt-3 border border-purple-500/20 hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full h-11 bg-gradient-to-r from-amber-600 to-amber-600 hover:from-amber-500 hover:to-amber-500 text-white text-sm font-medium rounded-lg font-display flex items-center justify-center gap-2 transition-all mt-3 border border-amber-500/20 hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   id="btn-submit-register"
                 >
                   {loading ? (
@@ -311,14 +311,14 @@ export default function RegisterForm() {
 
                 <div className="space-y-1.5">
                   <label className="text-xs font-medium text-gray-300 flex items-center gap-1.5">
-                    <Mail className="w-4 h-4 text-purple-400" /> E-mail de Matrícula
+                    <Mail className="w-4 h-4 text-amber-400" /> E-mail de Matrícula
                   </label>
                   <input 
                     type="email" 
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="user@exemplo.com"
-                    className="w-full bg-[#0a0715] border border-purple-900/30 rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500/20"
+                    className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500/20"
                     required
                     id="login-input-email"
                   />
@@ -327,14 +327,14 @@ export default function RegisterForm() {
 
                 <div className="space-y-1.5">
                   <label className="text-xs font-medium text-gray-300 flex items-center gap-1.5">
-                    <Lock className="w-4 h-4 text-purple-400" /> Senha de Segurança
+                    <Lock className="w-4 h-4 text-amber-400" /> Senha de Segurança
                   </label>
                   <input 
                     type="password" 
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full bg-[#0a0715] border border-purple-900/30 rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500/20"
+                    className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500/20"
                     id="login-input-password"
                   />
                 </div>
@@ -342,14 +342,14 @@ export default function RegisterForm() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full h-11 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-sm font-medium rounded-lg font-display flex items-center justify-center gap-2 transition-all hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full h-11 bg-gradient-to-r from-amber-600 to-amber-600 hover:from-amber-500 hover:to-amber-500 text-white text-sm font-medium rounded-lg font-display flex items-center justify-center gap-2 transition-all hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   id="btn-submit-login"
                 >
                   {loading ? (
                     <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                   ) : (
                     <>
-                      Entrar na Nzila Academy <ArrowRight className="w-4 h-4" />
+                      Entrar na Nzila Digital <ArrowRight className="w-4 h-4" />
                     </>
                   )}
                 </button>

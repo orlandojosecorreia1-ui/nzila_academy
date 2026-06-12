@@ -47,10 +47,10 @@ export default function AdminVouchers() {
     <div className="space-y-6 py-2 relative">
       
       {/* 1. Header Toolbar */}
-      <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-purple-950/20 pb-4">
+      <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-amber-950/20 pb-4">
         <div>
           <h2 className="text-xl font-display font-medium text-white flex items-center gap-2">
-            <Ticket className="w-5 h-5 text-purple-400" /> Códigos de Acesso & Vouchers
+            <Ticket className="w-5 h-5 text-amber-400" /> Códigos de Acesso & Vouchers
           </h2>
           <p className="text-xs text-gray-400 mt-1">
             Geração segura criptográfica off-line de tokens, resgastes por alunos e auditoria de ingressos.
@@ -66,13 +66,13 @@ export default function AdminVouchers() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Buscar por código ou utilizador..."
-              className="pl-8 pr-3 py-1.5 w-44 sm:w-64 bg-black/35 border border-purple-900/20 text-xs text-white placeholder-gray-500 rounded-lg focus:outline-none focus:border-purple-500"
+              className="pl-8 pr-3 py-1.5 w-44 sm:w-64 bg-black/35 border border-amber-900/20 text-xs text-white placeholder-gray-500 rounded-lg focus:outline-none focus:border-amber-500"
             />
           </div>
 
           <button 
             onClick={() => setIsGenerateOpen(true)}
-            className="px-3.5 py-1.5 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-xs font-mono font-medium flex items-center gap-1.5 hover:cursor-pointer transition-colors"
+            className="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-xs font-mono font-medium flex items-center gap-1.5 hover:cursor-pointer transition-colors"
             id="vouchers-btn-generate-batch"
           >
             <Plus className="w-3.5 h-3.5" /> Gerar Lote
@@ -81,10 +81,10 @@ export default function AdminVouchers() {
       </div>
 
       {/* 2. List in High-Contrast Table Grid */}
-      <div className="glass-card rounded-2xl overflow-hidden border border-purple-500/12">
+      <div className="glass-card rounded-2xl overflow-hidden border border-amber-500/12">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs text-gray-300 font-mono">
-            <thead className="bg-purple-950/15 text-purple-400 uppercase tracking-widest text-[10px] font-bold border-b border-purple-950/30">
+            <thead className="bg-amber-950/15 text-amber-400 uppercase tracking-widest text-[10px] font-bold border-b border-amber-950/30">
               <tr>
                 <th className="px-6 py-4">Status</th>
                 <th className="px-6 py-4">Código Token</th>
@@ -102,7 +102,7 @@ export default function AdminVouchers() {
                 </tr>
               ) : (
                 filteredCodes.map(c => (
-                  <tr key={c.code} className="hover:bg-purple-950/5 transition-colors">
+                  <tr key={c.code} className="hover:bg-amber-950/5 transition-colors">
                     <td className="px-6 py-4">
                       {c.status === 'disponivel' ? (
                         <span className="inline-flex items-center gap-1 text-[10px] font-bold text-cyan-400 bg-cyan-400/10 border border-cyan-400/20 px-2.5 py-0.5 rounded-full">
@@ -133,7 +133,7 @@ export default function AdminVouchers() {
                           className={`p-2 rounded-lg border transition-all hover:cursor-pointer ${
                             copiedCode === c.code
                               ? 'text-emerald-400 bg-emerald-950/30 border-emerald-500/30'
-                              : 'text-gray-400 hover:text-cyan-400 bg-purple-950/20 hover:bg-cyan-500/10 border-purple-500/10 hover:border-cyan-500/20'
+                              : 'text-gray-400 hover:text-cyan-400 bg-amber-950/20 hover:bg-cyan-500/10 border-amber-500/10 hover:border-cyan-500/20'
                           }`}
                           title="Copiar código"
                         >
@@ -141,7 +141,7 @@ export default function AdminVouchers() {
                         </button>
                         <button
                           onClick={() => handleDeleteCode(c.code)}
-                          className="p-2 text-gray-500 hover:text-red-400 bg-purple-950/20 hover:bg-purple-500/10 rounded-lg border border-purple-500/10 hover:border-purple-500/20 transition-all hover:cursor-pointer"
+                          className="p-2 text-gray-500 hover:text-red-400 bg-amber-950/20 hover:bg-amber-500/10 rounded-lg border border-amber-500/10 hover:border-amber-500/20 transition-all hover:cursor-pointer"
                           title="Deletar código de voucher"
                           id={`vouchers-btn-delete-${c.code}`}
                         >
@@ -165,7 +165,7 @@ export default function AdminVouchers() {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="w-full max-w-md glass-card p-6 rounded-2xl relative border border-purple-500/20"
+              className="w-full max-w-md glass-card p-6 rounded-2xl relative border border-amber-500/20"
             >
               <button 
                 onClick={() => setIsGenerateOpen(false)}
@@ -175,7 +175,7 @@ export default function AdminVouchers() {
               </button>
 
               <div className="flex items-center gap-2 mb-4">
-                <Ticket className="w-5 h-5 text-purple-400 animate-pulse" />
+                <Ticket className="w-5 h-5 text-amber-400 animate-pulse" />
                 <h3 className="text-base font-display font-medium text-white pt-0.5">Gerar Lote de Chaves Criptográficas</h3>
               </div>
 
@@ -185,7 +185,7 @@ export default function AdminVouchers() {
                   <select
                     value={targetCourse}
                     onChange={(e) => setTargetCourse(e.target.value)}
-                    className="w-full bg-[#0a0715] border border-purple-900/30 rounded-lg px-3 py-2 text-xs text-white focus:outline-none"
+                    className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-3 py-2 text-xs text-white focus:outline-none"
                     style={{ backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b5cf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 12px center', backgroundSize: '16px' }}
                   >
                     {courses.map(c => (
@@ -204,7 +204,7 @@ export default function AdminVouchers() {
                     max={50}
                     value={ticketCount}
                     onChange={(e) => setTicketCount(Number(e.target.value))}
-                    className="w-full bg-[#0a0715] border border-purple-900/30 rounded-lg px-3 py-2 text-xs text-white uppercase focus:outline-none"
+                    className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-3 py-2 text-xs text-white uppercase focus:outline-none"
                     required
                   />
                   <span className="block text-[10px] text-gray-500 mt-1">Os códigos serão expostos instantaneamente na tela de cadastro para facilitação de testes.</span>
@@ -212,7 +212,7 @@ export default function AdminVouchers() {
 
                 <button
                   type="submit"
-                  className="w-full h-10 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-xs font-mono font-medium flex items-center justify-center gap-2 transition-all pt-1 hover:cursor-pointer"
+                  className="w-full h-10 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-xs font-mono font-medium flex items-center justify-center gap-2 transition-all pt-1 hover:cursor-pointer"
                   id="vouchers-btn-submit-generate"
                 >
                   <FileOutput className="w-4 h-4" /> Gerar Vouchers e Publicar Lote

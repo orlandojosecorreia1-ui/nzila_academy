@@ -81,8 +81,8 @@ export default function AdminKanban() {
   const [newStudCourse, setNewStudCourse] = useState(courses[0]?.id || 'course-1');
 
   const columns: { id: Student['status']; title: string; color: string; border: string; bg: string }[] = [
-    { id: 'Novos', title: 'Novas Matrículas', color: 'text-indigo-400', border: 'border-indigo-500/20', bg: 'bg-indigo-500/5' },
-    { id: 'Em Andamento', title: 'Em Atividade', color: 'text-purple-400', border: 'border-purple-500/20', bg: 'bg-purple-500/5' },
+    { id: 'Novos', title: 'Novas Matrículas', color: 'text-yellow-400', border: 'border-yellow-500/20', bg: 'bg-yellow-500/5' },
+    { id: 'Em Andamento', title: 'Em Atividade', color: 'text-amber-400', border: 'border-amber-500/20', bg: 'bg-amber-500/5' },
     { id: 'Concluídos', title: 'Certificação Pendente', color: 'text-emerald-400', border: 'border-emerald-500/20', bg: 'bg-emerald-500/5' },
     { id: 'Inativos', title: 'Inativos / Trancado', color: 'text-red-400', border: 'border-red-500/20', bg: 'bg-red-500/5' }
   ];
@@ -147,10 +147,10 @@ export default function AdminKanban() {
     <div className="space-y-6 py-2 relative">
       
       {/* 1. Header Toolbar */}
-      <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-purple-950/20 pb-4">
+      <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-amber-950/20 pb-4">
         <div>
           <h2 className="text-xl font-display font-medium text-white flex items-center gap-2">
-            <Columns className="w-5 h-5 text-purple-400" /> CRM de Relacionamento & Kanban
+            <Columns className="w-5 h-5 text-amber-400" /> CRM de Relacionamento & Kanban
           </h2>
           <p className="text-xs text-gray-400 mt-1">
             Modulação ágil de turmas, progresso do aluno e canais diretos de suporte ao cliente. Arraste os cards para mudar o funil.
@@ -166,13 +166,13 @@ export default function AdminKanban() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Buscar por estudante..."
-              className="pl-8 pr-3 py-1.5 w-44 sm:w-56 bg-black/35 border border-purple-900/20 text-xs text-white placeholder-gray-500 rounded-lg focus:outline-none focus:border-purple-500"
+              className="pl-8 pr-3 py-1.5 w-44 sm:w-56 bg-black/35 border border-amber-900/20 text-xs text-white placeholder-gray-500 rounded-lg focus:outline-none focus:border-amber-500"
             />
           </div>
 
           <button 
             onClick={() => setIsAddStudentOpen(true)}
-            className="px-3.5 py-1.5 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-xs font-mono font-medium flex items-center gap-1.5 hover:cursor-pointer transition-colors"
+            className="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-xs font-mono font-medium flex items-center gap-1.5 hover:cursor-pointer transition-colors"
             id="kanban-btn-add-student"
           >
             <Plus className="w-3.5 h-3.5" /> Adicionar Aluno
@@ -193,11 +193,11 @@ export default function AdminKanban() {
               onDragLeave={() => setDragOverColumnId(null)}
               onDrop={(e) => handleDrop(e, col.id)}
               className={`rounded-2xl border p-4 flex flex-col space-y-3 min-h-[460px] ${col.border} ${col.bg} ${
-                isOverThisCol ? 'border-purple-400 bg-purple-500/10 scale-[1.01] shadow-[0_0_15px_rgba(168,85,247,0.15)]' : ''
+                isOverThisCol ? 'border-amber-400 bg-amber-500/10 scale-[1.01] shadow-[0_0_15px_rgba(168,85,247,0.15)]' : ''
               } transition-all duration-250`}
             >
               {/* Header Title count */}
-              <div className="flex justify-between items-center border-b border-purple-950/30 pb-2.5">
+              <div className="flex justify-between items-center border-b border-amber-950/30 pb-2.5">
                 <span className={`text-xs font-mono font-bold uppercase tracking-wider ${col.color}`}>
                   {col.title}
                 </span>
@@ -222,20 +222,20 @@ export default function AdminKanban() {
                         onDragStart={(e: any) => handleDragStart(e, student.id)}
                         onDragEnd={handleDragEnd}
                         onClick={() => handleOpenDetailModal(student)}
-                        className="glass-card p-5 rounded-2xl border border-purple-500/20 hover:border-purple-500/35 transition-all flex flex-col justify-between space-y-4 bg-black/55 group relative cursor-grab active:cursor-grabbing hover:bg-[#12082b]/80 hover:scale-[1.02] hover:shadow-xl hover:shadow-purple-500/5 duration-300"
+                        className="glass-card p-5 rounded-2xl border border-amber-500/20 hover:border-amber-500/35 transition-all flex flex-col justify-between space-y-4 bg-black/55 group relative cursor-grab active:cursor-grabbing hover:bg-[#12082b]/80 hover:scale-[1.02] hover:shadow-xl hover:shadow-amber-500/5 duration-300"
                       >
                         <div className="space-y-2">
                           <div className="flex justify-between items-start gap-1.5">
-                            <span className="block text-base font-bold text-white font-display line-clamp-1 group-hover:text-purple-300 transition-colors">
+                            <span className="block text-base font-bold text-white font-display line-clamp-1 group-hover:text-amber-300 transition-colors">
                               {student.name}
                             </span>
-                            <span className="text-[9.5px] text-purple-400 font-mono bg-purple-950/50 border border-purple-500/25 px-2 py-0.5 rounded font-bold shrink-0 select-none">
+                            <span className="text-[9.5px] text-amber-400 font-mono bg-amber-950/50 border border-amber-500/25 px-2 py-0.5 rounded font-bold shrink-0 select-none">
                               DRAG ☰
                             </span>
                           </div>
                           
                           <div className="flex justify-between items-center text-xs font-mono leading-none pt-0.5 select-none">
-                            <span className="text-purple-400/90 truncate max-w-[65%] font-medium" title={student.courseTitle}>
+                            <span className="text-amber-400/90 truncate max-w-[65%] font-medium" title={student.courseTitle}>
                               {student.courseTitle}
                             </span>
                             <span className="text-gray-400 shrink-0">
@@ -249,9 +249,9 @@ export default function AdminKanban() {
                           <span>Progresso</span>
                           <div className="flex items-center gap-2.5 w-1/2 justify-end">
                             <span className={`${col.color} font-bold text-[11px]`}>{student.progress}%</span>
-                            <div className="w-16 bg-purple-950/50 h-2 rounded-full overflow-hidden border border-purple-950/40">
+                            <div className="w-16 bg-amber-950/50 h-2 rounded-full overflow-hidden border border-amber-950/40">
                               <div 
-                                className="bg-purple-500 h-full rounded-full" 
+                                className="bg-amber-500 h-full rounded-full" 
                                 style={{ width: `${student.progress}%` }} 
                               />
                             </div>
@@ -259,7 +259,7 @@ export default function AdminKanban() {
                         </div>
 
                         {/* Interaction toolbar */}
-                        <div className="flex items-center justify-between border-t border-purple-950/20 pt-3">
+                        <div className="flex items-center justify-between border-t border-amber-950/20 pt-3">
                           
                           {/* Direct Whatsapp chat link */}
                           <a 
@@ -293,7 +293,7 @@ export default function AdminKanban() {
                                 shiftStudentColumn(student.id, student.status, 'prev');
                               }}
                               disabled={student.status === 'Novos'}
-                              className="p-0.5 rounded bg-purple-950/20 border border-purple-500/10 text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed hover:cursor-pointer"
+                              className="p-0.5 rounded bg-amber-950/20 border border-amber-500/10 text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed hover:cursor-pointer"
                               title="Mover de volta"
                             >
                               <ChevronDown className="w-2.5 h-2.5 transform rotate-90" />
@@ -304,7 +304,7 @@ export default function AdminKanban() {
                                 shiftStudentColumn(student.id, student.status, 'next');
                               }}
                               disabled={student.status === 'Inativos'}
-                              className="p-0.5 rounded bg-purple-950/20 border border-purple-500/10 text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed hover:cursor-pointer"
+                              className="p-0.5 rounded bg-amber-950/20 border border-amber-500/10 text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed hover:cursor-pointer"
                               title="Mover adiante"
                             >
                               <ChevronUp className="w-2.5 h-2.5 transform rotate-90" />
@@ -330,7 +330,7 @@ export default function AdminKanban() {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="w-full max-w-md glass-card p-6 rounded-2xl relative border border-purple-500/20"
+              className="w-full max-w-md glass-card p-6 rounded-2xl relative border border-amber-500/20"
             >
               <button 
                 onClick={() => setIsAddStudentOpen(false)}
@@ -349,7 +349,7 @@ export default function AdminKanban() {
                     value={newStudName}
                     onChange={(e) => setNewStudName(e.target.value)}
                     placeholder="Ex: Ana Nogueira"
-                    className="w-full bg-[#0a0715] border border-purple-900/30 rounded-lg px-3 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-purple-500"
+                    className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-3 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-amber-500"
                     required
                   />
                 </div>
@@ -361,7 +361,7 @@ export default function AdminKanban() {
                     value={newStudEmail}
                     onChange={(e) => setNewStudEmail(e.target.value)}
                     placeholder="ana.nogueira@tech.com"
-                    className="w-full bg-[#0a0715] border border-purple-900/30 rounded-lg px-3 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-purple-500"
+                    className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-3 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-amber-500"
                     required
                   />
                 </div>
@@ -373,7 +373,7 @@ export default function AdminKanban() {
                     value={newStudPhone}
                     onChange={(e) => setNewStudPhone(e.target.value)}
                     placeholder="+55 11 98888-8888"
-                    className="w-full bg-[#0a0715] border border-purple-900/30 rounded-lg px-3 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-purple-500"
+                    className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-3 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-amber-500"
                     required
                   />
                 </div>
@@ -383,7 +383,7 @@ export default function AdminKanban() {
                   <select 
                     value={newStudCourse}
                     onChange={(e) => setNewStudCourse(e.target.value)}
-                    className="w-full bg-[#0a0715] border border-purple-900/30 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500"
+                    className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500"
                   >
                     {courses.map(c => (
                       <option key={c.id} value={c.id}>
@@ -395,7 +395,7 @@ export default function AdminKanban() {
 
                 <button
                   type="submit"
-                  className="w-full h-10 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-xs font-mono font-medium flex items-center justify-center gap-2 transition-all pt-1 hover:cursor-pointer"
+                  className="w-full h-10 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-xs font-mono font-medium flex items-center justify-center gap-2 transition-all pt-1 hover:cursor-pointer"
                 >
                   Confirmar Matrícula Direta
                 </button>
@@ -435,15 +435,15 @@ export default function AdminKanban() {
               </div>
 
               {/* Graphical simulation design of the certificate */}
-              <div className="p-4 rounded-lg bg-black/40 border border-purple-500/10 font-mono text-[10.5px] text-gray-300 text-left space-y-2 relative overflow-hidden bg-gradient-to-tr from-[#0e071e] via-[#04030a] to-[#04030a]">
-                <div className="absolute top-[-30px] right-[-30px] w-20 h-20 rounded-full bg-purple-600/5 blur-2xl" />
-                <div className="flex justify-between items-center text-[9px] text-purple-400 border-b border-purple-950/35 pb-1.5 mb-1.5">
+              <div className="p-4 rounded-lg bg-black/40 border border-amber-500/10 font-mono text-[10.5px] text-gray-300 text-left space-y-2 relative overflow-hidden bg-gradient-to-tr from-[#0e071e] via-[#04030a] to-[#04030a]">
+                <div className="absolute top-[-30px] right-[-30px] w-20 h-20 rounded-full bg-amber-600/5 blur-2xl" />
+                <div className="flex justify-between items-center text-[9px] text-amber-400 border-b border-amber-950/35 pb-1.5 mb-1.5">
                   <span>NZILA ACADEMY SÃO PAULO</span>
                   <span>REGISTRY: #{certStudent.id.toUpperCase()}</span>
                 </div>
                 <div>CERTIFICAMOS QUE <span className="text-white font-bold">{certStudent.name.toUpperCase()}</span></div>
-                <div>CONCLUIU COM ÊXITO O <span className="text-purple-300 font-semibold">{certStudent.courseTitle.toUpperCase()}</span>.</div>
-                <div className="text-[9px] text-gray-500 pt-3 border-t border-purple-950/35 mt-3 flex justify-between">
+                <div>CONCLUIU COM ÊXITO O <span className="text-amber-300 font-semibold">{certStudent.courseTitle.toUpperCase()}</span>.</div>
+                <div className="text-[9px] text-gray-500 pt-3 border-t border-amber-950/35 mt-3 flex justify-between">
                   <span>SIGN: ALEX_RIVERA_FOUNDER</span>
                   <span>HASH: AF3D91...CE89</span>
                 </div>
@@ -479,14 +479,14 @@ export default function AdminKanban() {
               initial={{ scale: 0.95, opacity: 0, y: 15 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 15 }}
-              className="w-full max-w-lg bg-[#0e0a1f] border border-purple-500/20 rounded-2xl relative overflow-hidden shadow-2xl font-sans"
+              className="w-full max-w-lg bg-[#111111] border border-amber-500/20 rounded-2xl relative overflow-hidden shadow-2xl font-sans"
             >
               {/* Header Visual Stripe */}
-              <div className="h-1.5 bg-gradient-to-r from-purple-600 via-indigo-650 to-cyan-500" />
+              <div className="h-1.5 bg-gradient-to-r from-amber-600 via-indigo-650 to-cyan-500" />
 
               <button 
                 onClick={() => setSelectedStudentDetail(null)}
-                className="absolute top-3.5 right-3.5 z-10 w-7 h-7 rounded-full bg-black/45 hover:bg-black/85 text-gray-400 hover:text-white flex items-center justify-center border border-purple-900/30 transition-colors cursor-pointer"
+                className="absolute top-3.5 right-3.5 z-10 w-7 h-7 rounded-full bg-black/45 hover:bg-black/85 text-gray-400 hover:text-white flex items-center justify-center border border-amber-900/30 transition-colors cursor-pointer"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -494,11 +494,11 @@ export default function AdminKanban() {
               <div className="p-4 sm:p-5 space-y-3.5 text-left">
                 {/* Profile Header Block */}
                 <div className="flex gap-3 items-center">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-600 to-indigo-650 flex items-center justify-center text-sm font-display font-black text-white shadow-md border border-purple-400/20 shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-600 to-amber-650 flex items-center justify-center text-sm font-display font-black text-white shadow-md border border-amber-400/20 shrink-0">
                     {selectedStudentDetail.name.charAt(0).toUpperCase()}
                   </div>
                   <div className="space-y-0.5 min-w-0">
-                    <span className="text-[9px] text-purple-400 font-mono font-bold uppercase tracking-wider block leading-none">Ficha do Estudante</span>
+                    <span className="text-[9px] text-amber-400 font-mono font-bold uppercase tracking-wider block leading-none">Ficha do Estudante</span>
                     <h3 className="text-base sm:text-lg font-display font-semibold text-white leading-tight truncate">
                       {selectedStudentDetail.name}
                     </h3>
@@ -508,15 +508,15 @@ export default function AdminKanban() {
 
                 {/* Compact contact grid */}
                 <div className="grid grid-cols-2 gap-2.5">
-                  <div className="bg-black/30 border border-purple-950/20 rounded-lg p-2 flex items-center gap-2 min-w-0">
-                    <Phone className="w-3.5 h-3.5 text-purple-400 shrink-0" />
+                  <div className="bg-black/30 border border-amber-950/20 rounded-lg p-2 flex items-center gap-2 min-w-0">
+                    <Phone className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                     <div className="min-w-0">
                       <span className="text-[8px] text-gray-500 font-mono block leading-none">CONTATO</span>
                       <span className="text-xs text-white font-mono font-medium truncate block">{selectedStudentDetail.whatsapp}</span>
                     </div>
                   </div>
-                  <div className="bg-black/30 border border-purple-950/20 rounded-lg p-2 flex items-center gap-2 min-w-0">
-                    <Mail className="w-3.5 h-3.5 text-purple-400 shrink-0" />
+                  <div className="bg-black/30 border border-amber-950/20 rounded-lg p-2 flex items-center gap-2 min-w-0">
+                    <Mail className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                     <div className="min-w-0 block">
                       <span className="text-[8px] text-gray-500 font-mono block leading-none">E-MAIL</span>
                       <span className="text-xs text-white font-mono font-medium truncate block text-ellipsis overflow-hidden" title={selectedStudentDetail.email}>{selectedStudentDetail.email}</span>
@@ -525,9 +525,9 @@ export default function AdminKanban() {
                 </div>
 
                 {/* Allocation Box */}
-                <div className="bg-[#0b0817c0] border border-purple-500/10 rounded-xl p-3 space-y-2">
+                <div className="bg-[#0b0817c0] border border-amber-500/10 rounded-xl p-3 space-y-2">
                   <div className="space-y-1.5">
-                    <div className="flex justify-between items-center text-[9px] font-mono font-bold text-purple-300">
+                    <div className="flex justify-between items-center text-[9px] font-mono font-bold text-amber-300">
                       <span>Cursos Ativos</span>
                       <span className="text-[8px] text-gray-400 uppercase">Acesso Liberado</span>
                     </div>
@@ -536,12 +536,12 @@ export default function AdminKanban() {
                       {(selectedStudentDetail.enrolledCourses || [{ courseId: selectedStudentDetail.courseId, courseTitle: selectedStudentDetail.courseTitle }]).map((ec) => (
                         <div 
                           key={ec.courseId} 
-                          className="flex justify-between items-center text-[10.5px] bg-[#0c091bc2] border border-purple-500/5 rounded-md px-2.5 py-1 text-gray-200"
+                          className="flex justify-between items-center text-[10.5px] bg-[#0c091bc2] border border-amber-500/5 rounded-md px-2.5 py-1 text-gray-200"
                         >
                           <span className="truncate max-w-[80%] text-white/90">
                             📚 {ec.courseTitle}
                           </span>
-                          <span className="text-[8px] font-mono font-bold bg-purple-500/15 border border-purple-500/25 text-purple-300 px-1 py-0.5 rounded uppercase shrink-0">
+                          <span className="text-[8px] font-mono font-bold bg-amber-500/15 border border-amber-500/25 text-amber-300 px-1 py-0.5 rounded uppercase shrink-0">
                             Ativo
                           </span>
                         </div>
@@ -550,11 +550,11 @@ export default function AdminKanban() {
 
                     {/* Add new course selector dropdown */}
                     {courses.filter(c => !(selectedStudentDetail.enrolledCourses || [{ courseId: selectedStudentDetail.courseId }]).some(ec => ec.courseId === c.id)).length > 0 ? (
-                      <div className="flex gap-2 pt-1.5 border-t border-purple-500/5">
+                      <div className="flex gap-2 pt-1.5 border-t border-amber-500/5">
                         <select
                           value={newCourseToAddId}
                           onChange={(e) => setNewCourseToAddId(e.target.value)}
-                          className="bg-[#050308] border border-purple-900/40 text-[10px] text-gray-300 rounded px-2 py-1 font-mono focus:outline-none w-full"
+                          className="bg-[#050308] border border-amber-900/40 text-[10px] text-gray-300 rounded px-2 py-1 font-mono focus:outline-none w-full"
                         >
                           <option value="">-- Adicionar mais um curso --</option>
                           {courses
@@ -579,7 +579,7 @@ export default function AdminKanban() {
                               setNewCourseToAddId('');
                             }
                           }}
-                          className="px-2.5 py-1 bg-purple-600 hover:bg-purple-500 text-white rounded text-[10px] font-mono font-bold flex items-center gap-1 cursor-pointer shrink-0 transition-colors"
+                          className="px-2.5 py-1 bg-amber-600 hover:bg-amber-500 text-white rounded text-[10px] font-mono font-bold flex items-center gap-1 cursor-pointer shrink-0 transition-colors"
                         >
                           <Plus className="w-3 h-3" /> Adicionar
                         </button>
@@ -592,7 +592,7 @@ export default function AdminKanban() {
                   </div>
 
                   {/* Voucher tracking info */}
-                  <div className="pt-2 border-t border-purple-950/20 flex justify-between items-center text-[9px] font-mono text-gray-400">
+                  <div className="pt-2 border-t border-amber-950/20 flex justify-between items-center text-[9px] font-mono text-gray-400">
                     <span>CÓDIGO DE ATIVAÇÃO:</span>
                     <span className="text-cyan-400 bg-cyan-950/40 border border-cyan-500/10 rounded px-1.5 py-0.5 font-bold uppercase tracking-wide">
                       {selectedStudentDetail.codeUsed}
@@ -618,8 +618,8 @@ export default function AdminKanban() {
                             }}
                             className={`py-1 px-1 rounded text-center border transition-all text-[9.5px] cursor-pointer font-semibold ${
                               isActive 
-                                ? 'bg-purple-600 border-purple-400 text-white shadow-sm opacity-100' 
-                                : 'bg-black/30 border-purple-950/20 text-gray-400 hover:text-white'
+                                ? 'bg-amber-600 border-amber-400 text-white shadow-sm opacity-100' 
+                                : 'bg-black/30 border-amber-950/20 text-gray-400 hover:text-white'
                             }`}
                           >
                             {col.id}
@@ -635,7 +635,7 @@ export default function AdminKanban() {
                       <span className="uppercase tracking-wider">Progresso: <span className="text-cyan-400 font-bold">{selectedStudentDetail.progress}%</span></span>
                     </div>
                     
-                    <div className="bg-black/40 border border-purple-950/15 p-2 rounded-lg space-y-1">
+                    <div className="bg-black/40 border border-amber-950/15 p-2 rounded-lg space-y-1">
                       <input 
                         type="range"
                         min="0"
@@ -659,7 +659,7 @@ export default function AdminKanban() {
                 </div>
 
                 {/* Compact quick actions bar */}
-                <div className="pt-2.5 flex justify-end gap-2.5 border-t border-purple-950/25">
+                <div className="pt-2.5 flex justify-end gap-2.5 border-t border-amber-950/25">
                   <a
                     href={`https://wa.me/${selectedStudentDetail.whatsapp.replace('+', '').replace(' ', '')}`}
                     target="_blank"
@@ -684,7 +684,7 @@ export default function AdminKanban() {
                     onClick={() => {
                       handleSendEmailSimulated(selectedStudentDetail.email);
                     }}
-                    className="py-2 px-3 bg-[#1d123e] border border-purple-500/10 hover:bg-purple-850/20 rounded-lg text-xs font-mono text-purple-300 font-bold transition-all cursor-pointer"
+                    className="py-2 px-3 bg-[#1d123e] border border-amber-500/10 hover:bg-amber-850/20 rounded-lg text-xs font-mono text-amber-300 font-bold transition-all cursor-pointer"
                   >
                     Auditar Acesso
                   </button>

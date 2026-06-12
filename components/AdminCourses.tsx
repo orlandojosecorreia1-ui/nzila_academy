@@ -519,7 +519,7 @@ export default function AdminCourses() {
 
 
   const categoriesColors: Record<string, string> = {
-    'Tech': 'text-purple-400 bg-purple-500/10 border-purple-500/20',
+    'Tech': 'text-amber-400 bg-amber-500/10 border-amber-500/20',
     'Cyber': 'text-red-400 bg-red-400/10 border-red-400/20',
     'Dev': 'text-cyan-400 bg-cyan-400/10 border-cyan-400/20',
     'Design': 'text-pink-400 bg-pink-500/10 border-pink-500/20'
@@ -539,10 +539,10 @@ export default function AdminCourses() {
             className="space-y-6"
           >
             {/* Header toolbar */}
-            <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-purple-950/20 pb-4">
+            <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-amber-950/20 pb-4">
               <div>
                 <h2 className="text-xl font-display font-medium text-white flex items-center gap-2">
-                  <BookOpen className="w-5 h-5 text-purple-400" /> Grade de Masterclasses
+                  <BookOpen className="w-5 h-5 text-amber-400" /> Grade de Masterclasses
                 </h2>
                 <p className="text-xs text-gray-400 mt-1">
                   Gestão estratégica de ementas, duração de disciplinas e adição de novas masterclasses existentes.
@@ -551,7 +551,7 @@ export default function AdminCourses() {
 
               <button 
                 onClick={() => setIsAddOpen(true)}
-                className="px-3.5 py-1.5 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-xs font-mono font-medium flex items-center gap-1.5 hover:cursor-pointer transition-colors"
+                className="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-xs font-mono font-medium flex items-center gap-1.5 hover:cursor-pointer transition-colors"
                 id="courses-btn-add"
               >
                 <Plus className="w-3.5 h-3.5" /> Adicionar Curso
@@ -564,10 +564,10 @@ export default function AdminCourses() {
                 <div 
                   key={course.id} 
                   onClick={() => selectCourseForEditing(course)}
-                  className="glass-card flex flex-col rounded-xl overflow-hidden border border-purple-500/10 hover:border-purple-500/30 transition-all bg-black/40 hover:scale-[1.01] hover:shadow-lg hover:shadow-purple-550/5 group hover:cursor-pointer"
+                  className="glass-card flex flex-col rounded-xl overflow-hidden border border-amber-500/10 hover:border-amber-500/30 transition-all bg-black/40 hover:scale-[1.01] hover:shadow-lg hover:shadow-amber-550/5 group hover:cursor-pointer"
                 >
                   {/* Visual Header */}
-                  <div className="h-32 w-full relative bg-purple-950/30">
+                  <div className="h-32 w-full relative bg-amber-950/30">
                     <img 
                       src={course.image} 
                       alt={course.title} 
@@ -583,18 +583,18 @@ export default function AdminCourses() {
                   {/* Content info */}
                   <div className="p-4 flex-grow flex flex-col justify-between space-y-3">
                     <div className="space-y-1">
-                      <h3 className="text-sm font-bold font-display text-white line-clamp-1 group-hover:text-purple-300 transition-colors">{course.title}</h3>
+                      <h3 className="text-sm font-bold font-display text-white line-clamp-1 group-hover:text-amber-300 transition-colors">{course.title}</h3>
                       <p className="text-[11px] text-gray-400 line-clamp-2 leading-relaxed">{course.tagline}</p>
                     </div>
 
-                    <div className="border-t border-purple-950/15 pt-3.5 flex justify-between items-center text-[10px] font-mono text-gray-400">
-                      <span className="flex items-center gap-1"><Calendar className="w-3.5 h-3.5 text-purple-400" /> {course.duration}</span>
+                    <div className="border-t border-amber-950/15 pt-3.5 flex justify-between items-center text-[10px] font-mono text-gray-400">
+                      <span className="flex items-center gap-1"><Calendar className="w-3.5 h-3.5 text-amber-400" /> {course.duration}</span>
                       <span className="flex items-center gap-1"><Layers className="w-3.5 h-3.5 text-cyan-400" /> {course.lessonsList.length} Módulos</span>
                     </div>
                   </div>
 
                   {/* Hover Actions Bar Hint */}
-                  <div className="bg-purple-950/10 border-t border-purple-900/10 py-2.5 px-4 text-[10px] font-mono text-purple-300 flex items-center justify-between group-hover:bg-purple-900/10">
+                  <div className="bg-amber-950/10 border-t border-amber-900/10 py-2.5 px-4 text-[10px] font-mono text-amber-300 flex items-center justify-between group-hover:bg-amber-900/10">
                     <span>Gerenciar Aulas e Módulos</span>
                     <div className="flex items-center gap-3">
                       <button
@@ -626,10 +626,10 @@ export default function AdminCourses() {
             className="space-y-6"
           >
             {/* Header and Back navigation */}
-            <div className="flex items-center justify-between border-b border-purple-950/20 pb-4">
+            <div className="flex items-center justify-between border-b border-amber-950/20 pb-4">
               <button
                 onClick={() => setSelectedCourse(null)}
-                className="text-xs font-mono text-gray-450 text-gray-300 hover:text-white flex items-center gap-1 bg-purple-950/10 border border-purple-500/10 hover:border-purple-500/25 px-3 py-1.5 rounded-lg transition-all hover:cursor-pointer"
+                className="text-xs font-mono text-gray-450 text-gray-300 hover:text-white flex items-center gap-1 bg-amber-950/10 border border-amber-500/10 hover:border-amber-500/25 px-3 py-1.5 rounded-lg transition-all hover:cursor-pointer"
               >
                 <ArrowLeft className="w-3.5 h-3.5" /> Voltar para Masterclasses
               </button>
@@ -643,13 +643,13 @@ export default function AdminCourses() {
               
               {/* Left Column (Metadata edit fields) - 5 Cols */}
               <div className="lg:col-span-5 space-y-4">
-                <div className="glass-card p-5 rounded-2xl border border-purple-500/15 bg-black/40 space-y-4">
+                <div className="glass-card p-5 rounded-2xl border border-amber-500/15 bg-black/40 space-y-4">
                   <div className="space-y-1">
-                    <span className="text-[10px] font-mono text-purple-400 font-bold block uppercase font-display">Informações da Masterclass</span>
+                    <span className="text-[10px] font-mono text-amber-400 font-bold block uppercase font-display">Informações da Masterclass</span>
                     <h3 className="text-sm font-display font-medium text-white">{selectedCourse.title}</h3>
                   </div>
 
-                  <form onSubmit={handleUpdateCourseDetails} className="space-y-3.5 pt-2 border-t border-purple-950/20 text-xs text-sans">
+                  <form onSubmit={handleUpdateCourseDetails} className="space-y-3.5 pt-2 border-t border-amber-950/20 text-xs text-sans">
                     
                     <div className="space-y-1.5">
                       <label className="text-[10px] font-mono text-gray-400 block">Título Oficial</label>
@@ -657,7 +657,7 @@ export default function AdminCourses() {
                         type="text"
                         value={editTitle}
                         onChange={e => setEditTitle(e.target.value)}
-                        className="w-full bg-[#0a0715] border border-purple-900/30 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500/50"
+                        className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500/50"
                         required
                       />
                     </div>
@@ -668,7 +668,7 @@ export default function AdminCourses() {
                         <select
                           value={editCategory}
                           onChange={e => setEditCategory(e.target.value as any)}
-                          className="w-full bg-[#0a0715] border border-purple-900/30 rounded-lg px-2.5 py-2 text-xs text-white focus:outline-none"
+                          className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-2.5 py-2 text-xs text-white focus:outline-none"
                         >
                           <option value="Tech">Tech</option>
                           <option value="Dev">Dev</option>
@@ -683,7 +683,7 @@ export default function AdminCourses() {
                           type="text"
                           value={editDuration}
                           onChange={e => setEditDuration(e.target.value)}
-                          className="w-full bg-[#0a0715] border border-purple-900/30 rounded-lg px-3 py-2 text-xs text-white focus:outline-none"
+                          className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-3 py-2 text-xs text-white focus:outline-none"
                           required
                         />
                       </div>
@@ -695,7 +695,7 @@ export default function AdminCourses() {
                         type="number"
                         value={editPrice}
                         onChange={e => setEditPrice(e.target.value)}
-                        className="w-full bg-[#0a0715] border border-purple-900/30 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500/50"
+                        className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500/50"
                         placeholder="Ex: 120000"
                         required
                       />
@@ -706,19 +706,19 @@ export default function AdminCourses() {
                       <textarea 
                         value={editTagline}
                         onChange={e => setEditTagline(e.target.value)}
-                        className="w-full bg-[#0a0715] border border-purple-900/30 rounded-lg p-3 text-xs text-white font-sans min-h-[90px] focus:outline-none leading-relaxed"
+                        className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg p-3 text-xs text-white font-sans min-h-[90px] focus:outline-none leading-relaxed"
                         required
                       />
                     </div>
 
                     <div className="space-y-1.5">
                       <label className="text-[10px] font-mono text-gray-400 block">Identidade Visual (Capa do Curso)</label>
-                      <div className="flex items-center gap-3 bg-[#0a0715] border border-purple-900/30 p-2.5 rounded-lg">
+                      <div className="flex items-center gap-3 bg-[#0a0715] border border-amber-900/30 p-2.5 rounded-lg">
                         {editCourseImage ? (
                           <img 
                             src={editCourseImage} 
                             alt="Capa masterclass" 
-                            className="w-14 h-10 object-cover rounded border border-purple-500/20 bg-purple-950/20 flex-shrink-0"
+                            className="w-14 h-10 object-cover rounded border border-amber-500/20 bg-amber-950/20 flex-shrink-0"
                             referrerPolicy="no-referrer"
                           />
                         ) : (
@@ -732,7 +732,7 @@ export default function AdminCourses() {
                             value={editCourseImage}
                             onChange={e => setEditCourseImage(e.target.value)}
                             placeholder="https://exemplo.com/capa.jpg"
-                            className="w-full bg-black/40 border border-purple-900/15 rounded px-2 py-1 text-[10px] text-white focus:outline-none"
+                            className="w-full bg-black/40 border border-amber-900/15 rounded px-2 py-1 text-[10px] text-white focus:outline-none"
                           />
                           <div className="flex items-center gap-1.5">
                             <input 
@@ -745,7 +745,7 @@ export default function AdminCourses() {
                             <button
                               type="button"
                               onClick={triggerEditCoverFileInput}
-                              className="text-[9px] font-mono text-purple-400 hover:text-purple-300 hover:underline flex items-center gap-1 cursor-pointer"
+                              className="text-[9px] font-mono text-amber-400 hover:text-amber-300 hover:underline flex items-center gap-1 cursor-pointer"
                             >
                               <UploadCloud className="w-3 h-3" /> Carregar Capa Local
                             </button>
@@ -759,7 +759,7 @@ export default function AdminCourses() {
 
                     <button
                       type="submit"
-                      className="w-full py-2.5 bg-purple-600 hover:bg-purple-500 text-white rounded-lg font-mono text-xs font-bold flex items-center justify-center gap-1.5 transition-colors hover:cursor-pointer"
+                      className="w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white rounded-lg font-mono text-xs font-bold flex items-center justify-center gap-1.5 transition-colors hover:cursor-pointer"
                     >
                       <Save className="w-4 h-4" /> Salvar Configurações Gerais
                     </button>
@@ -767,10 +767,10 @@ export default function AdminCourses() {
                 </div>
 
                 {/* Metadata stats card */ }
-                <div className="glass-card p-4 rounded-xl border border-purple-500/10 bg-[#0c091d]/20 text-xs flex items-center justify-between">
+                <div className="glass-card p-4 rounded-xl border border-amber-500/10 bg-[#0c091d]/20 text-xs flex items-center justify-between">
                   <div className="space-y-1">
                     <span className="text-[9px] font-mono text-gray-400 block">AUDITORIA DE BANCO</span>
-                    <span className="block text-[#a78bfa] font-semibold">Integridade Acadêmica</span>
+                    <span className="block text-[#C9A84C] font-semibold">Integridade Acadêmica</span>
                     <span className="block text-[10px] text-gray-500 font-mono leading-relaxed">
                       Módulos ativos: {selectedCourse.lessonsList.length} <br />
                       Aulas totais registradas: {selectedCourse.lessonsList.flatMap(m => m.lessons).length}
@@ -782,13 +782,13 @@ export default function AdminCourses() {
 
               {/* Right Column (Dynamic Syllabus / Modules and lessons interactive addition) - 7 Cols */}
               <div className="lg:col-span-7 space-y-4">
-                <div className="glass-card p-5 rounded-2xl border border-purple-500/15 bg-black/40 space-y-4">
+                <div className="glass-card p-5 rounded-2xl border border-amber-500/15 bg-black/40 space-y-4">
                   
                   {/* Title Bar */}
-                  <div className="flex items-center justify-between gap-4 border-b border-purple-950/15 pb-3">
+                  <div className="flex items-center justify-between gap-4 border-b border-amber-950/15 pb-3">
                     <div className="space-y-0.5">
                       <h3 className="text-sm font-display font-medium text-white flex items-center gap-1.5">
-                        <Video className="w-4 h-4 text-purple-400" /> Gerenciador de Aulas Nzila
+                        <Video className="w-4 h-4 text-amber-400" /> Gerenciador de Aulas Nzila
                       </h3>
                       <p className="text-[10px] text-gray-400">Monte a estrutura de módulos e configure os conteúdos/links de cada aula.</p>
                     </div>
@@ -796,7 +796,7 @@ export default function AdminCourses() {
                     {!isAddingModule ? (
                       <button
                         onClick={() => setIsAddingModule(true)}
-                        className="px-2.5 py-1.5 bg-purple-900/40 hover:bg-purple-900/70 text-purple-200 border border-purple-500/20 hover:border-purple-500/40 rounded-lg text-[10px] font-mono flex items-center gap-1 hover:cursor-pointer transition-colors"
+                        className="px-2.5 py-1.5 bg-amber-900/40 hover:bg-amber-900/70 text-amber-200 border border-amber-500/20 hover:border-amber-500/40 rounded-lg text-[10px] font-mono flex items-center gap-1 hover:cursor-pointer transition-colors"
                       >
                         <Plus className="w-3.5 h-3.5" /> Adicionar Módulo
                       </button>
@@ -805,7 +805,7 @@ export default function AdminCourses() {
 
                   {/* Add module form panel */}
                   {isAddingModule && (
-                    <form onSubmit={handleAddModule} className="p-3.5 bg-purple-950/10 border border-purple-500/15 rounded-xl space-y-3">
+                    <form onSubmit={handleAddModule} className="p-3.5 bg-amber-950/10 border border-amber-500/15 rounded-xl space-y-3">
                       <div className="space-y-1">
                         <label className="text-[10px] font-mono text-gray-300 block">Nome do Novo Módulo / Seção Acadêmica</label>
                         <input 
@@ -813,7 +813,7 @@ export default function AdminCourses() {
                           value={newModuleName}
                           onChange={e => setNewModuleName(e.target.value)}
                           placeholder="Ex: Módulo 4: Avançado em Kernel Drivers"
-                          className="w-full bg-[#0a0715] border border-purple-900/30 rounded-lg px-2.5 py-2 text-xs text-white focus:outline-none"
+                          className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-2.5 py-2 text-xs text-white focus:outline-none"
                           required
                         />
                       </div>
@@ -827,7 +827,7 @@ export default function AdminCourses() {
                         </button>
                         <button
                           type="submit"
-                          className="px-3.5 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-mono font-medium flex items-center gap-1 transition-colors hover:cursor-pointer"
+                          className="px-3.5 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-mono font-medium flex items-center gap-1 transition-colors hover:cursor-pointer"
                         >
                           <CheckCircle className="w-3.5 h-3.5" /> Confirmar Módulo
                         </button>
@@ -841,12 +841,12 @@ export default function AdminCourses() {
                       const isAddingLessonHere = activeModuleIndexForNewLesson === modIndex;
                       
                       return (
-                        <div key={modIndex} className="p-4 rounded-xl border border-purple-950/40 bg-purple-950/5 space-y-3.5 relative overflow-hidden">
+                        <div key={modIndex} className="p-4 rounded-xl border border-amber-950/40 bg-amber-950/5 space-y-3.5 relative overflow-hidden">
                           
                           {/* Module title and Actions */}
-                          <div className="flex justify-between items-start gap-4 pb-2 border-b border-purple-950/15">
-                            <div className="flex items-center gap-1.5 text-xs font-semibold text-purple-300 font-display">
-                              <span className="w-1.5 h-1.5 rounded-full bg-purple-400 shadow shadow-purple-500/35 animate-pulse" />
+                          <div className="flex justify-between items-start gap-4 pb-2 border-b border-amber-950/15">
+                            <div className="flex items-center gap-1.5 text-xs font-semibold text-amber-300 font-display">
+                              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shadow shadow-amber-500/35 animate-pulse" />
                               <span className="line-clamp-1">{mod.moduleName}</span>
                             </div>
 
@@ -860,16 +860,16 @@ export default function AdminCourses() {
                           </div>
 
                           {/* Sub-lessons checklist */}
-                          <div className="space-y-2 pl-3 border-l border-purple-900/20">
+                          <div className="space-y-2 pl-3 border-l border-amber-900/20">
                             {mod.lessons.map((lesson, lessonIndex) => (
                               <div 
                                 key={lesson.id} 
-                                className="flex justify-between items-center bg-black/25 hover:bg-black/40 border border-purple-950/10 p-2.5 rounded-lg text-xs transition-colors"
+                                className="flex justify-between items-center bg-black/25 hover:bg-black/40 border border-amber-950/10 p-2.5 rounded-lg text-xs transition-colors"
                               >
                                 <div className="space-y-0.5 min-w-0 pr-2 select-none">
                                   <span className="text-white block font-sans font-medium line-clamp-1">{lesson.title}</span>
                                   <div className="flex items-center gap-2 mt-0.5">
-                                    <span className="text-[9px] text-[#c084fc] font-mono uppercase bg-purple-950/35 px-1 rounded border border-purple-500/10">{lesson.contentType || 'video'}</span>
+                                    <span className="text-[9px] text-[#c084fc] font-mono uppercase bg-amber-950/35 px-1 rounded border border-amber-500/10">{lesson.contentType || 'video'}</span>
                                     <span className="text-[10px] text-gray-500 font-mono">Duração: {lesson.duration}</span>
                                     {lesson.materials && lesson.materials.length > 0 && (
                                       <span className="text-[9px] text-cyan-400 font-mono bg-cyan-950/20 px-1 rounded border border-cyan-500/5">+{lesson.materials.length} anexos</span>
@@ -881,7 +881,7 @@ export default function AdminCourses() {
                                   {/* Config detailed stats */}
                                   <button
                                     onClick={() => handleOpenConfigureLesson(modIndex, lessonIndex)}
-                                    className="p-1 px-2.5 rounded bg-purple-950/30 border border-purple-500/20 text-purple-300 hover:text-white hover:bg-purple-600/20 transition-all hover:cursor-pointer font-mono text-[10px] flex items-center gap-1"
+                                    className="p-1 px-2.5 rounded bg-amber-950/30 border border-amber-500/20 text-amber-300 hover:text-white hover:bg-amber-600/20 transition-all hover:cursor-pointer font-mono text-[10px] flex items-center gap-1"
                                     title="Editar Conteúdo e Descrição"
                                   >
                                     <Settings className="w-3 h-3" /> Config
@@ -905,8 +905,8 @@ export default function AdminCourses() {
 
                           {/* Lesson adding configuration */}
                           {isAddingLessonHere ? (
-                            <div className="p-3 bg-black/40 border border-purple-950/30 rounded-lg space-y-3 mt-3">
-                              <span className="text-[10px] font-mono text-[#a78bfa] block font-bold">RÁPIDO REGISTRO DE AULA</span>
+                            <div className="p-3 bg-black/40 border border-amber-950/30 rounded-lg space-y-3 mt-3">
+                              <span className="text-[10px] font-mono text-[#C9A84C] block font-bold">RÁPIDO REGISTRO DE AULA</span>
                               
                               <div className="grid grid-cols-1 sm:grid-cols-12 gap-2 text-xs">
                                 <input 
@@ -914,18 +914,18 @@ export default function AdminCourses() {
                                   placeholder="Ex: Aula 3: Configuração do TLS 1.3"
                                   value={newLessonTitle}
                                   onChange={e => setNewLessonTitle(e.target.value)}
-                                  className="sm:col-span-8 bg-[#0a0715] border border-purple-900/30 text-xs p-2 rounded text-white focus:outline-none focus:border-purple-500/30"
+                                  className="sm:col-span-8 bg-[#0a0715] border border-amber-900/30 text-xs p-2 rounded text-white focus:outline-none focus:border-amber-500/30"
                                 />
                                 <input 
                                   type="text" 
                                   placeholder="Duração (ex: 20 min)"
                                   value={newLessonDuration}
                                   onChange={e => setNewLessonDuration(e.target.value)}
-                                  className="sm:col-span-4 bg-[#0a0715] border border-purple-900/30 text-xs p-2 rounded text-white focus:outline-none focus:border-purple-500/30"
+                                  className="sm:col-span-4 bg-[#0a0715] border border-amber-900/30 text-xs p-2 rounded text-white focus:outline-none focus:border-amber-500/30"
                                 />
                               </div>
 
-                              <p className="text-[9px] text-[#a78bfa]/70 font-mono leading-normal">
+                              <p className="text-[9px] text-[#C9A84C]/70 font-mono leading-normal">
                                 Dica: Após salvar, clique em <strong className="text-cyan-300 font-bold">&quot;Config&quot;</strong> ao lado da aula para cadastrar as descrições, subir vídeos ou ebooks, e anexar PDFs acadêmicos!
                               </p>
 
@@ -940,7 +940,7 @@ export default function AdminCourses() {
                                 <button 
                                   type="button"
                                   onClick={() => handleAddLesson(modIndex)}
-                                  className="bg-purple-600 hover:bg-purple-500 text-white text-[11px] font-mono px-3.5 py-1.5 rounded-lg hover:cursor-pointer transition-colors"
+                                  className="bg-amber-600 hover:bg-amber-500 text-white text-[11px] font-mono px-3.5 py-1.5 rounded-lg hover:cursor-pointer transition-colors"
                                 >
                                   Inserir Aula
                                 </button>
@@ -966,7 +966,7 @@ export default function AdminCourses() {
                     {selectedCourse.lessonsList.length === 0 && (
                       <div className="text-center py-8 text-xs text-gray-500 space-y-2">
                         <p>Este curso ainda não possui ementas de conteúdo programático.</p>
-                        <p className="text-[10px] text-purple-400">Clique em &quot;Adicionar Módulo&quot; acima para estruturar matérias.</p>
+                        <p className="text-[10px] text-amber-400">Clique em &quot;Adicionar Módulo&quot; acima para estruturar matérias.</p>
                       </div>
                     )}
                   </div>
@@ -988,7 +988,7 @@ export default function AdminCourses() {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="w-full max-w-2xl bg-[#090615] border border-purple-500/25 rounded-2xl relative shadow-2xl p-6 overflow-hidden my-8"
+              className="w-full max-w-2xl bg-[#090615] border border-amber-500/25 rounded-2xl relative shadow-2xl p-6 overflow-hidden my-8"
             >
               <button 
                 onClick={() => {
@@ -996,39 +996,39 @@ export default function AdminCourses() {
                   setEditingLessonModIndex(null);
                   setEditingLessonIdx(null);
                 }}
-                className="absolute top-4 right-4 text-gray-400 hover:text-white bg-purple-950/40 p-1.5 rounded-full border border-purple-500/10"
+                className="absolute top-4 right-4 text-gray-400 hover:text-white bg-amber-950/40 p-1.5 rounded-full border border-amber-500/10"
               >
                 <X className="w-4 h-4" />
               </button>
 
-              <div className="flex items-center gap-2 text-xs font-mono text-purple-400 bg-purple-950/35 border border-purple-550/10 px-3 py-1 rounded-md w-max uppercase tracking-wider mb-2">
-                <Settings className="w-3.5 h-3.5 text-purple-400 animate-spin-slow" /> Configurações Detalhadas de Aula
+              <div className="flex items-center gap-2 text-xs font-mono text-amber-400 bg-amber-950/35 border border-amber-550/10 px-3 py-1 rounded-md w-max uppercase tracking-wider mb-2">
+                <Settings className="w-3.5 h-3.5 text-amber-400 animate-spin-slow" /> Configurações Detalhadas de Aula
               </div>
 
               <h3 className="text-base sm:text-lg font-display font-bold text-white mb-4">
-                Redefinindo: <span className="text-purple-300 font-medium">{editingLesson.title}</span>
+                Redefinindo: <span className="text-amber-300 font-medium">{editingLesson.title}</span>
               </h3>
 
               {/* Compartmentalized Tab Selectors */}
-              <div className="flex border-b border-purple-950/40 mb-5 text-xs font-mono gap-1 font-bold">
+              <div className="flex border-b border-amber-950/40 mb-5 text-xs font-mono gap-1 font-bold">
                 <button
                   type="button"
                   onClick={() => setActiveLessonTab('general')}
-                  className={`px-3 py-2.5 border-b-2 hover:cursor-pointer transition-all flex items-center gap-1.5 ${activeLessonTab === 'general' ? 'border-purple-500 text-purple-300 bg-purple-500/5' : 'border-transparent text-gray-400 hover:text-white'}`}
+                  className={`px-3 py-2.5 border-b-2 hover:cursor-pointer transition-all flex items-center gap-1.5 ${activeLessonTab === 'general' ? 'border-amber-500 text-amber-300 bg-amber-500/5' : 'border-transparent text-gray-400 hover:text-white'}`}
                 >
                   <Laptop className="w-3.5 h-3.5" /> Metadados Básicos
                 </button>
                 <button
                   type="button"
                   onClick={() => setActiveLessonTab('content')}
-                  className={`px-3 py-2.5 border-b-2 hover:cursor-pointer transition-all flex items-center gap-1.5 ${activeLessonTab === 'content' ? 'border-purple-500 text-purple-300 bg-purple-500/5' : 'border-transparent text-gray-400 hover:text-white'}`}
+                  className={`px-3 py-2.5 border-b-2 hover:cursor-pointer transition-all flex items-center gap-1.5 ${activeLessonTab === 'content' ? 'border-amber-500 text-amber-300 bg-amber-500/5' : 'border-transparent text-gray-400 hover:text-white'}`}
                 >
                   <Video className="w-3.5 h-3.5" /> Conteúdo (Vídeo/E-book)
                 </button>
                 <button
                   type="button"
                   onClick={() => setActiveLessonTab('materials')}
-                  className={`px-3 py-2.5 border-b-2 hover:cursor-pointer transition-all flex items-center gap-1.5 ${activeLessonTab === 'materials' ? 'border-purple-500 text-purple-300 bg-purple-500/5' : 'border-transparent text-gray-400 hover:text-white'}`}
+                  className={`px-3 py-2.5 border-b-2 hover:cursor-pointer transition-all flex items-center gap-1.5 ${activeLessonTab === 'materials' ? 'border-amber-500 text-amber-300 bg-amber-500/5' : 'border-transparent text-gray-400 hover:text-white'}`}
                 >
                   <FileText className="w-3.5 h-3.5" /> Materiais de Apoio
                 </button>
@@ -1046,7 +1046,7 @@ export default function AdminCourses() {
                           type="text" 
                           value={lessonEditTitle}
                           onChange={(e) => setLessonEditTitle(e.target.value)}
-                          className="w-full bg-[#05030d] border border-purple-900/30 rounded-lg px-3 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500/40"
+                          className="w-full bg-[#05030d] border border-amber-900/30 rounded-lg px-3 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500/40"
                           required
                         />
                       </div>
@@ -1057,7 +1057,7 @@ export default function AdminCourses() {
                           type="text" 
                           value={lessonEditDuration}
                           onChange={(e) => setLessonEditDuration(e.target.value)}
-                          className="w-full bg-[#05030d] border border-purple-900/30 rounded-lg px-3 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500/40"
+                          className="w-full bg-[#05030d] border border-amber-900/30 rounded-lg px-3 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500/40"
                           required
                         />
                       </div>
@@ -1069,7 +1069,7 @@ export default function AdminCourses() {
                         value={lessonEditDescription}
                         onChange={(e) => setLessonEditDescription(e.target.value)}
                         placeholder="Nesta aula, abordamos tópicos de extrema complexidade de engenharia de software e cibersegurança..."
-                        className="w-full bg-[#05030d] border border-purple-900/30 rounded-lg p-3 text-xs text-white font-sans min-h-[120px] focus:outline-none focus:border-purple-500/40 leading-relaxed"
+                        className="w-full bg-[#05030d] border border-amber-900/30 rounded-lg p-3 text-xs text-white font-sans min-h-[120px] focus:outline-none focus:border-amber-500/40 leading-relaxed"
                       />
                     </div>
                   </div>
@@ -1088,8 +1088,8 @@ export default function AdminCourses() {
                           onClick={() => setLessonEditContentType('video')}
                           className={`p-3 rounded-xl border font-mono font-medium flex flex-col items-center justify-center gap-1.5 hover:cursor-pointer transition-all ${
                             lessonEditContentType === 'video'
-                              ? 'border-purple-500 bg-purple-500/10 text-white'
-                              : 'border-purple-950/35 bg-[#05030d] text-gray-400'
+                              ? 'border-amber-500 bg-amber-500/10 text-white'
+                              : 'border-amber-950/35 bg-[#05030d] text-gray-400'
                           }`}
                         >
                           <Video className="w-5 h-5" /> Videoaula (Hospedagem / Upload)
@@ -1100,8 +1100,8 @@ export default function AdminCourses() {
                           onClick={() => setLessonEditContentType('ebook')}
                           className={`p-3 rounded-xl border font-mono font-medium flex flex-col items-center justify-center gap-1.5 hover:cursor-pointer transition-all ${
                             lessonEditContentType === 'ebook'
-                              ? 'border-purple-500 bg-purple-500/10 text-white'
-                              : 'border-purple-950/35 bg-[#05030d] text-gray-400'
+                              ? 'border-amber-500 bg-amber-500/10 text-white'
+                              : 'border-amber-950/35 bg-[#05030d] text-gray-400'
                           }`}
                         >
                           <BookOpenCheck className="w-5 h-5" /> E-Book Acadêmico (Leitura Direta)
@@ -1111,7 +1111,7 @@ export default function AdminCourses() {
                     </div>
 
                     {lessonEditContentType === 'video' ? (
-                      <div className="space-y-4 border-t border-purple-950/20 pt-3">
+                      <div className="space-y-4 border-t border-amber-950/20 pt-3">
                         
                         {/* Option A: YouTube/Vimeo Custom Video URL embed */}
                         <div className="space-y-1.5">
@@ -1121,7 +1121,7 @@ export default function AdminCourses() {
                             value={lessonEditVideoUrl}
                             onChange={(e) => setLessonEditVideoUrl(e.target.value)}
                             placeholder="Ex: https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-                            className="w-full bg-[#05030d] border border-purple-900/30 rounded-lg px-3 py-2.5 text-xs text-white focus:outline-none"
+                            className="w-full bg-[#05030d] border border-amber-900/30 rounded-lg px-3 py-2.5 text-xs text-white focus:outline-none"
                           />
                           <p className="text-[9px] text-gray-500 font-mono">Nosso reprodutor converterá o link de exibição convencional em iframe automático.</p>
                         </div>
@@ -1132,7 +1132,7 @@ export default function AdminCourses() {
                           
                           <div 
                             onClick={triggerFileInput}
-                            className="border-2 border-dashed border-purple-900/30 hover:border-purple-500/40 rounded-xl p-5 text-center bg-[#05030d] hover:bg-purple-950/5 transition-all hover:cursor-pointer flex flex-col items-center justify-center gap-2"
+                            className="border-2 border-dashed border-amber-900/30 hover:border-amber-500/40 rounded-xl p-5 text-center bg-[#05030d] hover:bg-amber-950/5 transition-all hover:cursor-pointer flex flex-col items-center justify-center gap-2"
                           >
                             <input 
                               type="file" 
@@ -1141,7 +1141,7 @@ export default function AdminCourses() {
                               accept="video/*"
                               className="hidden"
                             />
-                            <UploadCloud className="w-8 h-8 text-purple-400 animate-pulse" />
+                            <UploadCloud className="w-8 h-8 text-amber-400 animate-pulse" />
                             <div>
                               <span className="block text-xs font-semibold text-white">Clique para selecionar ou arraste o vídeo</span>
                               <span className="block text-[10px] text-gray-500 font-mono mt-0.5">MP4, WEBM ou MKV (Suporta arquivos grandes)</span>
@@ -1150,13 +1150,13 @@ export default function AdminCourses() {
 
                           {/* Render Upload Progress */}
                           {uploadProgress !== null && (
-                            <div className="bg-[#0b0816] p-3 rounded-lg border border-purple-500/10 space-y-2 animate-fadeIn">
+                            <div className="bg-[#0b0816] p-3 rounded-lg border border-amber-500/10 space-y-2 animate-fadeIn">
                               <div className="flex justify-between font-mono text-[10px]">
-                                <span className="text-purple-300">Enviando: {uploadedFileName || 'video.mp4'}</span>
+                                <span className="text-amber-300">Enviando: {uploadedFileName || 'video.mp4'}</span>
                                 <span className="text-cyan-400 font-bold">{uploadProgress}%</span>
                               </div>
-                              <div className="w-full bg-purple-950/40 h-1.5 rounded-full overflow-hidden">
-                                <div className="bg-gradient-to-r from-purple-500 to-cyan-400 h-full transition-all duration-300" style={{ width: `${uploadProgress}%` }} />
+                              <div className="w-full bg-amber-950/40 h-1.5 rounded-full overflow-hidden">
+                                <div className="bg-gradient-to-r from-amber-500 to-cyan-400 h-full transition-all duration-300" style={{ width: `${uploadProgress}%` }} />
                               </div>
                               {uploadProgress === 100 && (
                                 <span className="block text-[9px] text-emerald-400 font-mono text-right font-bold">✓ Upload efetuado com sucesso em buffer local!</span>
@@ -1168,7 +1168,7 @@ export default function AdminCourses() {
                       </div>
                     ) : (
                       // Option Ebook text editor
-                      <div className="space-y-4 border-t border-purple-950/20 pt-3 animate-fadeIn">
+                      <div className="space-y-4 border-t border-amber-950/20 pt-3 animate-fadeIn">
                         
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           {/* Option A: Upload Ebook file */}
@@ -1177,7 +1177,7 @@ export default function AdminCourses() {
                             
                             <div 
                               onClick={triggerEbookFileInput}
-                              className="border border-dashed border-purple-500/20 hover:border-purple-500/50 rounded-lg p-3 text-center bg-black/40 hover:bg-[#120822]/20 transition-all hover:cursor-pointer flex flex-col items-center justify-center gap-1.5 min-h-[96px]"
+                              className="border border-dashed border-amber-500/20 hover:border-amber-500/50 rounded-lg p-3 text-center bg-black/40 hover:bg-[#120822]/20 transition-all hover:cursor-pointer flex flex-col items-center justify-center gap-1.5 min-h-[96px]"
                             >
                               <input 
                                 type="file" 
@@ -1186,7 +1186,7 @@ export default function AdminCourses() {
                                 accept=".pdf,.epub,.mobi,.doc,.docx"
                                 className="hidden"
                               />
-                              <UploadCloud className="w-5 h-5 text-purple-400 animate-pulse" />
+                              <UploadCloud className="w-5 h-5 text-amber-400 animate-pulse" />
                               <div className="space-y-0.5">
                                 <span className="block text-[11px] font-medium text-white">Upload de E-Book</span>
                                 <span className="block text-[9px] text-gray-500 font-mono">PDF ou EPUB até 150MB</span>
@@ -1194,11 +1194,11 @@ export default function AdminCourses() {
                             </div>
 
                             {ebookUploadProgress !== null && (
-                              <div className="bg-[#0b0816] p-2 rounded border border-purple-500/10 space-y-1 mt-2 font-mono">
-                                <span className="block text-[9px] text-purple-300 line-clamp-1">Enviando: {uploadedEbookName}</span>
+                              <div className="bg-[#0b0816] p-2 rounded border border-amber-500/10 space-y-1 mt-2 font-mono">
+                                <span className="block text-[9px] text-amber-300 line-clamp-1">Enviando: {uploadedEbookName}</span>
                                 <div className="flex items-center gap-2">
-                                  <div className="w-full bg-purple-950/40 h-1 rounded-full overflow-hidden">
-                                    <div className="bg-purple-500 h-full transition-all duration-300" style={{ width: `${ebookUploadProgress}%` }} />
+                                  <div className="w-full bg-amber-950/40 h-1 rounded-full overflow-hidden">
+                                    <div className="bg-amber-500 h-full transition-all duration-300" style={{ width: `${ebookUploadProgress}%` }} />
                                   </div>
                                   <span className="text-[9px] text-cyan-400 font-bold leading-none">{ebookUploadProgress}%</span>
                                 </div>
@@ -1222,24 +1222,24 @@ export default function AdminCourses() {
                                 value={lessonEditEbookUrl}
                                 onChange={(e) => setLessonEditEbookUrl(e.target.value)}
                                 placeholder="https://drive.google.com/file/d/..."
-                                className="w-full bg-[#05030d] border border-purple-900/30 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500/30 font-mono"
+                                className="w-full bg-[#05030d] border border-amber-900/30 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500/30 font-mono"
                               />
                             </div>
 
-                            <div className="bg-[#0c091d]/20 border border-purple-950/25 p-2.5 rounded-lg text-[9px] text-gray-400 leading-normal font-mono">
+                            <div className="bg-[#0c091d]/20 border border-amber-950/25 p-2.5 rounded-lg text-[9px] text-gray-400 leading-normal font-mono">
                               O estudante poderá baixar o e-book ou lê-lo diretamente do visualizador integrado, seja com o drive configurado ou carregado via buffer local.
                             </div>
                           </div>
                         </div>
 
                         {/* Direct programming text */}
-                        <div className="space-y-1.5 border-t border-purple-950/15 pt-3">
+                        <div className="space-y-1.5 border-t border-amber-950/15 pt-3">
                           <label className="text-[10px] font-mono text-gray-400 uppercase tracking-wider block">Opção C: Texto Teórico da Aula (Formato Markdown / Editor Literário)</label>
                           <textarea 
                             value={lessonEditEbookContent}
                             onChange={(e) => setLessonEditEbookContent(e.target.value)}
                             placeholder="### O Guia Definitivo do Programador...\nEscreva o material teórico da aula em formato de tópicos ou livro interativo digital..."
-                            className="w-full bg-[#05030d] border border-purple-900/30 rounded-lg p-3 text-xs text-white font-mono min-h-[140px] focus:outline-none focus:border-purple-500/40 leading-relaxed"
+                            className="w-full bg-[#05030d] border border-amber-900/30 rounded-lg p-3 text-xs text-white font-mono min-h-[140px] focus:outline-none focus:border-amber-500/40 leading-relaxed"
                           />
                           <p className="text-[9px] text-gray-500 font-mono">Formatador de Markdown integrado ativo. O estudante lerá com alto conforto e fontes profissionais.</p>
                         </div>
@@ -1254,8 +1254,8 @@ export default function AdminCourses() {
                   <div className="space-y-5 py-1 animate-fadeIn">
                     
                     {/* Add attachment form */}
-                    <div className="p-4 bg-[#05030d] border border-purple-900/30 rounded-xl space-y-3.5">
-                      <legend className="text-[10px] font-mono font-bold text-[#a78bfa] uppercase tracking-wider block">Adicionar Material Adicional</legend>
+                    <div className="p-4 bg-[#05030d] border border-amber-900/30 rounded-xl space-y-3.5">
+                      <legend className="text-[10px] font-mono font-bold text-[#C9A84C] uppercase tracking-wider block">Adicionar Material Adicional</legend>
                       
                       <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 text-xs">
                         
@@ -1266,7 +1266,7 @@ export default function AdminCourses() {
                             placeholder="Ex: Anexo de Infraestrutura e Cibersegurança"
                             value={newMatName}
                             onChange={(e) => setNewMatName(e.target.value)}
-                            className="w-full bg-[#090615] border border-purple-900/20 rounded p-2 text-xs text-white focus:outline-none focus:border-purple-500/30 font-medium"
+                            className="w-full bg-[#090615] border border-amber-900/20 rounded p-2 text-xs text-white focus:outline-none focus:border-amber-500/30 font-medium"
                           />
                         </div>
 
@@ -1275,7 +1275,7 @@ export default function AdminCourses() {
                           <select
                             value={newMatType}
                             onChange={(e) => setNewMatType(e.target.value as any)}
-                            className="w-full bg-[#090615] border border-purple-900/20 rounded p-1.5 text-xs text-white focus:outline-none"
+                            className="w-full bg-[#090615] border border-amber-900/20 rounded p-1.5 text-xs text-white focus:outline-none"
                           >
                             <option value="pdf">📄 PDF Acadêmico</option>
                             <option value="zip">📦 ZIP (Código-Fonte / Repositório)</option>
@@ -1332,7 +1332,7 @@ export default function AdminCourses() {
                               placeholder="https://drive.google.com/... (ou deixe em branco ao concluir o upload acima)"
                               value={newMatUrl}
                               onChange={(e) => setNewMatUrl(e.target.value)}
-                              className="w-full bg-[#090615] border border-purple-900/20 rounded p-2 text-[10px] text-white focus:outline-none focus:border-purple-500/25 font-mono"
+                              className="w-full bg-[#090615] border border-amber-900/20 rounded p-2 text-[10px] text-white focus:outline-none focus:border-amber-500/25 font-mono"
                             />
                           </div>
 
@@ -1354,7 +1354,7 @@ export default function AdminCourses() {
                           disabled={!newMatName.trim()}
                           className={`px-6 py-2 rounded-lg font-mono text-xs font-bold transition-colors ${
                             newMatName.trim() 
-                              ? 'bg-purple-600 hover:bg-purple-500 text-white hover:cursor-pointer'
+                              ? 'bg-amber-600 hover:bg-amber-500 text-white hover:cursor-pointer'
                               : 'bg-gray-900 text-gray-500 cursor-not-allowed border border-gray-800'
                           }`}
                         >
@@ -1371,7 +1371,7 @@ export default function AdminCourses() {
                       {lessonEditMaterials && lessonEditMaterials.length > 0 ? (
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                           {lessonEditMaterials.map((item) => (
-                            <div key={item.id} className="bg-black/40 border border-purple-950/25 p-2 px-3 rounded-lg flex items-center justify-between gap-3">
+                            <div key={item.id} className="bg-black/40 border border-amber-950/25 p-2 px-3 rounded-lg flex items-center justify-between gap-3">
                               <div className="flex items-center gap-2 min-w-0">
                                 <Paperclip className="w-3.5 h-3.5 text-cyan-400 flex-shrink-0" />
                                 <div className="min-w-0">
@@ -1399,7 +1399,7 @@ export default function AdminCourses() {
                 )}
 
                 {/* Confirm / modal cancel buttons block */}
-                <div className="border-t border-purple-950/25 pt-4 flex justify-end gap-2 text-xs">
+                <div className="border-t border-amber-950/25 pt-4 flex justify-end gap-2 text-xs">
                   <button
                     type="button"
                     onClick={() => {
@@ -1407,13 +1407,13 @@ export default function AdminCourses() {
                       setEditingLessonModIndex(null);
                       setEditingLessonIdx(null);
                     }}
-                    className="px-4 py-2 bg-transparent hover:bg-white/5 border border-purple-500/10 text-gray-400 hover:text-white rounded-lg font-mono transition-colors"
+                    className="px-4 py-2 bg-transparent hover:bg-white/5 border border-amber-500/10 text-gray-400 hover:text-white rounded-lg font-mono transition-colors"
                   >
                     Encerrar
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-gradient-to-tr from-purple-600 to-indigo-650 bg-purple-600 hover:bg-purple-500 text-white rounded-lg font-mono font-bold flex items-center gap-1.5 hover:cursor-pointer transition-colors"
+                    className="px-4 py-2 bg-gradient-to-tr from-amber-600 to-amber-650 bg-amber-600 hover:bg-amber-500 text-white rounded-lg font-mono font-bold flex items-center gap-1.5 hover:cursor-pointer transition-colors"
                   >
                     <Save className="w-4 h-4" /> Atualizar Aula Virtual
                   </button>
@@ -1434,7 +1434,7 @@ export default function AdminCourses() {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="w-full max-w-lg glass-card p-6 rounded-2xl relative border border-purple-500/20 bg-[#090615]"
+              className="w-full max-w-lg glass-card p-6 rounded-2xl relative border border-amber-500/20 bg-[#090615]"
             >
               <button 
                 onClick={() => setIsAddOpen(false)}
@@ -1454,7 +1454,7 @@ export default function AdminCourses() {
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
                       placeholder="Ex: Mestrado em Compiladores"
-                      className="w-full bg-[#0a0715] border border-purple-900/30 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500/40"
+                      className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500/40"
                       required
                     />
                   </div>
@@ -1464,7 +1464,7 @@ export default function AdminCourses() {
                     <select
                       value={category}
                       onChange={(e) => setCategory(e.target.value as any)}
-                      className="w-full bg-[#0a0715] border border-purple-900/30 rounded-lg px-3 py-2 text-xs text-white focus:outline-none"
+                      className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-3 py-2 text-xs text-white focus:outline-none"
                     >
                       <option value="Tech">Tech (Processamento/IA)</option>
                       <option value="Dev">Dev (Arquitetura/Escalabilidade)</option>
@@ -1481,7 +1481,7 @@ export default function AdminCourses() {
                     value={tagline}
                     onChange={(e) => setTagline(e.target.value)}
                     placeholder="Aborda compiladores, otimização de C e Rust de baixo nível."
-                    className="w-full bg-[#0a0715] border border-purple-900/30 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500/40"
+                    className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500/40"
                     required
                   />
                 </div>
@@ -1493,7 +1493,7 @@ export default function AdminCourses() {
                     value={duration}
                     onChange={(e) => setDuration(e.target.value)}
                     placeholder="180 horas"
-                    className="w-full bg-[#0a0715] border border-purple-900/30 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500/40"
+                    className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500/40"
                     required
                   />
                 </div>
@@ -1505,19 +1505,19 @@ export default function AdminCourses() {
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
                     placeholder="Ex: 120000"
-                    className="w-full bg-[#0a0715] border border-purple-900/30 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500/40"
+                    className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500/40"
                     required
                   />
                 </div>
 
                 <div className="space-y-1.5">
                   <label className="text-xs font-mono text-gray-300 block">Identidade Visual (Capa do Curso)</label>
-                  <div className="flex items-center gap-2.5 bg-[#0a0715] border border-purple-900/30 p-2 rounded-lg">
+                  <div className="flex items-center gap-2.5 bg-[#0a0715] border border-amber-900/30 p-2 rounded-lg">
                     {newCourseImage ? (
                       <img 
                         src={newCourseImage} 
                         alt="Preview Capa" 
-                        className="w-12 h-9 object-cover rounded border border-purple-500/10 flex-shrink-0"
+                        className="w-12 h-9 object-cover rounded border border-amber-500/10 flex-shrink-0"
                         referrerPolicy="no-referrer"
                       />
                     ) : (
@@ -1531,7 +1531,7 @@ export default function AdminCourses() {
                         value={newCourseImage}
                         onChange={(e) => setNewCourseImage(e.target.value)}
                         placeholder="Link da imagem (ou use o upload abaixo)"
-                        className="w-full bg-black/40 border border-purple-900/15 rounded px-2 py-0.5 text-[10px] text-white focus:outline-none"
+                        className="w-full bg-black/40 border border-amber-900/15 rounded px-2 py-0.5 text-[10px] text-white focus:outline-none"
                       />
                       <div className="flex items-center gap-1.5 leading-none">
                         <input 
@@ -1544,7 +1544,7 @@ export default function AdminCourses() {
                         <button
                           type="button"
                           onClick={triggerCoverFileInput}
-                          className="text-[9px] font-mono text-purple-400 hover:text-purple-300 hover:underline flex items-center gap-0.5 cursor-pointer"
+                          className="text-[9px] font-mono text-amber-400 hover:text-amber-300 hover:underline flex items-center gap-0.5 cursor-pointer"
                         >
                           <UploadCloud className="w-2.5 h-2.5" /> Fazer Upload Local
                         </button>
@@ -1562,7 +1562,7 @@ export default function AdminCourses() {
                     value={lessonsRaw}
                     onChange={(e) => setLessonsRaw(e.target.value)}
                     placeholder="Escreva como o exemplo acima..."
-                    className="w-full bg-[#0a0715] border border-purple-900/30 rounded-lg p-2.5 text-xs text-white font-mono min-h-[110px] focus:outline-none focus:border-purple-500/40"
+                    className="w-full bg-[#0a0715] border border-amber-900/30 rounded-lg p-2.5 text-xs text-white font-mono min-h-[110px] focus:outline-none focus:border-amber-500/40"
                     required
                   />
                   <span className="block text-[9px] text-gray-500 font-mono leading-relaxed">Formato recomendado: <br /> Módulo 1: Nome do Mód <br /> - Nome da Aula 1 <br /> - Nome da Aula 2</span>
@@ -1570,7 +1570,7 @@ export default function AdminCourses() {
 
                 <button
                   type="submit"
-                  className="w-full h-10 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-xs font-mono font-medium flex items-center justify-center gap-2 transition-all pt-1 hover:cursor-pointer"
+                  className="w-full h-10 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-xs font-mono font-medium flex items-center justify-center gap-2 transition-all pt-1 hover:cursor-pointer"
                   id="courses-btn-submit"
                 >
                   <Save className="w-4 h-4" /> Registrar Curso Acadêmico

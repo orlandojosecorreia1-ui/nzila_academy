@@ -1,41 +1,51 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-sans), sans-serif;
-  --font-display: var(--font-display), sans-serif;
+  --color-brand-gold: #C9A84C;
+  --color-brand-gold-light: #E8C97A;
+  --color-brand-gold-dark: #8B6914;
+  --color-brand-abismo: #0a0a0a;
+  --color-brand-abismo-card: #111111;
+  --color-brand-abismo-border: #1e1e1e;
+  --color-brand-marfim: #F5F2EC;
+  --color-brand-sombra: #2C2A22;
+  --color-brand-muted: #888880;
+
+  --font-sans: 'Helvetica Neue', var(--font-sans), sans-serif;
+  --font-display: 'Helvetica Neue', var(--font-display), sans-serif;
 }
 
 @layer utilities {
   .glass-card {
-    background: rgba(14, 11, 26, 0.45);
+    background: rgba(17, 17, 17, 0.6); /* abismo-card com opacidade */
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(139, 92, 246, 0.15);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    border: 1px solid rgba(44, 42, 34, 0.4); /* sombra */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
   }
 
   .glass-card-hover:hover {
-    border-color: rgba(139, 92, 246, 0.35);
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
+    border-color: rgba(201, 168, 76, 0.35); /* ouro */
+    box-shadow: 0 0 20px rgba(201, 168, 76, 0.15);
     transform: translateY(-2px);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .neon-text-purple {
-    text-shadow: 0 0 10px rgba(168, 85, 247, 0.5), 0 0 20px rgba(168, 85, 247, 0.2);
+    text-shadow: 0 0 10px rgba(201, 168, 76, 0.5), 0 0 20px rgba(201, 168, 76, 0.2);
   }
 
   .neon-text-cyan {
-    text-shadow: 0 0 10px rgba(6, 182, 212, 0.5), 0 0 20px rgba(6, 182, 212, 0.2);
+    text-shadow: 0 0 10px rgba(232, 201, 122, 0.5), 0 0 20px rgba(232, 201, 122, 0.2);
   }
 
   .neon-border-purple {
-    box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
-    border-color: rgba(168, 85, 247, 0.4);
+    box-shadow: 0 0 15px rgba(201, 168, 76, 0.2);
+    border-color: rgba(201, 168, 76, 0.4);
   }
 
   .neo-glow-bar {
-    background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+    background: linear-gradient(90deg, #8B6914 0%, #C9A84C 50%, #E8C97A 100%);
+    box-shadow: 0 0 20px rgba(201, 168, 76, 0.6);
   }
 }
 
@@ -46,15 +56,15 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #06040a;
+  background: #0a0a0a;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #251d3a;
+  background: #2C2A22;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3b2b5d;
+  background: #C9A84C;
 }
 

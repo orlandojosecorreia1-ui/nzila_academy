@@ -412,17 +412,17 @@ export default function AdminDashboard() {
     text: log.action,
     time: log.timestamp.substring(11, 16),
     icon: log.category === 'auth' ? ShieldCheck : log.category === 'courses' ? BookOpen : Activity,
-    color: log.category === 'system' ? 'text-purple-400 bg-purple-500/10' : 'text-cyan-400 bg-cyan-500/10'
+    color: log.category === 'system' ? 'text-amber-400 bg-amber-500/10' : 'text-cyan-400 bg-cyan-500/10'
   }));
 
   return (
     <div className="space-y-6 py-2" id="admin-dashboard-container">
       
       {/* 1. Header Grid */}
-      <div id="dashboard-header" className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-purple-950/20 pb-4">
+      <div id="dashboard-header" className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-amber-950/20 pb-4">
         <div>
           <h2 id="dashboard-main-title" className="text-xl font-display font-medium text-white flex items-center gap-2">
-            <TrendingUp className="w-5 h-5 text-purple-400" /> Painel Executivo de Insights
+            <TrendingUp className="w-5 h-5 text-amber-400" /> Painel Executivo de Insights
           </h2>
           <p id="dashboard-subtitle" className="text-xs text-gray-400 mt-1">
             Status analítico global da Nzila Academy em tempo real de faturamento, matrículas e auditoria.
@@ -469,7 +469,7 @@ export default function AdminDashboard() {
       <div id="metric-summary-cards" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         
         {/* Metric 1: Faturamento */}
-        <div id="metric-card-dynamic-revenue" className="glass-card p-4 rounded-xl border border-purple-500/15 flex items-center justify-between transition-all duration-300">
+        <div id="metric-card-dynamic-revenue" className="glass-card p-4 rounded-xl border border-amber-500/15 flex items-center justify-between transition-all duration-300">
           <div className="space-y-1">
             <span className="text-[10px] text-gray-400 font-mono block uppercase">
               {isFilterActive ? 'Faturamento Filtrado' : 'Faturamento de Junho'}
@@ -487,7 +487,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Metric 2: Total de Vendas */}
-        <div id="metric-card-vendas" className="glass-card p-4 rounded-xl border border-purple-500/15 flex items-center justify-between transition-all duration-300">
+        <div id="metric-card-vendas" className="glass-card p-4 rounded-xl border border-amber-500/15 flex items-center justify-between transition-all duration-300">
           <div className="space-y-1">
             <span className="text-[10px] text-gray-400 font-mono block uppercase">
               {isFilterActive ? 'Vendas no Período' : 'Vendas em Junho'}
@@ -505,7 +505,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Metric 3: Faturamento Acumulado */}
-        <div id="metric-card-accumulated" className="glass-card p-4 rounded-xl border border-purple-500/15 flex items-center justify-between transition-all duration-300">
+        <div id="metric-card-accumulated" className="glass-card p-4 rounded-xl border border-amber-500/15 flex items-center justify-between transition-all duration-300">
           <div className="space-y-1">
             <span className="text-[10px] text-gray-400 font-mono block uppercase">
               Faturamento Acumulado
@@ -513,17 +513,17 @@ export default function AdminDashboard() {
             <span className="text-xl sm:text-2xl font-bold font-mono text-white tracking-tight">
               {accumulatedBaseValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} KZ
             </span>
-            <span className="text-[10px] text-indigo-400 font-mono block mt-0.5">
+            <span className="text-[10px] text-yellow-400 font-mono block mt-0.5">
               Acumulado de todos os tempos
             </span>
           </div>
-          <div className="w-10 h-10 rounded-lg bg-indigo-500/10 border border-indigo-500/25 flex items-center justify-center border-t-indigo-500/30">
-            <DollarSign className="w-5 h-5 text-indigo-400" />
+          <div className="w-10 h-10 rounded-lg bg-yellow-500/10 border border-yellow-500/25 flex items-center justify-center border-t-indigo-500/30">
+            <DollarSign className="w-5 h-5 text-yellow-400" />
           </div>
         </div>
 
         {/* Metric 4: Vouchers de Acesso Ativos */}
-        <div id="metric-card-vouchers" className="glass-card p-4 rounded-xl border border-purple-500/15 flex items-center justify-between transition-all duration-300">
+        <div id="metric-card-vouchers" className="glass-card p-4 rounded-xl border border-amber-500/15 flex items-center justify-between transition-all duration-300">
           <div className="space-y-1">
             <span className="text-[10px] text-gray-400 font-mono block uppercase">
               Vouchers de Acesso Ativos
@@ -571,13 +571,13 @@ export default function AdminDashboard() {
         }
 
         return (
-          <div id="revenue-growth-chart-card" className="glass-card p-5 rounded-2xl border border-purple-500/15 bg-[#0b081e]/85 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/5 rounded-full blur-[80px] pointer-events-none" />
+          <div id="revenue-growth-chart-card" className="glass-card p-5 rounded-2xl border border-amber-500/15 bg-[#111111]/85 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/5 rounded-full blur-[80px] pointer-events-none" />
             <div className="absolute -bottom-10 left-1/3 w-72 h-72 bg-cyan-500/5 rounded-full blur-[90px] pointer-events-none" />
 
-            <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 border-b border-purple-950/20 pb-4 mb-4">
+            <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 border-b border-amber-950/20 pb-4 mb-4">
               <div className="flex items-center gap-3">
-                <div className="p-2.5 bg-purple-500/10 rounded-xl border border-purple-500/30 text-purple-400">
+                <div className="p-2.5 bg-amber-500/10 rounded-xl border border-amber-500/30 text-amber-400">
                   <TrendingUp className="w-5 h-5 animate-pulse" />
                 </div>
                 <div>
@@ -590,7 +590,7 @@ export default function AdminDashboard() {
               </div>
 
               <div className="flex gap-4 self-start md:self-auto">
-                <div className="text-left font-mono border-l-2 border-purple-500/40 pl-3">
+                <div className="text-left font-mono border-l-2 border-amber-500/40 pl-3">
                   <span className="text-[8px] text-gray-400 block uppercase font-bold">Pico no Período</span>
                   <span className="text-xs font-bold text-white block">{chartPointsMax.toLocaleString('pt-BR')} KZ</span>
                 </div>
@@ -605,10 +605,10 @@ export default function AdminDashboard() {
               </div>
             </div>
 
-            <div className="relative w-full h-[180px] bg-[#070514]/40 border border-purple-950/20 rounded-xl p-2 pb-0 flex flex-col justify-end overflow-hidden">
+            <div className="relative w-full h-[180px] bg-[#0A0A0A]/40 border border-amber-950/20 rounded-xl p-2 pb-0 flex flex-col justify-end overflow-hidden">
               {chartCoords.length === 0 ? (
                 <div className="absolute inset-0 flex items-center justify-center font-mono text-xs text-gray-500 gap-2">
-                  <Activity className="w-4 h-4 text-purple-500 animate-pulse" />
+                  <Activity className="w-4 h-4 text-amber-500 animate-pulse" />
                   <span>Selecione um período maior para renderizar o gráfico temporal.</span>
                 </div>
               ) : (
@@ -722,7 +722,7 @@ export default function AdminDashboard() {
                     {/* Dynamic tooltips inside bounds */}
                     {hoveredPointIdx !== null && chartCoords[hoveredPointIdx] && (
                       <div 
-                        className="absolute p-2 rounded-xl bg-[#090618]/95 border border-purple-500/35 shadow-[0_4px_16px_rgba(168,85,247,0.3)] text-left font-mono pointer-events-none transition-all duration-75 z-40"
+                        className="absolute p-2 rounded-xl bg-[#111111]/95 border border-amber-500/35 shadow-[0_4px_16px_rgba(168,85,247,0.3)] text-left font-mono pointer-events-none transition-all duration-75 z-40"
                         style={{ 
                           left: `${Math.min(90, Math.max(10, (chartCoords[hoveredPointIdx].x / 700) * 100))}%`,
                           top: `${Math.max(5, (chartCoords[hoveredPointIdx].y / 150) * 100 - 32)}%`,
@@ -744,11 +744,11 @@ export default function AdminDashboard() {
               )}
             </div>
 
-            <div className="flex justify-between items-center text-[9px] font-mono text-gray-500 border-t border-purple-950/25 pt-2 mt-2 select-none">
+            <div className="flex justify-between items-center text-[9px] font-mono text-gray-500 border-t border-amber-950/25 pt-2 mt-2 select-none">
               <span className="flex items-center gap-1">
-                <Sparkles className="w-3 h-3 text-purple-400" /> Passe o mouse pelos pontos do gráfico para detalhar faturamento diário
+                <Sparkles className="w-3 h-3 text-amber-400" /> Passe o mouse pelos pontos do gráfico para detalhar faturamento diário
               </span>
-              <span className="text-purple-400">Dados baseados em Kwanza Angolano (AOA/KZ)</span>
+              <span className="text-amber-400">Dados baseados em Kwanza Angolano (AOA/KZ)</span>
             </div>
           </div>
         );
@@ -758,24 +758,24 @@ export default function AdminDashboard() {
       <div id="insights-row-layout" className="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
         {/* Column Left: Performance de Faturamento (7 cols) */}
-        <div id="performance-faturamento-section" className="lg:col-span-7 glass-card p-5 rounded-2xl border border-purple-500/12 space-y-5 h-fit">
+        <div id="performance-faturamento-section" className="lg:col-span-7 glass-card p-5 rounded-2xl border border-amber-500/12 space-y-5 h-fit">
           <div>
-            <span className="text-[10px] text-purple-400 font-mono font-bold tracking-widest block uppercase">MÉTRICAS OPERACIONAIS</span>
+            <span className="text-[10px] text-amber-400 font-mono font-bold tracking-widest block uppercase">MÉTRICAS OPERACIONAIS</span>
             <h3 className="text-sm font-semibold text-white font-display mt-1">Performance de Faturamento</h3>
           </div>
 
           <div id="operational-mini-cards" className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             
             {/* Average Ticket card */}
-            <div id="mini-card-ticket" className="bg-[#0b0816]/75 border border-purple-950/40 rounded-xl p-3.5 space-y-1 relative overflow-hidden">
-              <div className="absolute top-1 right-2 opacity-5"><Activity className="w-10 h-10 text-purple-400" /></div>
+            <div id="mini-card-ticket" className="bg-[#0b0816]/75 border border-amber-950/40 rounded-xl p-3.5 space-y-1 relative overflow-hidden">
+              <div className="absolute top-1 right-2 opacity-5"><Activity className="w-10 h-10 text-amber-400" /></div>
               <span className="text-[9px] text-gray-400 font-mono block uppercase">Ticket Médio</span>
               <span className="text-sm font-bold text-white font-mono block">{ticketMedio.toLocaleString('pt-BR')} KZ</span>
-              <span className="text-[8.5px] text-purple-300 font-mono block leading-none">Média por transação</span>
+              <span className="text-[8.5px] text-amber-300 font-mono block leading-none">Média por transação</span>
             </div>
 
             {/* Voucher Efficiency card */}
-            <div id="mini-card-conversion" className="bg-[#0b0816]/75 border border-purple-950/40 rounded-xl p-3.5 space-y-1 relative overflow-hidden">
+            <div id="mini-card-conversion" className="bg-[#0b0816]/75 border border-amber-950/40 rounded-xl p-3.5 space-y-1 relative overflow-hidden">
               <div className="absolute top-1 right-2 opacity-5"><Percent className="w-10 h-10 text-cyan-400" /></div>
               <span className="text-[9px] text-gray-400 font-mono block uppercase">Conversão</span>
               <span className="text-sm font-bold text-cyan-400 font-mono block">{conversionRate}%</span>
@@ -783,17 +783,17 @@ export default function AdminDashboard() {
             </div>
 
             {/* Target Card */}
-            <div id="mini-card-target" className="bg-[#0b0816]/75 border border-purple-950/40 rounded-xl p-3.5 space-y-1 relative overflow-hidden">
-              <div className="absolute top-1 right-2 opacity-5"><TrendingUp className="w-10 h-10 text-indigo-400" /></div>
+            <div id="mini-card-target" className="bg-[#0b0816]/75 border border-amber-950/40 rounded-xl p-3.5 space-y-1 relative overflow-hidden">
+              <div className="absolute top-1 right-2 opacity-5"><TrendingUp className="w-10 h-10 text-yellow-400" /></div>
               <span className="text-[9px] text-gray-400 font-mono block uppercase">Meta Mensal</span>
-              <span className="text-sm font-bold text-purple-300 font-mono block">1.000.000 KZ</span>
+              <span className="text-sm font-bold text-amber-300 font-mono block">1.000.000 KZ</span>
               <span className="text-[8.5px] text-gray-400 font-mono block leading-none">Meta comercial de Junho</span>
             </div>
 
           </div>
 
           {/* Monthly target tracker visual meter */}
-          <div id="target-tracker-meter" className="bg-purple-950/5 border border-purple-500/5 rounded-xl p-4 space-y-2">
+          <div id="target-tracker-meter" className="bg-amber-950/5 border border-amber-500/5 rounded-xl p-4 space-y-2">
             <div className="flex justify-between items-center text-xs">
               <span className="text-gray-300 font-sans font-medium flex items-center gap-1">
                 🎯 Progresso de Vendas de Junho
@@ -801,9 +801,9 @@ export default function AdminDashboard() {
               <span className="text-white font-mono font-bold">{targetPct}% ({levelMesValue.toLocaleString('pt-BR')} KZ faturados)</span>
             </div>
             
-            <div className="w-full bg-[#0a0715] h-3.5 rounded-full overflow-hidden border border-purple-950/50 p-0.5">
+            <div className="w-full bg-[#0a0715] h-3.5 rounded-full overflow-hidden border border-amber-950/50 p-0.5">
               <div 
-                className="h-full bg-gradient-to-r from-purple-600 via-indigo-500 to-cyan-400 rounded-full transition-all duration-500 relative"
+                className="h-full bg-gradient-to-r from-amber-600 via-indigo-500 to-cyan-400 rounded-full transition-all duration-500 relative"
                 style={{ width: `${targetPct}%` }}
               >
                 <div className="absolute inset-0 bg-gradient-to-t from-white/10 to-transparent animate-pulse" />
@@ -818,9 +818,9 @@ export default function AdminDashboard() {
           </div>
 
           {/* Faturamento por Curso no Período Selecionado (DYNAMIC CONTENT ENRICHMENT) */}
-          <div id="course-billing-selection-breakdown" className="border-t border-purple-950/30 pt-4.5 space-y-3.5">
+          <div id="course-billing-selection-breakdown" className="border-t border-amber-950/30 pt-4.5 space-y-3.5">
             <div className="flex justify-between items-center pb-0.5">
-              <span className="text-[10.5px] text-purple-300 font-mono font-bold tracking-wider uppercase block">
+              <span className="text-[10.5px] text-amber-300 font-mono font-bold tracking-wider uppercase block">
                 Faturamento por Curso (no período ativo)
               </span>
               <span className="text-[9px] font-mono text-gray-500">PARTICIPAÇÃO RELATIVA DE VENDAS</span>
@@ -828,7 +828,7 @@ export default function AdminDashboard() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {coursesBillingBreakdown.map((item, idx) => (
-                <div key={idx} id={`course-breakdown-card-${idx}`} className="space-y-1.5 bg-[#0b0816]/30 border border-purple-900/15 rounded-xl p-3 hover:bg-[#0b0816]/70 transition-all">
+                <div key={idx} id={`course-breakdown-card-${idx}`} className="space-y-1.5 bg-[#0b0816]/30 border border-amber-900/15 rounded-xl p-3 hover:bg-[#0b0816]/70 transition-all">
                   <div className="flex justify-between items-start text-[10px] font-mono gap-2">
                     <span className="text-gray-300 font-sans font-medium line-clamp-2 min-h-[30px]" title={item.title}>
                       {item.title}
@@ -840,12 +840,12 @@ export default function AdminDashboard() {
                   
                   <div className="flex justify-between items-center text-[9px] text-gray-500 font-mono">
                     <span>Quota: {item.percentage}%</span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-purple-500/40" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500/40" />
                   </div>
                   
                   <div className="w-full bg-[#05030d] h-1.5 rounded-full overflow-hidden">
                     <div 
-                      className="h-full bg-gradient-to-r from-purple-500 to-cyan-400 rounded-full"
+                      className="h-full bg-gradient-to-r from-amber-500 to-cyan-400 rounded-full"
                       style={{ width: `${item.percentage}%` }}
                     />
                   </div>
@@ -857,11 +857,11 @@ export default function AdminDashboard() {
         </div>
 
         {/* Column Right: Interactive Faturamento Picker (5 cols) */}
-        <div id="liquidez-calendar-section" className="lg:col-span-12 xl:col-span-5 glass-card p-5 rounded-2xl border border-purple-500/12 flex flex-col justify-start space-y-4 h-fit">
+        <div id="liquidez-calendar-section" className="lg:col-span-12 xl:col-span-5 glass-card p-5 rounded-2xl border border-amber-500/12 flex flex-col justify-start space-y-4 h-fit">
           <div className="space-y-4">
             
             {/* Header of search with Dynamic Toggle Option */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-[#0a0715]/40 p-3 rounded-xl border border-purple-500/10">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-[#0a0715]/40 p-3 rounded-xl border border-amber-500/10">
               <div>
                 <span className="text-[10px] text-cyan-400 font-mono font-bold tracking-widest block uppercase">CRONOGRAMA DE LIQUIDEZ</span>
                 <h3 className="text-sm font-semibold text-white font-display mt-0.5">Filtro de Faturamento</h3>
@@ -875,7 +875,7 @@ export default function AdminDashboard() {
                   className={`text-[10px] font-mono font-bold px-2.5 py-1.5 rounded-lg border flex items-center gap-2 transition-all duration-300 cursor-pointer ${
                     isFilterActive
                       ? 'bg-cyan-500/15 border-cyan-400/50 text-cyan-300 shadow-[0_0_8px_rgba(34,211,238,0.2)]'
-                      : 'bg-[#120e2e]/40 border-purple-950/50 text-gray-400 hover:text-white hover:bg-purple-900/10'
+                      : 'bg-[#120e2e]/40 border-amber-950/50 text-gray-400 hover:text-white hover:bg-amber-900/10'
                   }`}
                 >
                   <span className={`w-1.5 h-1.5 rounded-full ${isFilterActive ? 'bg-cyan-400 animate-pulse' : 'bg-gray-500'}`} />
@@ -886,8 +886,8 @@ export default function AdminDashboard() {
             </div>
 
             {/* Select Course dropdown widget */}
-            <div id="course-filter-widget" className="space-y-1.5 bg-[#06040e]/90 border border-purple-500/10 rounded-xl p-3">
-              <label htmlFor="course-select-dropdown" className="text-[9px] text-purple-300 font-mono block uppercase font-bold tracking-wider">FILTRAR FATURAMENTO POR CURSO</label>
+            <div id="course-filter-widget" className="space-y-1.5 bg-[#06040e]/90 border border-amber-500/10 rounded-xl p-3">
+              <label htmlFor="course-select-dropdown" className="text-[9px] text-amber-300 font-mono block uppercase font-bold tracking-wider">FILTRAR FATURAMENTO POR CURSO</label>
               <select
                 id="course-select-dropdown"
                 value={selectedCourseId}
@@ -895,10 +895,10 @@ export default function AdminDashboard() {
                   setSelectedCourseId(e.target.value);
                   setIsFilterActive(true);
                 }}
-                className="w-full bg-[#0b0813] border border-purple-500/15 text-xs text-white rounded-lg p-2.5 font-mono focus:outline-none focus:border-purple-500/40 cursor-pointer accent-purple-600 font-bold"
+                className="w-full bg-[#0A0A0A] border border-amber-500/15 text-xs text-white rounded-lg p-2.5 font-mono focus:outline-none focus:border-amber-500/40 cursor-pointer accent-purple-600 font-bold"
               >
                 {courseOptions.map(opt => (
-                  <option key={opt.id} value={opt.id} className="bg-[#0b0813] text-white font-sans text-xs">
+                  <option key={opt.id} value={opt.id} className="bg-[#0A0A0A] text-white font-sans text-xs">
                     {opt.title}
                   </option>
                 ))}
@@ -906,10 +906,10 @@ export default function AdminDashboard() {
             </div>
 
             {/* Interactive Visual Calendar Grid in Portuguese */}
-            <div id="interactive-calendar-grid-box" className="space-y-3 bg-[#0a0715] p-3.5 rounded-xl border border-purple-500/10 shadow-inner select-none">
+            <div id="interactive-calendar-grid-box" className="space-y-3 bg-[#0a0715] p-3.5 rounded-xl border border-amber-500/10 shadow-inner select-none">
               
               {/* Month navigation control */}
-              <div className="flex justify-between items-center text-xs font-mono pb-2 border-b border-purple-950/30">
+              <div className="flex justify-between items-center text-xs font-mono pb-2 border-b border-amber-950/30">
                 <button
                   type="button"
                   onClick={() => {
@@ -920,7 +920,7 @@ export default function AdminDashboard() {
                       setCurrentMonthIndex(m => m - 1);
                     }
                   }}
-                  className="p-1 px-2.5 rounded bg-purple-950/30 border border-purple-500/10 hover:bg-purple-900/20 text-gray-300 hover:text-white transition-all cursor-pointer font-bold font-mono"
+                  className="p-1 px-2.5 rounded bg-amber-950/30 border border-amber-500/10 hover:bg-amber-900/20 text-gray-300 hover:text-white transition-all cursor-pointer font-bold font-mono"
                 >
                   &larr;
                 </button>
@@ -937,14 +937,14 @@ export default function AdminDashboard() {
                       setCurrentMonthIndex(m => m + 1);
                     }
                   }}
-                  className="p-1 px-2.5 rounded bg-purple-950/30 border border-purple-500/10 hover:bg-purple-900/20 text-gray-300 hover:text-white transition-all cursor-pointer font-bold font-mono"
+                  className="p-1 px-2.5 rounded bg-amber-950/30 border border-amber-500/10 hover:bg-amber-900/20 text-gray-300 hover:text-white transition-all cursor-pointer font-bold font-mono"
                 >
                   &rarr;
                 </button>
               </div>
 
               {/* Weekday indicators */}
-              <div className="grid grid-cols-7 gap-1 text-center text-[10px] font-mono font-bold text-purple-400 border-b border-purple-950/15 pb-1">
+              <div className="grid grid-cols-7 gap-1 text-center text-[10px] font-mono font-bold text-amber-400 border-b border-amber-950/15 pb-1">
                 {weekdayNames.map(dayName => (
                   <div key={dayName} className="py-0.5">{dayName}</div>
                 ))}
@@ -983,14 +983,14 @@ export default function AdminDashboard() {
                       onMouseEnter={() => handleDayMouseEnter(item.day, item.month, item.year)}
                       className={`py-1.5 rounded transition-all font-semibold relative cursor-pointer ${
                         !item.isCurrentMonth 
-                          ? 'text-gray-650 hover:text-gray-400 hover:bg-purple-900/5' 
+                          ? 'text-gray-650 hover:text-gray-400 hover:bg-amber-900/5' 
                           : isSelected 
-                            ? 'bg-purple-600 text-white font-bold ring-2 ring-purple-500/40 shadow-[0_0_10px_rgba(168,85,247,0.45)] scale-105 z-10'
+                            ? 'bg-amber-600 text-white font-bold ring-2 ring-amber-500/40 shadow-[0_0_10px_rgba(168,85,247,0.45)] scale-105 z-10'
                             : inRange
-                              ? 'bg-purple-950/50 text-purple-200 border border-purple-500/5 font-semibold'
+                              ? 'bg-amber-950/50 text-amber-200 border border-amber-500/5 font-semibold'
                               : isToday
                                 ? 'border border-cyan-500/45 text-cyan-300 hover:bg-cyan-950/15 font-bold'
-                                : 'text-gray-300 hover:text-white hover:bg-purple-950/10'
+                                : 'text-gray-300 hover:text-white hover:bg-amber-950/10'
                       }`}
                     >
                       <span className="block">{item.day}</span>
@@ -1037,27 +1037,27 @@ export default function AdminDashboard() {
                       📅 {selectionStart ? selectionStart.split('-').reverse().join('/') : ''}
                       {selectionEnd ? ` até ${selectionEnd.split('-').reverse().join('/')}` : ' (Dia Único)'}
                     </div>
-                    <div className="text-purple-300 font-bold max-w-[170px] truncate" title={selectedCourseId === 'all' ? 'Todos os Cursos' : selectedCourseId}>
+                    <div className="text-amber-300 font-bold max-w-[170px] truncate" title={selectedCourseId === 'all' ? 'Todos os Cursos' : selectedCourseId}>
                        🎓 {selectedCourseId === 'all' ? 'Todos os Cursos' : selectedCourseId}
                     </div>
                   </div>
                 </div>
 
-                <div className="space-y-1 border-t border-purple-950/20 pt-2 pb-1 text-center sm:text-left">
+                <div className="space-y-1 border-t border-amber-950/20 pt-2 pb-1 text-center sm:text-left">
                   <span className="text-[10px] text-cyan-300 font-mono font-semibold uppercase tracking-wider block">Faturamento Filtrado do Período</span>
                   <div className="text-2xl font-bold font-mono text-cyan-300 tracking-tight flex items-baseline justify-center sm:justify-start gap-1">
                     {selectedRangeData.total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} <span className="text-xs text-gray-400 font-sans font-medium">KZ</span>
                   </div>
                 </div>
 
-                <div className="text-[9px] text-gray-400 font-mono flex justify-between items-center border-t border-purple-950/15 pt-2">
+                <div className="text-[9px] text-gray-400 font-mono flex justify-between items-center border-t border-amber-950/15 pt-2">
                   <span>Período Ativo: {selectedRangeData.days} dia(s)</span>
-                  <span className="text-purple-300 bg-purple-500/5 px-2 py-0.5 rounded border border-purple-500/10">Modo Filtrado</span>
+                  <span className="text-amber-300 bg-amber-500/5 px-2 py-0.5 rounded border border-amber-500/10">Modo Filtrado</span>
                 </div>
               </div>
             ) : (
-              <div id="inactive-period-billing-card" className="bg-[#0e0a1f]/85 border border-purple-500/15 p-4 rounded-xl space-y-2.5 relative overflow-hidden transition-all">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-purple-500/5 blur-xl rounded-full" />
+              <div id="inactive-period-billing-card" className="bg-[#111111]/85 border border-amber-500/15 p-4 rounded-xl space-y-2.5 relative overflow-hidden transition-all">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 blur-xl rounded-full" />
                 
                 <div className="flex justify-between items-start text-[10px] font-mono gap-4">
                   <span className="uppercase font-bold tracking-widest flex items-center gap-1.5 text-gray-400">
@@ -1068,20 +1068,20 @@ export default function AdminDashboard() {
                     <div className="font-bold">
                       📅 Junho {currentYear}
                     </div>
-                    <div className="text-purple-400 font-bold">
+                    <div className="text-amber-400 font-bold">
                        🎓 Todos os Cursos
                     </div>
                   </div>
                 </div>
 
-                <div className="space-y-1 border-t border-purple-950/20 pt-2 pb-1 text-center sm:text-left">
-                  <span className="text-[10px] text-purple-300 font-mono font-semibold uppercase tracking-wider block">Faturamento Bruto Mensal de Junho</span>
-                  <div className="text-2xl font-bold font-mono text-purple-300 tracking-tight flex items-baseline justify-center sm:justify-start gap-1">
+                <div className="space-y-1 border-t border-amber-950/20 pt-2 pb-1 text-center sm:text-left">
+                  <span className="text-[10px] text-amber-300 font-mono font-semibold uppercase tracking-wider block">Faturamento Bruto Mensal de Junho</span>
+                  <div className="text-2xl font-bold font-mono text-amber-300 tracking-tight flex items-baseline justify-center sm:justify-start gap-1">
                     {levelMesValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} <span className="text-xs text-gray-400 font-sans font-medium">KZ</span>
                   </div>
                 </div>
 
-                <div className="text-[9px] text-gray-450 font-mono flex justify-between items-center border-t border-purple-950/15 pt-2">
+                <div className="text-[9px] text-gray-450 font-mono flex justify-between items-center border-t border-amber-950/15 pt-2">
                   <span>Mês Inteiro: 30 dias de operação</span>
                   <span className="text-cyan-400 bg-cyan-500/5 px-2 py-0.5 rounded border border-cyan-500/10">Modo Geral</span>
                 </div>
@@ -1089,16 +1089,16 @@ export default function AdminDashboard() {
             )}
 
             {/* 4 Periodic comparative bars below calendar (4 Levels requested by user) */}
-            <div id="periodic-benchmark-card" className="space-y-3 bg-[#0a0715]/60 p-3.5 rounded-xl border border-purple-500/10">
-              <span className="text-[10px] text-purple-400 font-mono font-bold tracking-widest block uppercase">
+            <div id="periodic-benchmark-card" className="space-y-3 bg-[#0a0715]/60 p-3.5 rounded-xl border border-amber-500/10">
+              <span className="text-[10px] text-amber-400 font-mono font-bold tracking-widest block uppercase">
                 Faturamento por Períodos (Comparativo)
               </span>
 
               <div className="space-y-2.5">
                 {[
                   { label: 'Faturamento de Hoje', value: levelHojeValue, pct: levelHojePct, color: 'from-cyan-500 to-cyan-300' },
-                  { label: 'Últimos 7 dias', value: level7Value, pct: level7Pct, color: 'from-blue-500 to-indigo-500' },
-                  { label: 'Mês Corrente (Junho)', value: levelMesValue, pct: levelMesPct, color: 'from-purple-500 to-pink-500' },
+                  { label: 'Últimos 7 dias', value: level7Value, pct: level7Pct, color: 'from-blue-500 to-amber-500' },
+                  { label: 'Mês Corrente (Junho)', value: levelMesValue, pct: levelMesPct, color: 'from-amber-500 to-pink-500' },
                   { label: 'Faturamento Acumulado', value: accumulatedBaseValue, pct: 100, color: 'from-emerald-500 to-teal-400' }
                 ].map((lvl, idx) => (
                   <div key={idx} id={`benchmark-level-${idx}`} className="space-y-1">
@@ -1119,7 +1119,7 @@ export default function AdminDashboard() {
 
           </div>
 
-          <div className="text-[9.5px] text-gray-500 font-semibold font-mono text-center border-t border-purple-950/10 pt-3 select-none leading-normal">
+          <div className="text-[9.5px] text-gray-500 font-semibold font-mono text-center border-t border-amber-950/10 pt-3 select-none leading-normal">
             ⚙️ Sincronização operacional regional Luanda.
           </div>
         </div>
@@ -1130,9 +1130,9 @@ export default function AdminDashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 pb-6">
         
         {/* Left chart Distribution panel (7 cols) */}
-        <div className="lg:col-span-7 glass-card p-5 rounded-2xl border border-purple-500/12 space-y-6">
+        <div className="lg:col-span-7 glass-card p-5 rounded-2xl border border-amber-500/12 space-y-6">
           <div>
-            <span className="text-[10px] text-purple-400 font-mono font-bold tracking-widest block uppercase">DISTRIBUIÇÃO DE MATRÍCULAS</span>
+            <span className="text-[10px] text-amber-400 font-mono font-bold tracking-widest block uppercase">DISTRIBUIÇÃO DE MATRÍCULAS</span>
             <h3 className="text-sm font-semibold text-white font-display mt-1">Alunos Ativos por Coleção</h3>
           </div>
 
@@ -1144,9 +1144,9 @@ export default function AdminDashboard() {
                   <span className="text-gray-400">{c.count} alunos ({c.pct})</span>
                 </div>
                 {/* Simulated bar chart bar using Tailwind pure components */}
-                <div className="w-full h-3 bg-purple-950/20 rounded-full overflow-hidden border border-purple-500/5">
+                <div className="w-full h-3 bg-amber-950/20 rounded-full overflow-hidden border border-amber-500/5">
                   <div 
-                    className="h-full bg-gradient-to-r from-purple-600 via-indigo-500 to-cyan-400 rounded-full"
+                    className="h-full bg-gradient-to-r from-amber-600 via-indigo-500 to-cyan-400 rounded-full"
                     style={{ width: c.pct }}
                   />
                 </div>
@@ -1154,13 +1154,13 @@ export default function AdminDashboard() {
             ))}
           </div>
 
-          <div className="flex justify-between p-3.5 rounded-lg bg-purple-950/10 border border-purple-500/5 text-xs text-purple-300 font-mono">
+          <div className="flex justify-between p-3.5 rounded-lg bg-amber-950/10 border border-amber-500/5 text-xs text-amber-300 font-mono">
             <span className="block">Fator de Engajamento Global: {engagementFactor}%</span>
             <span className="block text-gray-500">• {courses.length} Classes de Masters</span>
           </div>
 
           {/* SECÇÃO 4.B: Novos Alunos Cadastrados Hoje (MELHORIA ADICIONADA) */}
-          <div className="border-t border-purple-950/35 pt-5 space-y-4" id="registered-today-dashboard-module">
+          <div className="border-t border-amber-950/35 pt-5 space-y-4" id="registered-today-dashboard-module">
             <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3">
               <div>
                 <span className="text-[10px] text-cyan-400 font-mono font-bold tracking-widest block uppercase">CRONOGRAMA DO DIA</span>
@@ -1174,7 +1174,7 @@ export default function AdminDashboard() {
             </div>
 
             {/* Students List Box */}
-            <div className="bg-[#080516]/60 border border-purple-950/40 rounded-xl overflow-hidden">
+            <div className="bg-[#080516]/60 border border-amber-950/40 rounded-xl overflow-hidden">
               {students.filter(s => s.registeredAt && s.registeredAt.startsWith('2026-06-10')).length === 0 ? (
                 <div className="p-7 text-center font-mono text-xs text-gray-400 space-y-2 flex flex-col items-center justify-center">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
@@ -1187,7 +1187,7 @@ export default function AdminDashboard() {
                 <div className="overflow-x-auto custom-scrollbar">
                   <table className="w-full text-left font-mono text-[10.5px] border-collapse">
                     <thead>
-                      <tr className="bg-[#0b081c]/90 text-purple-300 border-b border-purple-950/50">
+                      <tr className="bg-[#0b081c]/90 text-amber-300 border-b border-amber-950/50">
                         <th className="p-2.5 font-bold uppercase text-[9px] tracking-wider pl-4">Aluno</th>
                         <th className="p-2.5 font-bold uppercase text-[9px] tracking-wider md:table-cell hidden">Contato</th>
                         <th className="p-2.5 font-bold uppercase text-[9px] tracking-wider">Módulo Escolhido</th>
@@ -1198,7 +1198,7 @@ export default function AdminDashboard() {
                       {students
                         .filter(s => s.registeredAt && s.registeredAt.startsWith('2026-06-10'))
                         .map(std => (
-                          <tr key={std.id} className="hover:bg-purple-950/15 transition-all">
+                          <tr key={std.id} className="hover:bg-amber-950/15 transition-all">
                             <td className="p-2.5 font-semibold text-white pl-4">
                               <div className="text-[11px] font-sans font-bold leading-normal">{std.name}</div>
                               <div className="text-[9px] text-gray-500">{std.email}</div>
@@ -1209,7 +1209,7 @@ export default function AdminDashboard() {
                                 {std.whatsapp}
                               </div>
                             </td>
-                            <td className="p-2.5 text-purple-300 font-sans max-w-[150px] truncate" title={std.courseTitle}>
+                            <td className="p-2.5 text-amber-300 font-sans max-w-[150px] truncate" title={std.courseTitle}>
                               {std.courseTitle.split(' & ')[0]}
                             </td>
                             <td className="p-2.5 text-right pr-4">
@@ -1233,7 +1233,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Right Event Log (5 cols) */}
-        <div className="lg:col-span-5 glass-card p-5 rounded-2xl border border-purple-500/12 space-y-4">
+        <div className="lg:col-span-5 glass-card p-5 rounded-2xl border border-amber-500/12 space-y-4">
           <div>
             <span className="text-[10px] text-cyan-400 font-mono font-bold tracking-widest block uppercase">LOGS DE SEGURANÇA FILTRADOS</span>
             <h3 className="text-sm font-semibold text-white font-display mt-1">Audit Trail de Acontecimentos</h3>
@@ -1244,7 +1244,7 @@ export default function AdminDashboard() {
               const EventIcon = ev.icon;
               return (
                 <div key={ev.id} className="flex gap-3 text-xs">
-                  <div className={`w-8 h-8 rounded border border-purple-500/10 flex items-center justify-center flex-shrink-0 ${ev.color}`}>
+                  <div className={`w-8 h-8 rounded border border-amber-500/10 flex items-center justify-center flex-shrink-0 ${ev.color}`}>
                     <EventIcon className="w-4 h-4" />
                   </div>
                   <div className="space-y-0.5">

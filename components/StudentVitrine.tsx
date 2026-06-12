@@ -66,7 +66,7 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
   };
 
   const categoriesColors: Record<string, string> = {
-    'Tech': 'text-purple-400 bg-purple-500/10 border-purple-500/20',
+    'Tech': 'text-amber-400 bg-amber-500/10 border-amber-500/20',
     'Cyber': 'text-red-400 bg-red-400/10 border-red-400/20',
     'Dev': 'text-cyan-400 bg-cyan-400/10 border-cyan-400/20',
     'Design': 'text-pink-400 bg-pink-500/10 border-pink-500/20',
@@ -97,7 +97,7 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
       <motion.div 
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="relative overflow-hidden rounded-2xl min-h-[380px] sm:min-h-[440px] flex items-end border border-purple-500/20 shadow-2xl"
+        className="relative overflow-hidden rounded-2xl min-h-[380px] sm:min-h-[440px] flex items-end border border-amber-500/20 shadow-2xl"
       >
         {/* Background Artwork Cover with fallback */}
         <div className="absolute inset-0 z-0 select-none pointer-events-none">
@@ -116,8 +116,8 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
         <div className="relative z-10 w-full p-6 sm:p-10 space-y-4 max-w-3xl">
           
           <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full border border-purple-450/30 bg-purple-900/50 text-purple-300 text-[10px] font-mono font-bold uppercase tracking-wider">
-              <Sparkles className="w-3 h-3 text-purple-400 animate-pulse" /> MATRÍCULA ATIVA
+            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full border border-amber-450/30 bg-amber-900/50 text-amber-300 text-[10px] font-mono font-bold uppercase tracking-wider">
+              <Sparkles className="w-3 h-3 text-amber-400 animate-pulse" /> MATRÍCULA ATIVA
             </span>
             <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-cyan-400/20 bg-cyan-900/40 text-cyan-300 text-[10px] font-mono">
               <Flame className="w-3 h-3 text-orange-400 fill-orange-400/20" /> {courses.length} Masterclasses Disponíveis
@@ -125,7 +125,7 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
           </div>
           
           <div className="space-y-2">
-            <span className="text-purple-300 text-xs sm:text-sm font-mono tracking-wide">
+            <span className="text-amber-300 text-xs sm:text-sm font-mono tracking-wide">
               Mestrado Corporativo • Bem-vindo, {currentUser?.name || 'Alex Rivera'}
             </span>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black text-white tracking-tight leading-none drop-shadow-md">
@@ -140,7 +140,7 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
           <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <button
               onClick={handleStartClass}
-              className="px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-xl text-xs sm:text-sm font-mono font-bold flex items-center justify-center gap-2 transition-all hover:scale-[1.02] active:scale-[0.98] hover:cursor-pointer shadow-lg shadow-purple-900/40"
+              className="px-6 py-3 bg-gradient-to-r from-amber-600 to-amber-600 hover:from-amber-500 hover:to-amber-500 text-white rounded-xl text-xs sm:text-sm font-mono font-bold flex items-center justify-center gap-2 transition-all hover:scale-[1.02] active:scale-[0.98] hover:cursor-pointer shadow-lg shadow-amber-900/40"
             >
               <Play className="w-4 h-4 fill-white" />
               Assistir
@@ -162,9 +162,9 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
               </span>
               <span className="text-cyan-400 font-bold">{progressPercent}% Concluído</span>
             </div>
-            <div className="w-full bg-black/40 h-2 rounded-full overflow-hidden border border-purple-950/40">
+            <div className="w-full bg-black/40 h-2 rounded-full overflow-hidden border border-amber-950/40">
               <div 
-                className="bg-gradient-to-r from-purple-500 to-cyan-400 h-full rounded-full transition-all duration-500" 
+                className="bg-gradient-to-r from-amber-500 to-cyan-400 h-full rounded-full transition-all duration-500" 
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
@@ -175,13 +175,13 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
 
       {/* 2. Quick stats and status indicators row */}
       <div className="space-y-4">
-        <h2 className="text-xs font-mono font-bold uppercase tracking-widest text-[#a78bfa] flex items-center gap-1.5">
-          <TrendingUp className="w-4 h-4 text-purple-400 animate-pulse" /> Métricas e Indicadores de Aprendizado
+        <h2 className="text-xs font-mono font-bold uppercase tracking-widest text-[#C9A84C] flex items-center gap-1.5">
+          <TrendingUp className="w-4 h-4 text-amber-400 animate-pulse" /> Métricas e Indicadores de Aprendizado
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Enrolled Quick-Resume Card */}
-          <div className="glass-card p-5 rounded-xl border border-purple-500/10 flex flex-col justify-between bg-gradient-to-br from-[#120b29] to-[#04010a]">
+          <div className="glass-card p-5 rounded-xl border border-amber-500/10 flex flex-col justify-between bg-gradient-to-br from-[#120b29] to-[#04010a]">
             <div className="space-y-2">
               <div className="flex justify-between items-center text-[10px] font-mono">
                 <span className="text-emerald-400 flex items-center gap-1 font-semibold uppercase tracking-wider">
@@ -197,36 +197,36 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
               </p>
             </div>
 
-            <div className="mt-4 pt-3 border-t border-purple-950/20 flex items-center justify-between text-xs font-mono">
+            <div className="mt-4 pt-3 border-t border-amber-950/20 flex items-center justify-between text-xs font-mono">
               <span className="text-gray-400 text-[10px] font-mono">Último acesso: Hoje</span>
             </div>
           </div>
 
           {/* Core Analytics Metrics card */}
-          <div className="glass-card p-5 rounded-xl border border-purple-500/10 flex flex-col justify-between bg-[#110d24]/20">
+          <div className="glass-card p-5 rounded-xl border border-amber-500/10 flex flex-col justify-between bg-[#111111]/20">
             <div className="space-y-3">
-              <span className="text-[10px] font-mono text-purple-350 tracking-wider">
+              <span className="text-[10px] font-mono text-amber-350 tracking-wider">
                 DESEMPENHO ACADÊMICO INTEGRADO
               </span>
               <div className="grid grid-cols-3 gap-2 py-1 text-center font-mono">
-                <div className="p-2 rounded bg-purple-950/15 border border-purple-900/10">
+                <div className="p-2 rounded bg-amber-950/15 border border-amber-900/10">
                   <span className="block text-sm sm:text-base font-bold text-white">{Math.round((progressPercent / 100) * (enrolledCourse?.lessonsList?.flatMap(m => m.lessons).length || 0))}/{enrolledCourse?.lessonsList?.flatMap(m => m.lessons).length || 0}</span>
                   <span className="text-[9px] text-gray-400 header font-sans">Aulas Vistas</span>
                 </div>
-                <div className="p-2 rounded bg-purple-950/15 border border-purple-900/10">
+                <div className="p-2 rounded bg-amber-950/15 border border-amber-900/10">
                   <span className="block text-sm sm:text-base font-bold text-white">{progressPercent > 0 ? (progressPercent * 0.05).toFixed(1) : '0'}h</span>
                   <span className="text-[9px] text-gray-400 header font-sans text-ellipsis overflow-hidden whitespace-nowrap">Estudo</span>
                 </div>
-                <div className="p-2 rounded bg-purple-950/15 border border-purple-900/10">
+                <div className="p-2 rounded bg-amber-950/15 border border-amber-900/10">
                   <span className="block text-sm sm:text-base font-bold text-white">{progressPercent}%</span>
                   <span className="text-[9px] text-gray-400 header font-sans">Aproveitamento</span>
                 </div>
               </div>
             </div>
 
-            <div className="flex items-center justify-between text-[10px] text-purple-300 font-mono pt-2.5 border-t border-purple-950/20 mt-1">
+            <div className="flex items-center justify-between text-[10px] text-amber-300 font-mono pt-2.5 border-t border-amber-950/20 mt-1">
               <span className="flex items-center gap-1">
-                <BookOpen className="w-3.5 h-3.5 text-indigo-400" /> Próximo Download: Ebook de Protocolos
+                <BookOpen className="w-3.5 h-3.5 text-yellow-400" /> Próximo Download: Ebook de Protocolos
               </span>
               <span className="text-emerald-400 font-semibold">• Ativo</span>
             </div>
@@ -238,11 +238,11 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
       <div className="space-y-6 pt-4" id="course-vitrine-section">
         
         {/* Search header container */}
-        <div className="glass-card p-4 sm:p-5 rounded-2xl bg-[#090514]/85 border border-purple-500/10 space-y-4">
+        <div className="glass-card p-4 sm:p-5 rounded-2xl bg-[#090514]/85 border border-amber-500/10 space-y-4">
           
-          <div className="flex items-center justify-between border-b border-purple-950/20 pb-3">
+          <div className="flex items-center justify-between border-b border-amber-950/20 pb-3">
             <div className="flex gap-2">
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-purple-900/40 text-purple-300 border border-purple-500/30 shadow">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-amber-900/40 text-amber-300 border border-amber-500/30 shadow">
                 <Search className="w-3.5 h-3.5" /> Busca de Cursos
               </div>
             </div>
@@ -254,13 +254,13 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
 
           {/* Standard Search Input */}
           <div className="relative">
-            <Search className="absolute left-3 top-2.5 w-4 h-4 text-purple-400" />
+            <Search className="absolute left-3 top-2.5 w-4 h-4 text-amber-400" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Busque por 'Inteligência Artificial', 'Hacking', 'Design', 'Mestrado'..."
-              className="w-full bg-[#05030c]/90 border border-purple-950/60 focus:border-purple-500/50 rounded-xl py-2 pl-10 pr-4 text-xs font-mono text-white outline-none transition-all placeholder-gray-500"
+              className="w-full bg-[#0A0A0A]/90 border border-amber-950/60 focus:border-amber-500/50 rounded-xl py-2 pl-10 pr-4 text-xs font-mono text-white outline-none transition-all placeholder-gray-500"
             />
             {searchQuery && (
               <button 
@@ -275,7 +275,7 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
 
         <div>
           <h2 className="text-lg font-display font-medium text-white flex items-center gap-2">
-            <GraduationCap className="w-5 h-5 text-purple-400" /> Grade de Masterclasses Disponíveis
+            <GraduationCap className="w-5 h-5 text-amber-400" /> Grade de Masterclasses Disponíveis
           </h2>
           <p className="text-xs text-gray-400 mt-1">
             {searchQuery 
@@ -290,7 +290,7 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
               <p className="text-gray-500 text-xs">Nenhum programa acadêmico correspondente foi localizado.</p>
               <button
                 onClick={() => { setSearchQuery(''); }}
-                className="text-xs text-purple-400 hover:text-purple-300 underline"
+                className="text-xs text-amber-400 hover:text-amber-300 underline"
               >
                 Redefinir Filtros de Busca
               </button>
@@ -306,10 +306,10 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.05, duration: 0.3 }}
                   onClick={() => handleCourseClick(course)}
-                  className={`flex flex-col rounded-xl overflow-hidden border transition-all duration-300 group min-h-[310px] cursor-pointer hover:y-[-4px] border-purple-500/10 hover:border-purple-500/25 bg-black/20 hover:shadow-[0_8px_30px_rgb(168_85_247_/_0.08)]`}
+                  className={`flex flex-col rounded-xl overflow-hidden border transition-all duration-300 group min-h-[310px] cursor-pointer hover:y-[-4px] border-amber-500/10 hover:border-amber-500/25 bg-black/20 hover:shadow-[0_8px_30px_rgb(168_85_247_/_0.08)]`}
                 >
                   {/* Image background detailing heading */}
-                  <div className="relative h-44 w-full overflow-hidden bg-purple-950/30">
+                  <div className="relative h-44 w-full overflow-hidden bg-amber-950/30">
                     <img 
                       src={course.image} 
                       alt={course.title}
@@ -319,7 +319,7 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0e0a1b] via-[#0e0a1b]/40 to-transparent" />
                     
                     {/* Category Pill Tag */}
-                    <span className={`absolute top-4 left-4 border text-[9px] font-mono px-2 py-0.5 rounded-full font-bold uppercase tracking-wider ${categoriesColors[course.category] || 'text-purple-400 border-purple-500/20 bg-purple-500/5'}`}>
+                    <span className={`absolute top-4 left-4 border text-[9px] font-mono px-2 py-0.5 rounded-full font-bold uppercase tracking-wider ${categoriesColors[course.category] || 'text-amber-400 border-amber-500/20 bg-amber-500/5'}`}>
                       {course.category}
                     </span>
 
@@ -328,8 +328,8 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" /> JORNADA ATIVA
                       </span>
                     ) : (
-                      <span className="absolute top-4 right-4 bg-black/60 border border-purple-900/30 text-purple-300 text-[9px] font-mono px-2.5 py-0.5 rounded-full font-semibold flex items-center gap-1">
-                        <Lock className="w-2.5 h-2.5 text-purple-400" /> FECHADO
+                      <span className="absolute top-4 right-4 bg-black/60 border border-amber-900/30 text-amber-300 text-[9px] font-mono px-2.5 py-0.5 rounded-full font-semibold flex items-center gap-1">
+                        <Lock className="w-2.5 h-2.5 text-amber-400" /> FECHADO
                       </span>
                     )}
                   </div>
@@ -337,7 +337,7 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
                   {/* Info block body */}
                   <div className="p-4 flex-grow flex flex-col justify-between space-y-4 bg-black/20">
                     <div className="space-y-1.5">
-                      <h3 className="text-sm font-display font-bold text-white group-hover:text-purple-300 transition-colors line-clamp-1">
+                      <h3 className="text-sm font-display font-bold text-white group-hover:text-amber-300 transition-colors line-clamp-1">
                         {course.title}
                       </h3>
                       <p className="text-xs text-gray-400 leading-relaxed line-clamp-2">
@@ -345,7 +345,7 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
                       </p>
                     </div>
 
-                    <div className="border-t border-purple-950/30 pt-3 flex items-center justify-between text-[11px] text-gray-400 font-mono">
+                    <div className="border-t border-amber-950/30 pt-3 flex items-center justify-between text-[11px] text-gray-400 font-mono">
                       <div className="flex gap-3">
                         <span className="flex items-center gap-0.5 text-gray-400">
                           <Calendar className="w-3.5 h-3.5 text-gray-500" /> {course.duration}
@@ -358,7 +358,7 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
                             Acessar Aulas <Play className="w-2.5 h-2.5 fill-cyan-400 text-cyan-400 inline-block ml-0.5" />
                           </span>
                         ) : (
-                          <span className="text-[10px] text-purple-400 font-mono flex items-center gap-0.5 hover:underline">
+                          <span className="text-[10px] text-amber-400 font-mono flex items-center gap-0.5 hover:underline">
                             Ver Ementa <Info className="w-3 h-3" />
                           </span>
                         )}
@@ -392,12 +392,12 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
               initial={{ opacity: 0, scale: 0.95, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
-              className="relative w-full max-w-lg bg-[#0e0a1f] border border-purple-500/25 rounded-2xl overflow-hidden shadow-2xl z-10 font-sans max-h-[90vh] overflow-y-auto custom-scrollbar"
+              className="relative w-full max-w-lg bg-[#111111] border border-amber-500/25 rounded-2xl overflow-hidden shadow-2xl z-10 font-sans max-h-[90vh] overflow-y-auto custom-scrollbar"
             >
               {/* Close button */}
               <button 
                 onClick={() => { setSelectedPreviewCourse(null); setSolicitationSuccess(false); }}
-                className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-black/60 hover:bg-black/90 text-gray-300 hover:text-white flex items-center justify-center cursor-pointer transition-colors border border-purple-900/30"
+                className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-black/60 hover:bg-black/90 text-gray-300 hover:text-white flex items-center justify-center cursor-pointer transition-colors border border-amber-900/30"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -414,7 +414,7 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
                 
                 {/* Visual Label Tag */}
                 <div className="absolute bottom-4 left-4 flex flex-wrap gap-2">
-                  <span className={`border text-[10px] font-mono px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider ${categoriesColors[selectedPreviewCourse.category] || 'bg-purple-950/20 text-purple-300 border-purple-500/20'}`}>
+                  <span className={`border text-[10px] font-mono px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider ${categoriesColors[selectedPreviewCourse.category] || 'bg-amber-950/20 text-amber-300 border-amber-500/20'}`}>
                     {selectedPreviewCourse.category}
                   </span>
                   {isEnrolledInPreview ? (
@@ -432,7 +432,7 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
               {/* Information body container */}
               <div className="p-4 sm:p-6 space-y-4">
                 <div className="space-y-1.5 text-left">
-                  <span className="text-purple-400 text-xs font-mono font-semibold block uppercase tracking-wider">Masterclass Corporativa</span>
+                  <span className="text-amber-400 text-xs font-mono font-semibold block uppercase tracking-wider">Masterclass Corporativa</span>
                   <h3 className="text-lg sm:text-xl font-display font-black text-white leading-tight">
                     {selectedPreviewCourse.title}
                   </h3>
@@ -441,7 +441,7 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
                   </p>
                 </div>
 
-                <div className="bg-[#06030c] border border-purple-500/10 p-3.5 rounded-xl space-y-2">
+                <div className="bg-[#06030c] border border-amber-500/10 p-3.5 rounded-xl space-y-2">
                   <span className="text-[10px] font-mono text-gray-400 uppercase tracking-widest block font-bold">Resumo Acadêmico</span>
                   <p className="text-xs text-gray-300 leading-relaxed font-sans font-medium">
                     {selectedPreviewCourse.tagline}
@@ -454,9 +454,9 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
                     <span className="text-[10px] font-mono text-cyan-400 uppercase tracking-widest block font-bold">Estrutura Curricular</span>
                     <div className="space-y-2 max-h-48 overflow-y-auto custom-scrollbar pr-1">
                       {selectedPreviewCourse.lessonsList.map((mod, modIdx) => (
-                        <div key={modIdx} className="bg-[#0a0716]/60 border border-purple-950/30 rounded-lg p-3 space-y-2">
-                          <div className="flex items-center gap-2 text-xs font-mono font-bold text-purple-300">
-                            <BookOpen className="w-3.5 h-3.5 text-purple-400 flex-shrink-0" />
+                        <div key={modIdx} className="bg-[#111111]/60 border border-amber-950/30 rounded-lg p-3 space-y-2">
+                          <div className="flex items-center gap-2 text-xs font-mono font-bold text-amber-300">
+                            <BookOpen className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
                             <span className="line-clamp-1">{mod.moduleName}</span>
                           </div>
                           <div className="space-y-1 pl-5">
@@ -481,7 +481,7 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
                       onSelectCourse(selectedPreviewCourse.id);
                       setSelectedPreviewCourse(null);
                     }}
-                    className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-mono text-sm font-bold flex items-center justify-center gap-2 transition-all hover:scale-[1.01] cursor-pointer shadow-lg shadow-purple-900/30"
+                    className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-600 to-amber-600 hover:from-amber-500 hover:to-amber-500 text-white font-mono text-sm font-bold flex items-center justify-center gap-2 transition-all hover:scale-[1.01] cursor-pointer shadow-lg shadow-amber-900/30"
                   >
                     <Play className="w-4 h-4 fill-white" /> Assistir Aulas
                   </button>
@@ -502,9 +502,9 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
                         </div>
                       </motion.div>
                     ) : (
-                      <div className="bg-purple-950/20 border border-purple-500/20 p-4 rounded-xl flex items-start gap-3">
-                        <div className="w-8 h-8 rounded-full bg-purple-500/10 border border-purple-500/20 flex items-center justify-center flex-shrink-0 text-purple-300">
-                          <Lock className="w-4 h-4 text-purple-400 animate-pulse" />
+                      <div className="bg-amber-950/20 border border-amber-500/20 p-4 rounded-xl flex items-start gap-3">
+                        <div className="w-8 h-8 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center flex-shrink-0 text-amber-300">
+                          <Lock className="w-4 h-4 text-amber-400 animate-pulse" />
                         </div>
                         <div className="space-y-1 text-left">
                           <span className="block text-xs font-bold text-white">Solicitar Matrícula</span>
@@ -530,7 +530,7 @@ export default function StudentVitrine({ onSelectCourse }: StudentVitrineProps) 
                           addActivityLog(`Solicitou matrícula no curso: "${selectedPreviewCourse.title}"`, 'courses');
                         }}
                         disabled={solicitationSuccess}
-                        className="py-2.5 px-4 rounded-lg bg-purple-600 hover:bg-purple-500 disabled:bg-purple-950 disabled:text-gray-500 text-white font-mono text-xs font-bold transition-all hover:scale-[1.01] cursor-pointer"
+                        className="py-2.5 px-4 rounded-lg bg-amber-600 hover:bg-amber-500 disabled:bg-amber-950 disabled:text-gray-500 text-white font-mono text-xs font-bold transition-all hover:scale-[1.01] cursor-pointer"
                       >
                         {solicitationSuccess ? 'Enviado ✔' : 'Solicitar pelo Portal'}
                       </button>

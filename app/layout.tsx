@@ -14,8 +14,8 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: 'Nzila Academy | Portal Educacional Quântico',
-  description: 'Nzila Academy - O portal educacional do futuro de alta tecnologia, com foco em desenvolvimento avançado e arquiteturas quânticas de software.',
+  title: 'Nzila Digital | Brand Identity',
+  description: 'Nzila Digital - A agência que transforma negócios em marcas.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -49,7 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-animate-css@1.4.0/tw-animate.min.css" />
       </head>
-      <body className="bg-[#0b0813] text-gray-100 font-sans antialiased min-h-screen selection:bg-purple-500/30 selection:text-purple-200" suppressHydrationWarning>
+      <body className="bg-[#0A0A0A] text-[#F5F2EC] font-sans antialiased min-h-screen selection:bg-[#C9A84C]/30 selection:text-[#C9A84C]" suppressHydrationWarning>
         <AppProvider>
           {children}
         </AppProvider>

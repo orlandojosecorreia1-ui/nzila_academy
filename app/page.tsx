@@ -108,22 +108,22 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row bg-[#06040a] relative select-none">
+    <div className="min-h-screen flex flex-col md:flex-row bg-[#0A0A0A] relative select-none">
       
       {/* 1. Subtle Orbital Ambient Lights */}
-      <div className="absolute top-10 right-10 w-96 h-96 bg-purple-900/5 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-indigo-900/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-10 right-10 w-96 h-96 bg-amber-900/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-yellow-900/5 rounded-full blur-[120px] pointer-events-none" />
 
       {/* 2. Responsive Topbar Header (Mobile exclusively) */}
-      <div className="md:hidden w-full h-14 border-b border-purple-950/40 bg-[#0c0a1a]/85 backdrop-blur-md px-4 flex items-center justify-between z-40 fixed top-0 left-0 right-0">
+      <div className="md:hidden w-full h-14 border-b border-amber-950/40 bg-[#111111]/85 backdrop-blur-md px-4 flex items-center justify-between z-40 fixed top-0 left-0 right-0">
         <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-purple-500 animate-pulse" />
-          <span className="font-display font-bold text-sm tracking-wider text-white">NZILA ACADEMY</span>
+          <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse" />
+          <img src="/identidade visual/logo sem fundo.png" alt="Nzila Digital" className="h-5 object-contain" />
         </div>
 
         <button 
           onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
-          className="p-1.5 rounded-lg border border-purple-500/10 text-gray-400 hover:text-white"
+          className="p-1.5 rounded-lg border border-amber-500/10 text-gray-400 hover:text-white"
         >
           {isMobileNavOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
@@ -136,11 +136,11 @@ export default function Home() {
             initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -100 }}
-            className="fixed inset-0 top-14 bg-[#090714] z-30 p-5 flex flex-col justify-between md:hidden border-r border-purple-950/40"
+            className="fixed inset-0 top-14 bg-[#0A0A0A] z-30 p-5 flex flex-col justify-between md:hidden border-r border-amber-950/40"
           >
             {/* Nav link lists */}
             <div className="space-y-6">
-              <span className="text-[10px] font-mono text-purple-400 font-bold block tracking-widest uppercase">
+              <span className="text-[10px] font-mono text-amber-400 font-bold block tracking-widest uppercase">
                 {isAdmin ? 'MÓDULO DE GESTÃO EXECUTIVE' : 'ÁREA DO ESTUDANTE'}
               </span>
 
@@ -154,14 +154,14 @@ export default function Home() {
                       <button
                         key={item.id}
                         onClick={() => handleAdminTabChange(item.id as any)}
-                        className={`w-full py-2.5 px-3 rounded-lg text-xs font-mono font-medium flex items-center justify-between transition-all text-left ${isActive ? 'bg-purple-900/20 border border-purple-500/35 text-white' : 'text-gray-400 border border-transparent'}`}
+                        className={`w-full py-2.5 px-3 rounded-lg text-xs font-mono font-medium flex items-center justify-between transition-all text-left ${isActive ? 'bg-amber-900/20 border border-amber-500/35 text-white' : 'text-gray-400 border border-transparent'}`}
                       >
                         <div className="flex items-center gap-2.5">
-                          <Icon className="w-4 h-4 text-purple-400 flex-shrink-0" />
+                          <Icon className="w-4 h-4 text-amber-400 flex-shrink-0" />
                           <span>{item.label}</span>
                         </div>
                         {unreadCount > 0 && (
-                          <span className="bg-purple-500 text-[9px] text-white font-mono font-bold px-1.5 py-0.5 rounded-full animate-pulse">
+                          <span className="bg-amber-500 text-[9px] text-white font-mono font-bold px-1.5 py-0.5 rounded-full animate-pulse">
                             {unreadCount}
                           </span>
                         )}
@@ -177,14 +177,14 @@ export default function Home() {
                       <button
                         key={item.id}
                         onClick={() => handleStudentTabChange(item.id as any)}
-                        className={`w-full py-2.5 px-3 rounded-lg text-xs font-mono font-medium flex items-center justify-between transition-all text-left ${isActive ? 'bg-purple-900/20 border border-purple-500/35 text-white' : 'text-gray-400 border border-transparent'}`}
+                        className={`w-full py-2.5 px-3 rounded-lg text-xs font-mono font-medium flex items-center justify-between transition-all text-left ${isActive ? 'bg-amber-900/20 border border-amber-500/35 text-white' : 'text-gray-400 border border-transparent'}`}
                       >
                         <div className="flex items-center gap-2.5">
-                          <Icon className="w-4 h-4 text-purple-400 flex-shrink-0" />
+                          <Icon className="w-4 h-4 text-amber-400 flex-shrink-0" />
                           <span>{item.label}</span>
                         </div>
                         {unreadCount > 0 && (
-                          <span className="bg-purple-500 text-[9px] text-white font-mono font-bold px-1.5 py-0.5 rounded-full animate-pulse">
+                          <span className="bg-amber-500 text-[9px] text-white font-mono font-bold px-1.5 py-0.5 rounded-full animate-pulse">
                             {unreadCount}
                           </span>
                         )}
@@ -196,9 +196,9 @@ export default function Home() {
             </div>
 
             {/* Bottom Controls */}
-            <div className="space-y-4 border-t border-purple-950/25 pt-4">
+            <div className="space-y-4 border-t border-amber-950/25 pt-4">
               <div className="flex items-center gap-3 px-1">
-                <div className="w-8 h-8 rounded-full bg-purple-950/40 border border-purple-500/15 overflow-hidden flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-amber-950/40 border border-amber-500/15 overflow-hidden flex-shrink-0">
                   <img 
                     src={currentUser.avatar || (isAdmin 
                       ? "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&auto=format&fit=crop&q=80"
@@ -229,19 +229,17 @@ export default function Home() {
       </AnimatePresence>
 
       {/* 4. Desktop Persistent Sidebar Drawer (300px layout) */}
-      <div className="hidden md:flex w-72 flex-col justify-between p-5 border-r border-[#150d2c]/60 bg-[#090714] relative z-20 flex-shrink-0">
+      <div className="hidden md:flex w-72 flex-col justify-between p-5 border-r border-[#150d2c]/60 bg-[#0A0A0A] relative z-20 flex-shrink-0">
         
         <div className="space-y-8">
           {/* Main system Logo */}
           <div className="flex items-center gap-2.5 px-1 pb-1">
-            <span className="w-3 h-3 rounded-full bg-purple-500 animate-pulse ring-4 ring-purple-500/15" />
-            <h1 className="font-display font-medium text-white tracking-wider text-base">
-              NZILA <span className="text-[#a78bfa] font-bold">ACADEMY</span>
-            </h1>
+            <span className="w-3 h-3 rounded-full bg-amber-500 animate-pulse ring-4 ring-amber-500/15" />
+            <img src="/identidade visual/logo sem fundo.png" alt="Nzila Digital" className="h-7 object-contain" />
           </div>
 
           <div className="space-y-3">
-            <span className="text-[10px] font-mono text-purple-400 font-bold block tracking-widest uppercase px-1">
+            <span className="text-[10px] font-mono text-amber-400 font-bold block tracking-widest uppercase px-1">
               {isAdmin ? 'PORTAL EXECUTIVO DIRECT' : 'ÁREA DO ESTUDANTE'}
             </span>
 
@@ -258,19 +256,19 @@ export default function Home() {
                     <button
                       key={item.id}
                       onClick={() => handleAdminTabChange(item.id as any)}
-                      className={`w-full py-2 px-3 rounded-lg text-xs font-mono font-medium flex items-center justify-between transition-all text-left hover:cursor-pointer ${isActive ? 'bg-[#150d2d]/70 text-white font-bold border border-purple-500/15' : 'text-gray-400 border border-transparent hover:text-white'}`}
+                      className={`w-full py-2 px-3 rounded-lg text-xs font-mono font-medium flex items-center justify-between transition-all text-left hover:cursor-pointer ${isActive ? 'bg-[#150d2d]/70 text-white font-bold border border-amber-500/15' : 'text-gray-400 border border-transparent hover:text-white'}`}
                       id={`sidebar-admin-link-${item.id}`}
                     >
                       <div className="flex items-center gap-2.5">
-                        <Icon className="w-4 h-4 text-purple-450 text-purple-300" />
+                        <Icon className="w-4 h-4 text-amber-450 text-amber-300" />
                         <span>{item.label}</span>
                         {unreadCount > 0 && (
-                          <span className="ml-1 bg-purple-500 text-[9px] text-white font-mono font-bold px-1.5 py-0.5 rounded-full animate-pulse">
+                          <span className="ml-1 bg-amber-500 text-[9px] text-white font-mono font-bold px-1.5 py-0.5 rounded-full animate-pulse">
                             {unreadCount}
                           </span>
                         )}
                       </div>
-                      <ChevronRight className={`w-3 h-3 opacity-30 ${isActive ? 'opacity-90 text-purple-400 translate-x-0.5' : ''} transition-all`} />
+                      <ChevronRight className={`w-3 h-3 opacity-30 ${isActive ? 'opacity-90 text-amber-400 translate-x-0.5' : ''} transition-all`} />
                     </button>
                   );
                 })
@@ -285,19 +283,19 @@ export default function Home() {
                     <button
                       key={item.id}
                       onClick={() => handleStudentTabChange(item.id as any)}
-                      className={`w-full py-2 px-3 rounded-lg text-xs font-mono font-medium flex items-center justify-between transition-all text-left hover:cursor-pointer ${isActive ? 'bg-[#150d2d]/70 text-white font-bold border border-purple-500/15' : 'text-gray-400 border border-transparent hover:text-white'}`}
+                      className={`w-full py-2 px-3 rounded-lg text-xs font-mono font-medium flex items-center justify-between transition-all text-left hover:cursor-pointer ${isActive ? 'bg-[#150d2d]/70 text-white font-bold border border-amber-500/15' : 'text-gray-400 border border-transparent hover:text-white'}`}
                       id={`sidebar-student-link-${item.id}`}
                     >
                       <div className="flex items-center gap-2.5">
-                        <Icon className="w-4 h-4 text-purple-450 text-purple-300" />
+                        <Icon className="w-4 h-4 text-amber-450 text-amber-300" />
                         <span>{item.label}</span>
                         {unreadCount > 0 && (
-                          <span className="ml-1 bg-purple-500 text-[9px] text-white font-mono font-bold px-1.5 py-0.5 rounded-full animate-pulse">
+                          <span className="ml-1 bg-amber-500 text-[9px] text-white font-mono font-bold px-1.5 py-0.5 rounded-full animate-pulse">
                             {unreadCount}
                           </span>
                         )}
                       </div>
-                      <ChevronRight className={`w-3 h-3 opacity-30 ${isActive ? 'opacity-90 text-purple-400 translate-x-0.5' : ''} transition-all`} />
+                      <ChevronRight className={`w-3 h-3 opacity-30 ${isActive ? 'opacity-90 text-amber-400 translate-x-0.5' : ''} transition-all`} />
                     </button>
                   );
                 })
@@ -309,7 +307,7 @@ export default function Home() {
         {/* Dynamic Sidebar Bottom profile and switcher bypass */}
         <div className="space-y-4 border-t border-[#1a113a]/30 pt-4 mt-6">
           <div className="flex items-center gap-3 px-1 text-sm">
-            <div className="w-9 h-9 rounded-full bg-purple-950/40 border border-purple-500/15 overflow-hidden flex-shrink-0">
+            <div className="w-9 h-9 rounded-full bg-amber-950/40 border border-amber-500/15 overflow-hidden flex-shrink-0">
               <img 
                 src={currentUser.avatar || (isAdmin 
                   ? "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&auto=format&fit=crop&q=80"

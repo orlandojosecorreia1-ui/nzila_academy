@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0a0a; font-family: 'Helvetica Neue', sans-serif; color: #f0f0f0; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dark: #8B6914;
+    --black: #0a0a0a;
+    --black-card: #111111;
+    --black-border: #1e1e1e;
+    --white: #F5F2EC;
+    --muted: #888880;
+  }
+
+  .page { padding: 0; background: #0a0a0a; }
+
+  /* ─── HERO LOGO ─── */
+  .logo-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 52px 32px 44px;
+    border-bottom: 0.5px solid #1e1e1e;
+  }
+  .logo-mark {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 20px;
+  }
+  .logo-wordmark {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+  .logo-wordmark span {
+    color: var(--gold);
+  }
+  .logo-tagline {
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
+
+  /* ─── BRAND PALETTE ─── */
+  .section {
+    padding: 36px 32px;
+    border-bottom: 0.5px solid #1e1e1e;
+  }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .swatch {
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .swatch-color {
+    height: 64px;
+    width: 100%;
+  }
+  .swatch-info {
+    padding: 8px 0 4px;
+  }
+  .swatch-name {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--white);
+    display: block;
+  }
+  .swatch-hex {
+    font-size: 10px;
+    color: var(--muted);
+    display: block;
+    margin-top: 2px;
+    font-family: monospace;
+  }
+
+  /* ─── TYPOGRAPHY ─── */
+  .type-row {
+    padding: 18px 0;
+    border-bottom: 0.5px solid #1a1a1a;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+  .type-row:last-child { border-bottom: none; }
+  .type-sample { color: var(--white); }
+  .type-meta { font-size: 10px; color: var(--muted); letter-spacing: 0.1em; text-align: right; }
+
+  /* ─── LOGO VARIATIONS ─── */
+  .logo-variants {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .logo-card {
+    border: 0.5px solid #1e1e1e;
+    border-radius: 8px;
+    padding: 28px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .logo-card.inv {
+    background: var(--white);
+  }
+  .logo-card-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+  .logo-card.inv .logo-card-label {
+    color: #999;
+  }
+
+  /* ─── BRAND PILARS ─── */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+  }
+  .pillar {
+    border: 0.5px solid #1e1e1e;
+    border-radius: 6px;
+    padding: 16px 10px;
+    text-align: center;
+  }
+  .pillar-icon {
+    width: 28px;
+    height: 28px;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pillar-name {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+  }
+
+  /* ─── MOCKUP BUSINESS CARD ─── */
+  .bcard-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .bcard {
+    border-radius: 10px;
+    padding: 28px 24px;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .bcard.front {
+    background: #0f0f0f;
+    border: 0.5px solid #2a2a2a;
+  }
+  .bcard.back {
+    background: var(--gold);
+  }
+  .bcard-logo-small {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  .bcard-logo-small span { color: var(--gold); }
+  .bcard-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--white);
+  }
+  .bcard-role {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+  .bcard-contact {
+    font-size: 10px;
+    color: #555;
+    margin-top: 12px;
+    line-height: 1.8;
+  }
+  .bcard-back-logo {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #0a0a0a;
+    text-align: center;
+  }
+  .bcard-back-tag {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #0a0a0a;
+    text-align: center;
+    opacity: 0.6;
+  }
+  .bcard-back-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    gap: 6px;
+  }
+  .bcard-deco {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 0.5px solid #2a2a2a;
+    opacity: 0.4;
+  }
+  .bcard-deco2 {
+    position: absolute;
+    bottom: -36px;
+    right: -36px;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 0.5px solid #2a2a2a;
+    opacity: 0.25;
+  }
+
+  /* ─── CTA MOCKUP ─── */
+  .cta-box {
+    border: 0.5px solid var(--gold-dark);
+    border-radius: 8px;
+    padding: 32px 28px;
+    text-align: center;
+    background: linear-gradient(135deg, #111 0%, #0d0d0d 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 12px;
+  }
+  .cta-headline {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .cta-headline em {
+    color: var(--gold);
+    font-style: normal;
+  }
+  .cta-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: var(--gold);
+    color: #0a0a0a;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+  }
+  .cta-line {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+    opacity: 0.7;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- LOGO HERO -->
+  <div class="logo-section">
+    <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- N shape in gold — road/path motif -->
+      <rect width="72" height="72" rx="8" fill="#111111"/>
+      <path d="M16 54V18L36 46V18" stroke="#C9A84C" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M36 46V18L56 54V18" stroke="#C9A84C" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- accent dot -->
+      <circle cx="56" cy="18" r="3.5" fill="#C9A84C"/>
+      <circle cx="16" cy="18" r="3.5" fill="#C9A84C" opacity="0.4"/>
+    </svg>
+    <div class="logo-wordmark">NZILA <span>DIGITAL</span></div>
+    <div class="logo-tagline">A agência que transforma negócios em marcas</div>
+  </div>
+
+  <!-- BRAND COLORS -->
+  <div class="section">
+    <div class="section-label">Paleta de cores</div>
+    <div class="palette-grid">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#0a0a0a; border: 0.5px solid #222;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Abismo</span>
+          <span class="swatch-hex">#0A0A0A</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#C9A84C;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Ouro Nzila</span>
+          <span class="swatch-hex">#C9A84C</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#F5F2EC;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Marfim</span>
+          <span class="swatch-hex">#F5F2EC</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#2C2A22;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Sombra</span>
+          <span class="swatch-hex">#2C2A22</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <div class="section">
+    <div class="section-label">Tipografia</div>
+    <div class="type-row">
+      <span class="type-sample" style="font-size:28px; font-weight:700; letter-spacing:0.04em;">Nzila Digital</span>
+      <span class="type-meta">Display / 700<br>Headlines</span>
+    </div>
+    <div class="type-row">
+      <span class="type-sample" style="font-size:18px; font-weight:500; color:#C9A84C; letter-spacing:0.08em; text-transform:uppercase;">Aceleração de Vendas</span>
+      <span class="type-meta">Caps / 500<br>Subtítulos</span>
+    </div>
+    <div class="type-row">
+      <span class="type-sample" style="font-size:14px; color:#888; line-height:1.7;">Transformamos negócios em marcas com resultados reais.</span>
+      <span class="type-meta">Body / 400<br>Corpo de texto</span>
+    </div>
+    <div class="type-row">
+      <span class="type-sample" style="font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:#C9A84C;">Tráfego · Design · Website · Estratégia</span>
+      <span class="type-meta">Label / caps<br>Tags &amp; serviços</span>
+    </div>
+  </div>
+
+  <!-- LOGO VARIATIONS -->
+  <div class="section">
+    <div class="section-label">Variações do logótipo</div>
+    <div class="logo-variants">
+      <div class="logo-card">
+        <svg width="36" height="36" viewBox="0 0 72 72" fill="none">
+          <rect width="72" height="72" rx="8" fill="#111"/>
+          <path d="M16 54V18L36 46V18" stroke="#C9A84C" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M36 46V18L56 54V18" stroke="#C9A84C" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="56" cy="18" r="3.5" fill="#C9A84C"/>
+        </svg>
+        <div style="text-align:center;">
+          <div style="font-size:15px;font-weight:700;letter-spacing:0.15em;color:#F5F2EC;text-transform:uppercase;">NZILA <span style="color:#C9A84C;">DIGITAL</span></div>
+          <div style="font-size:9px;letter-spacing:0.25em;color:#555;text-transform:uppercase;margin-top:4px;">Versão principal</div>
+        </div>
+        <div class="logo-card-label">Fundo escuro</div>
+      </div>
+      <div class="logo-card inv">
+        <svg width="36" height="36" viewBox="0 0 72 72" fill="none">
+          <rect width="72" height="72" rx="8" fill="#F5F2EC"/>
+          <path d="M16 54V18L36 46V18" stroke="#8B6914" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M36 46V18L56 54V18" stroke="#8B6914" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="56" cy="18" r="3.5" fill="#8B6914"/>
+        </svg>
+        <div style="text-align:center;">
+          <div style="font-size:15px;font-weight:700;letter-spacing:0.15em;color:#0a0a0a;text-transform:uppercase;">NZILA <span style="color:#8B6914;">DIGITAL</span></div>
+          <div style="font-size:9px;letter-spacing:0.25em;color:#aaa;text-transform:uppercase;margin-top:4px;">Versão clara</div>
+        </div>
+        <div class="logo-card-label">Fundo claro</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BRAND PILLARS -->
+  <div class="section">
+    <div class="section-label">Pilares da marca</div>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M10 2L12.5 7.5H18L13.5 11L15.5 17L10 13.5L4.5 17L6.5 11L2 7.5H7.5Z" stroke="#C9A84C" stroke-width="1.2" fill="none"/>
+          </svg>
+        </div>
+        <span class="pillar-name">Confiança</span>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <rect x="3" y="3" width="14" height="14" rx="2" stroke="#C9A84C" stroke-width="1.2"/>
+            <path d="M7 10l2.5 2.5L14 7" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="pillar-name">Resultados</span>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M10 3v14M3 10h14" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+            <circle cx="10" cy="10" r="7" stroke="#C9A84C" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <span class="pillar-name">Autoridade</span>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M4 16L8 10l3 4 3-6 2 3" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="pillar-name">ROI</span>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M10 2C6 2 2 6 2 10s4 8 8 8 8-4 8-8-4-8-8-8z" stroke="#C9A84C" stroke-width="1.2"/>
+            <path d="M10 6v4l3 3" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="pillar-name">Exclusivo</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUSINESS CARD MOCKUP -->
+  <div class="section">
+    <div class="section-label">Cartão de visita</div>
+    <div class="bcard-wrap">
+      <div class="bcard front">
+        <div class="bcard-deco"></div>
+        <div class="bcard-deco2"></div>
+        <div>
+          <div class="bcard-logo-small">NZILA <span>DIGITAL</span></div>
+        </div>
+        <div>
+          <div class="bcard-name">Nome do Responsável</div>
+          <div class="bcard-role">Diretor de Estratégia Digital</div>
+          <div class="bcard-contact">
+            +244 900 000 000<br>
+            nziladigital.ao
+          </div>
+        </div>
+      </div>
+      <div class="bcard back">
+        <div class="bcard-back-center">
+          <div class="bcard-back-logo">NZILA</div>
+          <div style="width:40px; height:0.5px; background:#0a0a0a; opacity:0.3; margin:4px 0;"></div>
+          <div class="bcard-back-tag">A agência que transforma negócios em marcas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA MOCKUP -->
+  <div class="section" style="border-bottom:none;">
+    <div class="section-label">Comunicação — tom de voz</div>
+    <div class="cta-box">
+      <div class="cta-line"></div>
+      <span class="cta-label">Para empresas que querem escalar</span>
+      <div class="cta-headline">Você já investe.<br>Está a ter os <em>resultados</em> que merece?</div>
+      <div class="cta-sub">Tráfego pago, design, website e estratégia — tudo alinhado para crescer.</div>
+      <button class="cta-btn">Falar com um especialista</button>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

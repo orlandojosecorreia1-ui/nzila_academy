@@ -160,7 +160,7 @@ export default function StudentPlayer({ initialCourseId, onGoBack, onGoToCommuni
         return 'bg-black text-[#d1d5db] border-zinc-900';
       case 'slate':
       default:
-        return 'bg-[#0f0c1e]/60 text-[#edf2f7] border-purple-500/10';
+        return 'bg-[#0f0c1e]/60 text-[#edf2f7] border-amber-500/10';
     }
   };
 
@@ -189,16 +189,16 @@ export default function StudentPlayer({ initialCourseId, onGoBack, onGoToCommuni
       </AnimatePresence>
       
       {/* Back to vitrine */}
-      <div className="flex items-center justify-between border-b border-purple-950/20 pb-4">
+      <div className="flex items-center justify-between border-b border-amber-950/20 pb-4">
         <button 
           onClick={onGoBack}
-          className="text-xs font-mono text-gray-400 hover:text-white flex items-center gap-1 bg-purple-950/10 border border-purple-500/10 hover:border-purple-500/25 px-3 py-1.5 rounded-lg transition-all hover:cursor-pointer"
+          className="text-xs font-mono text-gray-400 hover:text-white flex items-center gap-1 bg-amber-950/10 border border-amber-500/10 hover:border-amber-500/25 px-3 py-1.5 rounded-lg transition-all hover:cursor-pointer"
           id="player-btn-back"
         >
           <ArrowLeft className="w-3.5 h-3.5" /> Voltar à Grade
         </button>
 
-        <span className="text-xs font-mono font-bold text-purple-400 uppercase tracking-wider block bg-purple-500/5 py-1 px-3 rounded-md border border-purple-500/10">
+        <span className="text-xs font-mono font-bold text-amber-400 uppercase tracking-wider block bg-amber-500/5 py-1 px-3 rounded-md border border-amber-500/10">
           AULA: {selectedLesson.title ? (selectedLesson.title.length > 30 ? selectedLesson.title.substring(0, 30) + '...' : selectedLesson.title) : 'Selecione uma aula'}
         </span>
       </div>
@@ -211,7 +211,7 @@ export default function StudentPlayer({ initialCourseId, onGoBack, onGoToCommuni
           {/* CONTENT ACCORDING TO LESSON TYPE (VIDEO VS EBOOK) */}
           {!isEbook ? (
             // ================== VIDEO PLAYER ==================
-            <div className="aspect-video w-full rounded-2xl glass-card relative flex flex-col items-center justify-center overflow-hidden border border-purple-500/15 bg-black/50 group">
+            <div className="aspect-video w-full rounded-2xl glass-card relative flex flex-col items-center justify-center overflow-hidden border border-amber-500/15 bg-black/50 group">
               
               {/* If we have a valid converted video url (like an iframe embed for youtube/vimeo) */}
               {parsedVideoEmbed && (parsedVideoEmbed.startsWith('http') || parsedVideoEmbed.includes('embed')) ? (
@@ -249,7 +249,7 @@ export default function StudentPlayer({ initialCourseId, onGoBack, onGoToCommuni
                       </div>
 
                       <div className="w-full text-center space-y-2 select-none pointer-events-none">
-                        <span className="text-xs font-mono text-purple-300 neon-text-purple animate-pulse block">
+                        <span className="text-xs font-mono text-amber-300 neon-text-purple animate-pulse block">
                           Carregando fluxo multimídia de dados integrado...
                         </span>
                         <div className="text-lg font-bold text-white font-display max-w-sm mx-auto overflow-hidden text-ellipsis whitespace-nowrap">
@@ -262,8 +262,8 @@ export default function StudentPlayer({ initialCourseId, onGoBack, onGoToCommuni
                           <span>Aulas Assistidas: {completedLessonIds.length}</span>
                           <span>Progresso: {videoProgress}%</span>
                         </div>
-                        <div className="w-full bg-purple-950/40 h-1.5 rounded-full overflow-hidden">
-                          <div className="bg-gradient-to-r from-purple-500 to-cyan-400 h-full transition-all duration-300" style={{ width: `${videoProgress}%` }} />
+                        <div className="w-full bg-amber-950/40 h-1.5 rounded-full overflow-hidden">
+                          <div className="bg-gradient-to-r from-amber-500 to-cyan-400 h-full transition-all duration-300" style={{ width: `${videoProgress}%` }} />
                         </div>
                       </div>
                     </div>
@@ -271,7 +271,7 @@ export default function StudentPlayer({ initialCourseId, onGoBack, onGoToCommuni
                     <div className="text-center p-6 space-y-5 z-10">
                       <button 
                         onClick={handleSimulateWatch}
-                        className="w-16 h-16 rounded-full bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center border border-purple-400/30 hover:shadow-lg hover:shadow-purple-500/20 hover:scale-105 transition-all outline-none hover:cursor-pointer mx-auto"
+                        className="w-16 h-16 rounded-full bg-gradient-to-tr from-amber-600 to-amber-600 flex items-center justify-center border border-amber-400/30 hover:shadow-lg hover:shadow-amber-500/20 hover:scale-105 transition-all outline-none hover:cursor-pointer mx-auto"
                         id="player-btn-play"
                       >
                         <Play className="w-6 h-6 text-white fill-white ml-1 font-bold" />
@@ -297,19 +297,19 @@ export default function StudentPlayer({ initialCourseId, onGoBack, onGoToCommuni
             <div className={`p-4 sm:p-5 rounded-2xl border transition-colors flex flex-col space-y-4 ${getEbookThemeClasses()}`}>
               
               {/* E-Book Toolbar settings */}
-              <div className="flex flex-wrap justify-between items-center gap-3 border-b border-purple-500/10 pb-3 text-xs">
+              <div className="flex flex-wrap justify-between items-center gap-3 border-b border-amber-500/10 pb-3 text-xs">
                 
-                <span className="font-mono text-[10px] font-bold tracking-wider text-purple-400 uppercase flex items-center gap-1.5">
-                  <BookOpen className="w-3.5 h-3.5 text-purple-400" /> LEITURA DE E-BOOK ACADÊMICO
+                <span className="font-mono text-[10px] font-bold tracking-wider text-amber-400 uppercase flex items-center gap-1.5">
+                  <BookOpen className="w-3.5 h-3.5 text-amber-400" /> LEITURA DE E-BOOK ACADÊMICO
                 </span>
 
                 <div className="flex items-center gap-3">
                   
                   {/* Theme Selectors */}
-                  <div className="flex bg-black/30 border border-purple-500/5 p-0.5 rounded-lg">
+                  <div className="flex bg-black/30 border border-amber-500/5 p-0.5 rounded-lg">
                     <button
                       onClick={() => setReadingTheme('slate')}
-                      className={`p-1.5 rounded text-[10px] font-mono transition-all hover:cursor-pointer ${readingTheme === 'slate' ? 'bg-purple-600/30 text-purple-300' : 'text-gray-400'}`}
+                      className={`p-1.5 rounded text-[10px] font-mono transition-all hover:cursor-pointer ${readingTheme === 'slate' ? 'bg-amber-600/30 text-amber-300' : 'text-gray-400'}`}
                       title="Tema Escuro Espacial"
                     >
                       Slate
@@ -334,25 +334,25 @@ export default function StudentPlayer({ initialCourseId, onGoBack, onGoToCommuni
                   <div className="flex items-center gap-1">
                     <button
                       onClick={() => setReadingSize('text-sm')}
-                      className={`w-6 h-6 rounded flex items-center justify-center font-bold text-[10px] bg-black/10 border ${readingSize === 'text-sm' ? 'border-purple-500/30 text-purple-400' : 'border-transparent text-gray-500'}`}
+                      className={`w-6 h-6 rounded flex items-center justify-center font-bold text-[10px] bg-black/10 border ${readingSize === 'text-sm' ? 'border-amber-500/30 text-amber-400' : 'border-transparent text-gray-500'}`}
                     >
                       A-
                     </button>
                     <button
                       onClick={() => setReadingSize('text-base')}
-                      className={`w-6 h-6 rounded flex items-center justify-center font-bold text-xs bg-black/10 border ${readingSize === 'text-base' ? 'border-purple-500/30 text-purple-400' : 'border-transparent text-gray-500'}`}
+                      className={`w-6 h-6 rounded flex items-center justify-center font-bold text-xs bg-black/10 border ${readingSize === 'text-base' ? 'border-amber-500/30 text-amber-400' : 'border-transparent text-gray-500'}`}
                     >
                       A
                     </button>
                     <button
                       onClick={() => setReadingSize('text-lg')}
-                      className={`w-6 h-6 rounded flex items-center justify-center font-bold text-sm bg-black/10 border ${readingSize === 'text-lg' ? 'border-purple-500/30 text-purple-400' : 'border-transparent text-gray-500'}`}
+                      className={`w-6 h-6 rounded flex items-center justify-center font-bold text-sm bg-black/10 border ${readingSize === 'text-lg' ? 'border-amber-500/30 text-amber-400' : 'border-transparent text-gray-500'}`}
                     >
                       A+
                     </button>
                     <button
                       onClick={() => setReadingSize('text-xl')}
-                      className={`w-6 h-6 rounded flex items-center justify-center font-bold text-base bg-black/10 border ${readingSize === 'text-xl' ? 'border-purple-500/30 text-purple-400' : 'border-transparent text-gray-500'}`}
+                      className={`w-6 h-6 rounded flex items-center justify-center font-bold text-base bg-black/10 border ${readingSize === 'text-xl' ? 'border-amber-500/30 text-amber-400' : 'border-transparent text-gray-500'}`}
                     >
                       A++
                     </button>
@@ -363,7 +363,7 @@ export default function StudentPlayer({ initialCourseId, onGoBack, onGoToCommuni
 
               {/* E-Book direct file / external URL attachment banner */}
               {selectedLesson.ebookUrl && (
-                <div className="bg-purple-950/20 shadow-inner border border-purple-500/20 rounded-xl p-3 flex flex-col sm:flex-row items-center justify-between gap-3 mb-4 animate-fadeIn">
+                <div className="bg-amber-950/20 shadow-inner border border-amber-500/20 rounded-xl p-3 flex flex-col sm:flex-row items-center justify-between gap-3 mb-4 animate-fadeIn">
                   <div className="flex items-center gap-2.5 min-w-0 self-start sm:self-center">
                     <div className="w-10 h-10 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 flex items-center justify-center flex-shrink-0 font-bold font-mono text-xs">
                       PDF
@@ -394,7 +394,7 @@ export default function StudentPlayer({ initialCourseId, onGoBack, onGoToCommuni
                         }, 600);
                       }
                     }}
-                    className="w-full sm:w-auto px-4 py-2 rounded-lg bg-gradient-to-tr from-purple-650 to-indigo-650 bg-purple-600 hover:bg-purple-500 text-white font-mono text-xs font-bold leading-none flex items-center justify-center gap-1.5 cursor-pointer hover:scale-[1.01] transition-transform flex-shrink-0 border border-purple-400/20"
+                    className="w-full sm:w-auto px-4 py-2 rounded-lg bg-gradient-to-tr from-amber-650 to-amber-650 bg-amber-600 hover:bg-amber-500 text-white font-mono text-xs font-bold leading-none flex items-center justify-center gap-1.5 cursor-pointer hover:scale-[1.01] transition-transform flex-shrink-0 border border-amber-400/20"
                   >
                     <Download className="w-3.5 h-3.5" /> Acessar E-book 📥
                   </button>
@@ -407,7 +407,7 @@ export default function StudentPlayer({ initialCourseId, onGoBack, onGoToCommuni
               </div>
 
               {/* Marker Hint */}
-              <div className="border-t border-purple-500/5 pt-3.5 flex justify-between items-center text-[10px] font-mono text-gray-400">
+              <div className="border-t border-amber-500/5 pt-3.5 flex justify-between items-center text-[10px] font-mono text-gray-400">
                 <span>Total estimado para conclusão: {selectedLesson.duration}</span>
                 <span className="text-emerald-500 flex items-center gap-1 font-bold">● Proteção Antipirataria Ativa</span>
               </div>
@@ -416,9 +416,9 @@ export default function StudentPlayer({ initialCourseId, onGoBack, onGoToCommuni
           )}
 
           {/* Lesson Details Info */}
-          <div className="glass-card p-5 sm:p-6 rounded-2xl space-y-4 bg-[#0a0715]/40 border border-purple-500/10">
+          <div className="glass-card p-5 sm:p-6 rounded-2xl space-y-4 bg-[#0a0715]/40 border border-amber-500/10">
             <div className="space-y-2">
-              <span className="text-xs font-mono text-purple-400 uppercase tracking-widest block font-bold">EMENTA EM EXECUÇÃO</span>
+              <span className="text-xs font-mono text-amber-400 uppercase tracking-widest block font-bold">EMENTA EM EXECUÇÃO</span>
               <h2 className="text-lg sm:text-xl font-display font-medium text-white leading-tight">
                 {selectedLesson.title}
               </h2>
@@ -427,11 +427,11 @@ export default function StudentPlayer({ initialCourseId, onGoBack, onGoToCommuni
               </p>
             </div>
 
-            <div className="border-t border-purple-950/20 pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="border-t border-amber-950/20 pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="flex flex-wrap gap-2">
                 <button 
                   onClick={() => toggleLessonCompletion(selectedLesson.id)}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono rounded-lg transition-all hover:cursor-pointer border ${completedLessonIds.includes(selectedLesson.id) ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400 hover:bg-emerald-500/15' : 'bg-purple-600/10 border-purple-500/20 text-purple-300 hover:bg-purple-600/20'}`}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono rounded-lg transition-all hover:cursor-pointer border ${completedLessonIds.includes(selectedLesson.id) ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400 hover:bg-emerald-500/15' : 'bg-amber-600/10 border-amber-500/20 text-amber-300 hover:bg-amber-600/20'}`}
                   id="player-btn-toggle-completion"
                 >
                   <CheckCircle className={`w-3.5 h-3.5 ${completedLessonIds.includes(selectedLesson.id) ? 'fill-emerald-400/10' : ''}`} />
@@ -440,7 +440,7 @@ export default function StudentPlayer({ initialCourseId, onGoBack, onGoToCommuni
 
                 <button 
                   onClick={onGoToCommunity}
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono rounded-lg bg-indigo-505 bg-indigo-500/5 hover:bg-indigo-500/10 border border-indigo-400/20 text-indigo-300 hover:cursor-pointer"
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono rounded-lg bg-yellow-505 bg-yellow-500/5 hover:bg-yellow-500/10 border border-yellow-400/20 text-yellow-300 hover:cursor-pointer"
                   id="player-btn-ask"
                 >
                   <HelpCircle className="w-3.5 h-3.5" /> Perguntar na Comunidade
@@ -456,7 +456,7 @@ export default function StudentPlayer({ initialCourseId, onGoBack, onGoToCommuni
           {/* Downloadable Materials Grid */}
           <div className="space-y-3">
             <h3 className="text-sm font-display font-medium text-white flex items-center gap-2">
-              <FileText className="w-4 h-4 text-purple-400" /> Materias Adicionais de Aula Complementar
+              <FileText className="w-4 h-4 text-amber-400" /> Materias Adicionais de Aula Complementar
             </h3>
             
             {selectedLesson.materials && selectedLesson.materials.length > 0 ? (
@@ -470,7 +470,7 @@ export default function StudentPlayer({ initialCourseId, onGoBack, onGoToCommuni
                     <div 
                       key={mat.id} 
                       onClick={() => handleMaterialClick(mat)}
-                      className="glass-card p-3 rounded-xl border border-purple-500/10 hover:border-purple-500/25 flex items-center justify-between hover:cursor-pointer hover:bg-black/30 transition-all select-none"
+                      className="glass-card p-3 rounded-xl border border-amber-500/10 hover:border-amber-500/25 flex items-center justify-between hover:cursor-pointer hover:bg-black/30 transition-all select-none"
                     >
                       <div className="flex items-center gap-2.5 min-w-0">
                         <div className={`w-8 h-8 rounded border flex items-center justify-center flex-shrink-0 ${
@@ -480,7 +480,7 @@ export default function StudentPlayer({ initialCourseId, onGoBack, onGoToCommuni
                               ? 'bg-amber-500/10 border-amber-500/20 text-amber-400'
                               : isDoc 
                                 ? 'bg-cyan-500/10 border-cyan-500/20 text-cyan-400'
-                                : 'bg-indigo-500/10 border-indigo-500/20 text-indigo-400'
+                                : 'bg-yellow-500/10 border-yellow-500/20 text-yellow-400'
                         }`}>
                           {isPdf && <span className="text-[9px] font-mono font-bold">PDF</span>}
                           {isZip && <span className="text-[9px] font-mono font-bold">ZIP</span>}
@@ -493,7 +493,7 @@ export default function StudentPlayer({ initialCourseId, onGoBack, onGoToCommuni
                         </div>
                       </div>
                       <button 
-                        className="p-1.5 rounded-lg text-gray-400 hover:text-white bg-purple-950/20 hover:bg-purple-500/10 border border-purple-500/10 flex-shrink-0"
+                        className="p-1.5 rounded-lg text-gray-400 hover:text-white bg-amber-950/20 hover:bg-amber-500/10 border border-amber-500/10 flex-shrink-0"
                         title="Acessar material"
                       >
                         <Download className="w-3.5 h-3.5" />
@@ -504,7 +504,7 @@ export default function StudentPlayer({ initialCourseId, onGoBack, onGoToCommuni
               </div>
             ) : (
               // Empty template
-              <div className="p-4 border border-purple-500/5 text-center bg-purple-950/5 rounded-xl text-xs text-gray-500">
+              <div className="p-4 border border-amber-500/5 text-center bg-amber-950/5 rounded-xl text-xs text-gray-500">
                 Nenhum link ou PDF de apoio anexado nesta aula. Siga as orientações da aula em texto/vídeo.
               </div>
             )}
@@ -514,18 +514,18 @@ export default function StudentPlayer({ initialCourseId, onGoBack, onGoToCommuni
 
         {/* Right Column: Complete Course Syllabus / Ementa Checklist (4 cols) */}
         <div className="lg:col-span-4 space-y-4 animate-fadeIn">
-          <div className="glass-card rounded-2xl overflow-hidden border border-purple-500/12 bg-[#090615]/50">
+          <div className="glass-card rounded-2xl overflow-hidden border border-amber-500/12 bg-[#090615]/50">
             
-            <div className="p-4 bg-purple-950/15 border-b border-purple-950/20">
-              <span className="block text-[10px] text-purple-400 font-mono uppercase tracking-widest font-bold">EMENTA COMPLETA DO CURSO</span>
+            <div className="p-4 bg-amber-950/15 border-b border-amber-950/20">
+              <span className="block text-[10px] text-amber-400 font-mono uppercase tracking-widest font-bold">EMENTA COMPLETA DO CURSO</span>
               <h3 className="text-sm font-bold font-display text-white line-clamp-1 mt-1">{course.title}</h3>
             </div>
 
             <div className="max-h-[500px] overflow-y-auto divide-y divide-purple-950/30">
               {course.lessonsList.map((mod, modIndex) => (
                 <div key={modIndex} className="p-3.5 space-y-2">
-                  <div className="flex items-center gap-1.5 text-xs font-semibold text-purple-300 font-display">
-                    <Layers className="w-3.5 h-3.5 text-indigo-400 flex-shrink-0" />
+                  <div className="flex items-center gap-1.5 text-xs font-semibold text-amber-300 font-display">
+                    <Layers className="w-3.5 h-3.5 text-yellow-400 flex-shrink-0" />
                     <span className="line-clamp-1">{mod.moduleName}</span>
                   </div>
                   
@@ -541,8 +541,8 @@ export default function StudentPlayer({ initialCourseId, onGoBack, onGoToCommuni
                             lesson.locked 
                               ? 'opacity-40 cursor-not-allowed bg-black/5' 
                               : isSelected
-                                ? 'bg-purple-950/25 border border-purple-500/30 text-white shadow-sm shadow-purple-500/5' 
-                                : 'hover:bg-purple-500/5 text-gray-300 border border-transparent hover:cursor-pointer'
+                                ? 'bg-amber-950/25 border border-amber-500/30 text-white shadow-sm shadow-amber-500/5' 
+                                : 'hover:bg-amber-500/5 text-gray-300 border border-transparent hover:cursor-pointer'
                           }`}
                           onClick={() => handleSelectLesson(lesson)}
                           id={`lesson-${lesson.id}`}
@@ -562,27 +562,27 @@ export default function StudentPlayer({ initialCourseId, onGoBack, onGoToCommuni
                             ) : isCompleted ? (
                               <CheckCircle className="w-4 h-4 text-emerald-400 fill-emerald-500/10 hover:opacity-80 transition-all hover:scale-105" />
                             ) : (
-                              <div className="w-4 h-4 rounded-full border border-purple-500/40 hover:border-purple-300 transition-all" />
+                              <div className="w-4 h-4 rounded-full border border-amber-500/40 hover:border-amber-300 transition-all" />
                             )}
                           </div>
 
                           {/* Lesson title */}
                           <div className="flex-grow min-w-0 pr-1 select-none">
-                            <span className={`block font-medium leading-tight line-clamp-2 ${isSelected ? 'text-purple-300 font-semibold' : ''} ${isCompleted && !isSelected ? 'text-gray-400 line-through decoration-gray-500/50' : ''}`}>
+                            <span className={`block font-medium leading-tight line-clamp-2 ${isSelected ? 'text-amber-300 font-semibold' : ''} ${isCompleted && !isSelected ? 'text-gray-400 line-through decoration-gray-500/50' : ''}`}>
                               {lesson.title}
                             </span>
                             <div className="flex items-center gap-1.5 mt-0.5">
                               {lesson.contentType === 'ebook' ? (
-                                <span className="text-[8px] bg-indigo-500/15 text-indigo-300 px-1 py-0.2 rounded font-mono font-bold uppercase">Ebook</span>
+                                <span className="text-[8px] bg-yellow-500/15 text-yellow-300 px-1 py-0.2 rounded font-mono font-bold uppercase">Ebook</span>
                               ) : (
-                                <span className="text-[8px] bg-purple-500/15 text-purple-300 px-1 py-0.2 rounded font-mono font-bold uppercase">Video</span>
+                                <span className="text-[8px] bg-amber-500/15 text-amber-300 px-1 py-0.2 rounded font-mono font-bold uppercase">Video</span>
                               )}
                               <span className="text-[10px] text-gray-500 block font-mono">{lesson.duration}</span>
                             </div>
                           </div>
                           
                           {isSelected && (
-                            <div className="w-1.5 h-6 rounded bg-purple-500 absolute right-0 top-1/2 -translate-y-1/2" />
+                            <div className="w-1.5 h-6 rounded bg-amber-500 absolute right-0 top-1/2 -translate-y-1/2" />
                           )}
                         </div>
                       );

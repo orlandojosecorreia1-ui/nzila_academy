@@ -207,18 +207,18 @@ export default function ProfileSettings() {
     <div className="space-y-8 pb-10">
       
       {/* Page Title Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-purple-950/25 pb-5">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-amber-950/25 pb-5">
         <div>
-          <span className="text-xs font-mono text-purple-400 font-bold block tracking-widest uppercase">
+          <span className="text-xs font-mono text-amber-400 font-bold block tracking-widest uppercase">
             {isAdmin ? 'PAINEL CENTRAL DO FUNDADOR' : 'CONFIGURAÇÕES PEDAGÓGICAS'}
           </span>
           <h2 className="text-2xl sm:text-3xl font-display font-medium text-white tracking-tight animate-fade-in">
             {isAdmin ? 'Configurações de' : 'Meu Perfil &'}{' '}
-            <span className="text-[#a78bfa] font-bold">{isAdmin ? 'Gestor e Auditoria' : 'Notificações'}</span>
+            <span className="text-[#C9A84C] font-bold">{isAdmin ? 'Gestor e Auditoria' : 'Notificações'}</span>
           </h2>
         </div>
         
-        <div className="flex items-center gap-2 text-xs font-mono text-gray-400 bg-purple-950/15 border border-purple-500/15 py-1.5 px-3 rounded-lg">
+        <div className="flex items-center gap-2 text-xs font-mono text-gray-400 bg-amber-950/15 border border-amber-500/15 py-1.5 px-3 rounded-lg">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
           <span>Servidor Nzila Core: Ativo</span>
         </div>
@@ -230,12 +230,12 @@ export default function ProfileSettings() {
         <div className="space-y-6 lg:col-span-7 col-span-1">
           
           {/* Card: Perfil do Utilizador */}
-          <div className="glass-card p-5 sm:p-6 rounded-2xl border border-purple-500/10 bg-[#0c091f]/60 relative overflow-hidden" id="profile-card">
-            <div className="absolute top-0 right-0 w-48 h-48 bg-purple-500/5 rounded-full blur-[80px] pointer-events-none" />
+          <div className="glass-card p-5 sm:p-6 rounded-2xl border border-amber-500/10 bg-[#0c091f]/60 relative overflow-hidden" id="profile-card">
+            <div className="absolute top-0 right-0 w-48 h-48 bg-amber-500/5 rounded-full blur-[80px] pointer-events-none" />
             
-            <div className="flex items-center gap-3 border-b border-purple-950/20 pb-4 mb-4">
-              <div className="p-2 bg-purple-900/10 rounded-lg border border-purple-500/20">
-                <User className="w-5 h-5 text-purple-400" />
+            <div className="flex items-center gap-3 border-b border-amber-950/20 pb-4 mb-4">
+              <div className="p-2 bg-amber-900/10 rounded-lg border border-amber-500/20">
+                <User className="w-5 h-5 text-amber-400" />
               </div>
               <div>
                 <h3 className="text-sm font-semibold text-white">Configuração de Perfil</h3>
@@ -247,9 +247,9 @@ export default function ProfileSettings() {
               
               {/* Dynamic photo and presets selector section */}
               <div className="space-y-3">
-                <div className="flex flex-col sm:flex-row items-center gap-5 p-4 rounded-xl bg-[#090514]/40 border border-purple-500/5">
+                <div className="flex flex-col sm:flex-row items-center gap-5 p-4 rounded-xl bg-[#090514]/40 border border-amber-500/5">
                   <div className="relative group shrink-0">
-                    <div className="w-20 h-20 rounded-full bg-[#130b2c] border-2 border-purple-500/20 overflow-hidden flex items-center justify-center relative shadow-inner">
+                    <div className="w-20 h-20 rounded-full bg-[#130b2c] border-2 border-amber-500/20 overflow-hidden flex items-center justify-center relative shadow-inner">
                       {selectedAvatar ? (
                         <img 
                           src={selectedAvatar} 
@@ -258,13 +258,13 @@ export default function ProfileSettings() {
                           referrerPolicy="no-referrer" 
                         />
                       ) : (
-                        <User className="w-8 h-8 text-purple-400" />
+                        <User className="w-8 h-8 text-amber-400" />
                       )}
                     </div>
                     <button 
                       type="button"
                       onClick={() => fileInputRef.current?.click()}
-                      className="absolute -bottom-1 -right-1 p-1.5 bg-purple-600 hover:bg-purple-500 text-white rounded-full border border-purple-400/20 shadow-md transition-all cursor-pointer hover:scale-105"
+                      className="absolute -bottom-1 -right-1 p-1.5 bg-amber-600 hover:bg-amber-500 text-white rounded-full border border-amber-400/20 shadow-md transition-all cursor-pointer hover:scale-105"
                       title="Carregar nova foto"
                     >
                       <Camera className="w-3.5 h-3.5" />
@@ -284,9 +284,9 @@ export default function ProfileSettings() {
                       <button
                         type="button"
                         onClick={() => fileInputRef.current?.click()}
-                        className="bg-purple-950/20 hover:bg-purple-900/40 border border-purple-500/20 text-purple-300 py-1.5 px-3 rounded-lg text-xs font-mono transition-all flex items-center gap-1 cursor-pointer"
+                        className="bg-amber-950/20 hover:bg-amber-900/40 border border-amber-500/20 text-amber-300 py-1.5 px-3 rounded-lg text-xs font-mono transition-all flex items-center gap-1 cursor-pointer"
                       >
-                        <Upload className="w-3.5 h-3.5 text-purple-400" /> Enviar do Dispositivo
+                        <Upload className="w-3.5 h-3.5 text-amber-400" /> Enviar do Dispositivo
                       </button>
                       {selectedAvatar && (
                         <button
@@ -316,7 +316,7 @@ export default function ProfileSettings() {
                           key={idx}
                           type="button"
                           onClick={() => setSelectedAvatar(p.url)}
-                          className={`relative rounded-xl overflow-hidden border aspect-square transition-all h-11 w-full group cursor-pointer ${isSel ? 'border-[#a78bfa] shadow-[0_0_12px_rgba(168,85,247,0.35)] scale-[1.04]' : 'border-purple-950/30 opacity-70 hover:opacity-100 hover:border-purple-500/35'}`}
+                          className={`relative rounded-xl overflow-hidden border aspect-square transition-all h-11 w-full group cursor-pointer ${isSel ? 'border-[#a78bfa] shadow-[0_0_12px_rgba(168,85,247,0.35)] scale-[1.04]' : 'border-amber-950/30 opacity-70 hover:opacity-100 hover:border-amber-500/35'}`}
                           title={p.name}
                         >
                           <img 
@@ -326,7 +326,7 @@ export default function ProfileSettings() {
                             referrerPolicy="no-referrer" 
                           />
                           <div className={`absolute inset-0 flex items-center justify-center transition-all bg-black/45 ${isSel ? 'opacity-100' : 'opacity-0 group-hover:opacity-100 bg-black/20'}`}>
-                            <Check className="w-3.5 h-3.5 text-purple-200" />
+                            <Check className="w-3.5 h-3.5 text-amber-200" />
                           </div>
                         </button>
                       );
@@ -340,12 +340,12 @@ export default function ProfileSettings() {
                 <div className="space-y-1.5">
                   <label className="block text-[10px] text-gray-400 font-mono uppercase tracking-widest pl-1">Nome Completo</label>
                   <div className="relative">
-                    <User className="absolute left-3 top-2.5 w-4 h-4 text-purple-400" />
+                    <User className="absolute left-3 top-2.5 w-4 h-4 text-amber-400" />
                     <input 
                       type="text" 
                       value={userName}
                       onChange={(e) => setUserName(e.target.value)}
-                      className="w-full bg-[#070514]/90 border border-purple-950/60 focus:border-purple-500/60 rounded-xl py-2 pl-9 pr-4 text-xs font-mono text-white outline-none transition-all placeholder-gray-500"
+                      className="w-full bg-[#0A0A0A]/90 border border-amber-950/60 focus:border-amber-500/60 rounded-xl py-2 pl-9 pr-4 text-xs font-mono text-white outline-none transition-all placeholder-gray-500"
                       placeholder="Seu nome"
                     />
                   </div>
@@ -354,12 +354,12 @@ export default function ProfileSettings() {
                 <div className="space-y-1.5">
                   <label className="block text-[10px] text-gray-400 font-mono uppercase tracking-widest pl-1">Endereço de Email</label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-2.5 w-4 h-4 text-purple-400" />
+                    <Mail className="absolute left-3 top-2.5 w-4 h-4 text-amber-400" />
                     <input 
                       type="email" 
                       value={userEmail}
                       onChange={(e) => setUserEmail(e.target.value)}
-                      className="w-full bg-[#070514]/90 border border-purple-950/60 focus:border-purple-500/60 rounded-xl py-2 pl-9 pr-4 text-xs font-mono text-white outline-none transition-all placeholder-gray-500"
+                      className="w-full bg-[#0A0A0A]/90 border border-amber-950/60 focus:border-amber-500/60 rounded-xl py-2 pl-9 pr-4 text-xs font-mono text-white outline-none transition-all placeholder-gray-500"
                       placeholder="voce@exemplo.com"
                     />
                   </div>
@@ -369,19 +369,19 @@ export default function ProfileSettings() {
               <div className="space-y-1.5">
                 <label className="block text-[10px] text-gray-400 font-mono uppercase tracking-widest pl-1">Contacto Whatsapp (Para Alertas e Desafios)</label>
                 <div className="relative">
-                  <Phone className="absolute left-3 top-2.5 w-4 h-4 text-purple-400" />
+                  <Phone className="absolute left-3 top-2.5 w-4 h-4 text-amber-400" />
                   <input 
                     type="text" 
                     value={userPhone}
                     onChange={(e) => setUserPhone(e.target.value)}
-                    className="w-full bg-[#070514]/90 border border-purple-950/60 focus:border-purple-500/60 rounded-xl py-2 pl-9 pr-4 text-xs font-mono text-white outline-none transition-all placeholder-gray-500"
+                    className="w-full bg-[#0A0A0A]/90 border border-amber-950/60 focus:border-amber-500/60 rounded-xl py-2 pl-9 pr-4 text-xs font-mono text-white outline-none transition-all placeholder-gray-500"
                     placeholder="+244 9XX XXX XXX"
                   />
                 </div>
               </div>
 
-              <div className="bg-purple-950/10 border border-purple-500/10 p-3 rounded-xl flex items-center gap-2.5">
-                <Shield className="w-4 h-4 text-purple-400" />
+              <div className="bg-amber-950/10 border border-amber-500/10 p-3 rounded-xl flex items-center gap-2.5">
+                <Shield className="w-4 h-4 text-amber-400" />
                 <span className="text-[11px] font-mono text-gray-400">
                   Nível de Acesso: <strong className="text-white">{isAdmin ? 'Administrador Co-Founder' : 'Estudante Pro'}</strong>
                 </span>
@@ -400,7 +400,7 @@ export default function ProfileSettings() {
                 <button
                   type="submit"
                   disabled={isUpdating}
-                  className="bg-purple-600 hover:bg-purple-500 text-white font-mono text-xs font-semibold py-2 px-5 rounded-lg border border-purple-500/30 transition-all shadow-md flex items-center gap-2 hover:cursor-pointer disabled:opacity-40"
+                  className="bg-amber-600 hover:bg-amber-500 text-white font-mono text-xs font-semibold py-2 px-5 rounded-lg border border-amber-500/30 transition-all shadow-md flex items-center gap-2 hover:cursor-pointer disabled:opacity-40"
                 >
                   {isUpdating ? 'Atualizando...' : 'Gravar Perfil'}
                 </button>
@@ -410,11 +410,11 @@ export default function ProfileSettings() {
 
           {/* Section 2: Configuração de Notificações do Sistema (ADMINS ONLY can view alerts channel editor) */}
           {isAdmin && (
-            <div className="glass-card p-5 sm:p-6 rounded-2xl border border-purple-500/10 bg-[#0c091f]/60 relative" id="notifications-settings">
+            <div className="glass-card p-5 sm:p-6 rounded-2xl border border-amber-500/10 bg-[#0c091f]/60 relative" id="notifications-settings">
               
-              <div className="flex items-center gap-3 border-b border-purple-950/20 pb-4 mb-4">
-                <div className="p-2 bg-indigo-900/10 rounded-lg border border-indigo-500/20">
-                  <Bell className="w-5 h-5 text-indigo-400" />
+              <div className="flex items-center gap-3 border-b border-amber-950/20 pb-4 mb-4">
+                <div className="p-2 bg-yellow-900/10 rounded-lg border border-yellow-500/20">
+                  <Bell className="w-5 h-5 text-yellow-400" />
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-white">Canais de Notificações Ativos (Global)</h3>
@@ -424,9 +424,9 @@ export default function ProfileSettings() {
 
               <div className="space-y-3">
                 {/* Channel 1: Browser push */}
-                <div className="flex items-center justify-between p-3 rounded-xl bg-[#070514]/50 border border-purple-950/40 hover:border-purple-500/20 transition-all">
+                <div className="flex items-center justify-between p-3 rounded-xl bg-[#0A0A0A]/50 border border-amber-950/40 hover:border-amber-500/20 transition-all">
                   <div className="flex items-center gap-3">
-                    <div className={`p-2 rounded-lg ${channels.browser ? 'bg-indigo-500/10 text-indigo-400' : 'bg-gray-900/20 text-gray-500'}`}>
+                    <div className={`p-2 rounded-lg ${channels.browser ? 'bg-yellow-500/10 text-yellow-400' : 'bg-gray-900/20 text-gray-500'}`}>
                       <Smartphone className="w-4 h-4" />
                     </div>
                     <div>
@@ -436,14 +436,14 @@ export default function ProfileSettings() {
                   </div>
                   <button 
                     onClick={() => toggleChannel('browser')}
-                    className={`w-9 h-5 rounded-full p-0.5 transition-all duration-300 flex ${channels.browser ? 'bg-indigo-500 justify-end' : 'bg-[#150d2d] justify-start'} hover:cursor-pointer`}
+                    className={`w-9 h-5 rounded-full p-0.5 transition-all duration-300 flex ${channels.browser ? 'bg-yellow-500 justify-end' : 'bg-[#150d2d] justify-start'} hover:cursor-pointer`}
                   >
                     <span className="w-4 h-4 rounded-full bg-white block shadow-sm" />
                   </button>
                 </div>
 
                 {/* Channel 2: WhatsApp Alerts */}
-                <div className="flex items-center justify-between p-3 rounded-xl bg-[#070514]/50 border border-purple-950/40 hover:border-purple-500/20 transition-all">
+                <div className="flex items-center justify-between p-3 rounded-xl bg-[#0A0A0A]/50 border border-amber-950/40 hover:border-amber-500/20 transition-all">
                   <div className="flex items-center gap-3">
                     <div className={`p-2 rounded-lg ${channels.whatsapp ? 'bg-emerald-500/10 text-emerald-400' : 'bg-gray-900/20 text-gray-500'}`}>
                       <MessageSquare className="w-4 h-4" />
@@ -462,9 +462,9 @@ export default function ProfileSettings() {
                 </div>
 
                 {/* Channel 3: Email newsletter */}
-                <div className="flex items-center justify-between p-3 rounded-xl bg-[#070514]/50 border border-purple-950/40 hover:border-purple-500/20 transition-all">
+                <div className="flex items-center justify-between p-3 rounded-xl bg-[#0A0A0A]/50 border border-amber-950/40 hover:border-amber-500/20 transition-all">
                   <div className="flex items-center gap-3">
-                    <div className={`p-2 rounded-lg ${channels.email ? 'bg-purple-500/10 text-purple-400' : 'bg-gray-900/20 text-gray-500'}`}>
+                    <div className={`p-2 rounded-lg ${channels.email ? 'bg-amber-500/10 text-amber-400' : 'bg-gray-900/20 text-gray-500'}`}>
                       <Mail className="w-4 h-4" />
                     </div>
                     <div>
@@ -474,7 +474,7 @@ export default function ProfileSettings() {
                   </div>
                   <button 
                     onClick={() => toggleChannel('email')}
-                    className={`w-9 h-5 rounded-full p-0.5 transition-all duration-300 flex ${channels.email ? 'bg-purple-500 justify-end' : 'bg-[#150d2d] justify-start'} hover:cursor-pointer`}
+                    className={`w-9 h-5 rounded-full p-0.5 transition-all duration-300 flex ${channels.email ? 'bg-amber-500 justify-end' : 'bg-[#150d2d] justify-start'} hover:cursor-pointer`}
                   >
                     <span className="w-4 h-4 rounded-full bg-white block shadow-sm" />
                   </button>
@@ -494,12 +494,12 @@ export default function ProfileSettings() {
             /* ADMIN SECTION RENDER */
             <>
               {/* Card 1: Notification Simulator */}
-              <div className="glass-card p-5 sm:p-6 rounded-2xl border border-purple-500/10 bg-[#0c091f]/60 relative" id="notifications-trigger">
+              <div className="glass-card p-5 sm:p-6 rounded-2xl border border-amber-500/10 bg-[#0c091f]/60 relative" id="notifications-trigger">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[#a78bfa]/5 rounded-full blur-[60px] pointer-events-none" />
                 
-                <div className="flex items-center gap-3 border-b border-purple-950/20 pb-4 mb-4">
-                  <div className="p-2 bg-purple-500/10 rounded-lg border border-[#a78bfa]/30">
-                    <Sliders className="w-5 h-5 text-purple-400" />
+                <div className="flex items-center gap-3 border-b border-amber-950/20 pb-4 mb-4">
+                  <div className="p-2 bg-amber-500/10 rounded-lg border border-[#a78bfa]/30">
+                    <Sliders className="w-5 h-5 text-amber-400" />
                   </div>
                   <div>
                     <h3 className="text-sm font-semibold text-white">Simulador NZILA Push</h3>
@@ -511,15 +511,15 @@ export default function ProfileSettings() {
                   <button 
                     type="button"
                     onClick={() => handleSetQuickNotification('Desafio Prático IA', 'Novo desafio lançado para criar uma rede neural simples.', 'success')}
-                    className="bg-[#0e0821] hover:bg-purple-900/10 border border-purple-500/5 hover:border-purple-500/20 rounded-lg p-2 text-left transition-all"
+                    className="bg-[#0e0821] hover:bg-amber-900/10 border border-amber-500/5 hover:border-amber-500/20 rounded-lg p-2 text-left transition-all"
                   >
-                    <span className="text-[10px] text-purple-400 font-bold font-mono block">1. Desafio IA</span>
+                    <span className="text-[10px] text-amber-400 font-bold font-mono block">1. Desafio IA</span>
                     <span className="text-[9px] text-gray-400 font-sans block line-clamp-1">Teste de neurônios</span>
                   </button>
                   <button 
                     type="button"
                     onClick={() => handleSetQuickNotification('Live Cancelada', 'A mentoria de Criptologia Quântica foi reagendada para Sábado.', 'alert')}
-                    className="bg-[#0e0821] hover:bg-purple-900/10 border border-purple-500/5 hover:border-purple-500/20 rounded-lg p-2 text-left transition-all"
+                    className="bg-[#0e0821] hover:bg-amber-900/10 border border-amber-500/5 hover:border-amber-500/20 rounded-lg p-2 text-left transition-all"
                   >
                     <span className="text-[10px] text-amber-400 font-bold font-mono block">2. Reagendamento</span>
                     <span className="text-[9px] text-gray-400 font-sans block line-clamp-1">Aviso de última hora</span>
@@ -527,9 +527,9 @@ export default function ProfileSettings() {
                   <button 
                     type="button"
                     onClick={() => handleSetQuickNotification('Promoção Exclusiva', 'O teu cupom do NZILA Core Masterclass já está ativo!', 'info')}
-                    className="bg-[#0e0821] hover:bg-purple-900/10 border border-purple-500/5 hover:border-purple-500/20 rounded-lg p-2 text-left transition-all"
+                    className="bg-[#0e0821] hover:bg-amber-900/10 border border-amber-500/5 hover:border-amber-500/20 rounded-lg p-2 text-left transition-all"
                   >
-                    <span className="text-[10px] text-indigo-400 font-bold font-mono block">3. Token Ativado</span>
+                    <span className="text-[10px] text-yellow-400 font-bold font-mono block">3. Token Ativado</span>
                     <span className="text-[9px] text-gray-400 font-sans block line-clamp-1">Sucesso de voucher</span>
                   </button>
                 </div>
@@ -541,7 +541,7 @@ export default function ProfileSettings() {
                       type="text" 
                       value={testTitle}
                       onChange={(e) => setTestTitle(e.target.value)}
-                      className="w-full bg-[#070514]/95 border border-purple-950/60 focus:border-purple-500/40 rounded-xl py-2 px-3 text-xs font-mono text-white outline-none"
+                      className="w-full bg-[#0A0A0A]/95 border border-amber-950/60 focus:border-amber-500/40 rounded-xl py-2 px-3 text-xs font-mono text-white outline-none"
                       placeholder="Título"
                       required
                     />
@@ -552,7 +552,7 @@ export default function ProfileSettings() {
                     <textarea 
                       value={testMsg}
                       onChange={(e) => setTestMsg(e.target.value)}
-                      className="w-full bg-[#070514]/95 border border-purple-950/60 focus:border-purple-500/40 rounded-xl py-2 px-3 text-xs font-mono text-white outline-none h-16 min-h-[4rem] max-h-32 resize-none"
+                      className="w-full bg-[#0A0A0A]/95 border border-amber-950/60 focus:border-amber-500/40 rounded-xl py-2 px-3 text-xs font-mono text-white outline-none h-16 min-h-[4rem] max-h-32 resize-none"
                       placeholder="Mensagem"
                       required
                     />
@@ -560,12 +560,12 @@ export default function ProfileSettings() {
 
                   <div className="space-y-3.5 pt-1">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <div className="space-y-1 bg-[#100a2b]/20 p-2 rounded-xl border border-purple-950/40">
-                        <label className="block text-[10px] text-purple-300 font-mono uppercase pl-1 pb-1">Destinatários</label>
+                      <div className="space-y-1 bg-[#100a2b]/20 p-2 rounded-xl border border-amber-950/40">
+                        <label className="block text-[10px] text-amber-300 font-mono uppercase pl-1 pb-1">Destinatários</label>
                         <select
                           value={selectedTargetCourseId}
                           onChange={(e) => setSelectedTargetCourseId(e.target.value)}
-                          className="w-full bg-[#0e0924] border border-purple-900/60 text-purple-200 text-[11px] font-mono rounded py-1 px-1.5 focus:outline-none"
+                          className="w-full bg-[#0e0924] border border-amber-900/60 text-amber-200 text-[11px] font-mono rounded py-1 px-1.5 focus:outline-none"
                         >
                           <option value="all">Alunos de Todos Cursos (Geral)</option>
                           {courses.map(course => (
@@ -576,12 +576,12 @@ export default function ProfileSettings() {
                         </select>
                       </div>
 
-                      <div className="space-y-1 bg-[#100a2b]/20 p-2 rounded-xl border border-purple-950/40">
-                        <label className="block text-[10px] text-purple-300 font-mono uppercase pl-1 pb-1">Categoria de Alerta</label>
+                      <div className="space-y-1 bg-[#100a2b]/20 p-2 rounded-xl border border-amber-950/40">
+                        <label className="block text-[10px] text-amber-300 font-mono uppercase pl-1 pb-1">Categoria de Alerta</label>
                         <select 
                           value={testCategory}
                           onChange={(e: any) => setTestCategory(e.target.value)}
-                          className="w-full bg-[#0e0924] border border-purple-900/60 text-purple-200 text-[11px] font-mono rounded py-1 px-1.5 focus:outline-none"
+                          className="w-full bg-[#0e0924] border border-amber-900/60 text-amber-200 text-[11px] font-mono rounded py-1 px-1.5 focus:outline-none"
                         >
                           <option value="info">Info</option>
                           <option value="success">Sucesso</option>
@@ -593,7 +593,7 @@ export default function ProfileSettings() {
                     <div className="flex justify-end pt-1">
                       <button
                         type="submit"
-                        className="bg-purple-600 hover:bg-purple-500 text-white font-mono text-xs font-bold py-2 px-6 rounded-xl border border-purple-500/40 hover:border-purple-500/80 transition-all hover:cursor-pointer flex items-center gap-1.5 shadow-[0_0_15px_rgba(168,85,247,0.15)]"
+                        className="bg-amber-600 hover:bg-amber-500 text-white font-mono text-xs font-bold py-2 px-6 rounded-xl border border-amber-500/40 hover:border-amber-500/80 transition-all hover:cursor-pointer flex items-center gap-1.5 shadow-[0_0_15px_rgba(168,85,247,0.15)]"
                       >
                         <Sparkles className="w-3.5 h-3.5" /> Disparar Alerta Acadêmico
                       </button>
@@ -603,15 +603,15 @@ export default function ProfileSettings() {
               </div>
 
               {/* Card 2: Visualizador de Logs do Sistema */}
-              <div className="glass-card p-5 sm:p-6 rounded-2xl border border-purple-500/15 bg-[#0b081e]/85 relative h-auto min-h-[580px] flex flex-col justify-between" id="activity-logs">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full blur-[60px] pointer-events-none" />
+              <div className="glass-card p-5 sm:p-6 rounded-2xl border border-amber-500/15 bg-[#111111]/85 relative h-auto min-h-[580px] flex flex-col justify-between" id="activity-logs">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-full blur-[60px] pointer-events-none" />
                 
                 <div>
                   {/* Title and Header Actions */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-purple-950/30 pb-4 mb-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-amber-950/30 pb-4 mb-4">
                     <div className="flex items-center gap-3">
-                      <div className="p-2.5 bg-purple-500/10 rounded-xl border border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.15)]">
-                        <Database className="w-5 h-5 text-purple-400" />
+                      <div className="p-2.5 bg-amber-500/10 rounded-xl border border-amber-500/30 shadow-[0_0_15px_rgba(168,85,247,0.15)]">
+                        <Database className="w-5 h-5 text-amber-400" />
                       </div>
                       <div>
                         <h3 className="text-sm font-bold text-white tracking-wide uppercase font-mono">Visualizador de Logs</h3>
@@ -623,7 +623,7 @@ export default function ProfileSettings() {
                     <div className="flex items-center gap-2">
                       <button
                         onClick={handleExportLogs}
-                        className="text-[10px] font-mono font-bold text-purple-300 hover:text-white bg-purple-900/40 border border-purple-500/30 px-2.5 py-1.5 rounded-lg transition-all hover:cursor-pointer flex items-center gap-1"
+                        className="text-[10px] font-mono font-bold text-amber-300 hover:text-white bg-amber-900/40 border border-amber-500/30 px-2.5 py-1.5 rounded-lg transition-all hover:cursor-pointer flex items-center gap-1"
                         type="button"
                         title="Exportar todos os logs formatados em formato TXT"
                       >
@@ -642,7 +642,7 @@ export default function ProfileSettings() {
 
                   {/* Micro-analytics boxes */}
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
-                    <div className="bg-[#080516]/80 p-2 rounded-xl border border-purple-950/45 text-center">
+                    <div className="bg-[#080516]/80 p-2 rounded-xl border border-amber-950/45 text-center">
                       <span className="block text-[8px] font-mono text-gray-500 uppercase">Todos Eventos</span>
                       <span className="text-sm font-bold text-white font-mono">{activityLogs.length}</span>
                     </div>
@@ -652,9 +652,9 @@ export default function ProfileSettings() {
                         {activityLogs.filter(l => l.category === 'auth').length}
                       </span>
                     </div>
-                    <div className="bg-[#080516]/80 p-2 rounded-xl border border-purple-900/45 text-center">
-                      <span className="block text-[8px] font-mono text-purple-300 uppercase">Cursos Criados</span>
-                      <span className="text-sm font-bold text-purple-400 font-mono">
+                    <div className="bg-[#080516]/80 p-2 rounded-xl border border-amber-900/45 text-center">
+                      <span className="block text-[8px] font-mono text-amber-300 uppercase">Cursos Criados</span>
+                      <span className="text-sm font-bold text-amber-400 font-mono">
                         {activityLogs.filter(l => l.category === 'courses').length}
                       </span>
                     </div>
@@ -670,13 +670,13 @@ export default function ProfileSettings() {
                   <div className="space-y-3 mb-4">
                     {/* Search bar */}
                     <div className="relative">
-                      <Search className="absolute left-3 top-2.5 w-3.5 h-3.5 text-purple-500" />
+                      <Search className="absolute left-3 top-2.5 w-3.5 h-3.5 text-amber-500" />
                       <input 
                         type="text" 
                         value={logSearch}
                         onChange={(e) => setLogSearch(e.target.value)}
                         placeholder="Pesquisar por ação ou utilizador..."
-                        className="w-full bg-[#060411]/90 border border-purple-950/60 focus:border-purple-500/30 rounded-xl py-1.5 px-3 pl-9 text-[11px] font-mono text-white outline-none placeholder-gray-500 transition-all"
+                        className="w-full bg-[#060411]/90 border border-amber-950/60 focus:border-amber-500/30 rounded-xl py-1.5 px-3 pl-9 text-[11px] font-mono text-white outline-none placeholder-gray-500 transition-all"
                       />
                     </div>
 
@@ -685,35 +685,35 @@ export default function ProfileSettings() {
                       <button
                         onClick={() => setLogCategoryFilter('all')}
                         type="button"
-                        className={`px-3 py-1 rounded-lg text-[10px] font-mono font-medium transition-all ${logCategoryFilter === 'all' ? 'bg-purple-600 text-white' : 'bg-[#0e0a24] text-gray-400 border border-purple-950/50 hover:text-white'}`}
+                        className={`px-3 py-1 rounded-lg text-[10px] font-mono font-medium transition-all ${logCategoryFilter === 'all' ? 'bg-amber-600 text-white' : 'bg-[#0e0a24] text-gray-400 border border-amber-950/50 hover:text-white'}`}
                       >
                         Todos ({activityLogs.length})
                       </button>
                       <button
                         onClick={() => setLogCategoryFilter('auth')}
                         type="button"
-                        className={`px-3 py-1 rounded-lg text-[10px] font-mono font-medium transition-all ${logCategoryFilter === 'auth' ? 'bg-cyan-900/30 text-cyan-300 border border-cyan-500/30' : 'bg-[#0e0a24] text-gray-400 border border-purple-950/50 hover:text-white'}`}
+                        className={`px-3 py-1 rounded-lg text-[10px] font-mono font-medium transition-all ${logCategoryFilter === 'auth' ? 'bg-cyan-900/30 text-cyan-300 border border-cyan-500/30' : 'bg-[#0e0a24] text-gray-400 border border-amber-950/50 hover:text-white'}`}
                       >
                         Sessões ({activityLogs.filter(l => l.category === 'auth').length})
                       </button>
                       <button
                         onClick={() => setLogCategoryFilter('courses')}
                         type="button"
-                        className={`px-3 py-1 rounded-lg text-[10px] font-mono font-medium transition-all ${logCategoryFilter === 'courses' ? 'bg-indigo-950/40 text-indigo-300 border border-indigo-500/20' : 'bg-[#0e0a24] text-gray-400 border border-purple-950/50 hover:text-white'}`}
+                        className={`px-3 py-1 rounded-lg text-[10px] font-mono font-medium transition-all ${logCategoryFilter === 'courses' ? 'bg-yellow-950/40 text-yellow-300 border border-yellow-500/20' : 'bg-[#0e0a24] text-gray-400 border border-amber-950/50 hover:text-white'}`}
                       >
                         Cursos ({activityLogs.filter(l => l.category === 'courses').length})
                       </button>
                       <button
                         onClick={() => setLogCategoryFilter('notification')}
                         type="button"
-                        className={`px-3 py-1 rounded-lg text-[10px] font-mono font-medium transition-all ${logCategoryFilter === 'notification' ? 'bg-pink-950/50 text-pink-300 border border-pink-500/35' : 'bg-[#0e0a24] text-gray-400 border border-purple-950/50 hover:text-white'}`}
+                        className={`px-3 py-1 rounded-lg text-[10px] font-mono font-medium transition-all ${logCategoryFilter === 'notification' ? 'bg-pink-950/50 text-pink-300 border border-pink-500/35' : 'bg-[#0e0a24] text-gray-400 border border-amber-950/50 hover:text-white'}`}
                       >
                         Disparos ({activityLogs.filter(l => l.category === 'notification').length})
                       </button>
                       <button
                         onClick={() => setLogCategoryFilter('system')}
                         type="button"
-                        className={`px-3 py-1 rounded-lg text-[10px] font-mono font-medium transition-all ${logCategoryFilter === 'system' ? 'bg-amber-950/50 text-amber-300 border border-amber-500/35' : 'bg-[#0e0a24] text-gray-400 border border-purple-950/50 hover:text-white'}`}
+                        className={`px-3 py-1 rounded-lg text-[10px] font-mono font-medium transition-all ${logCategoryFilter === 'system' ? 'bg-amber-950/50 text-amber-300 border border-amber-500/35' : 'bg-[#0e0a24] text-gray-400 border border-amber-950/50 hover:text-white'}`}
                       >
                         Sistema ({activityLogs.filter(l => l.category === 'system').length})
                       </button>
@@ -730,7 +730,7 @@ export default function ProfileSettings() {
                     </div>
                   ) : (
                     filteredLogs.map(log => {
-                      let badgeColor = 'text-purple-400 bg-purple-950/40 border-purple-900/50';
+                      let badgeColor = 'text-amber-400 bg-amber-950/40 border-amber-900/50';
                       let catLabel = 'Perfil';
                       if (log.category === 'auth') {
                         badgeColor = 'text-cyan-400 bg-cyan-950/40 border-cyan-800/50';
@@ -742,17 +742,17 @@ export default function ProfileSettings() {
                         badgeColor = 'text-pink-400 bg-pink-950/40 border-pink-850/50';
                         catLabel = 'Alerta';
                       } else if (log.category === 'courses') {
-                        badgeColor = 'text-indigo-400 bg-indigo-950/40 border-indigo-850/50';
+                        badgeColor = 'text-yellow-400 bg-yellow-950/40 border-yellow-850/50';
                         catLabel = 'Curso';
                       }
 
                       return (
                         <div 
                           key={log.id} 
-                          className="p-3 rounded-xl bg-[#060412]/90 border border-purple-950/45 hover:border-purple-500/20 transition-all duration-200 text-left flex items-start gap-3 relative overflow-hidden"
+                          className="p-3 rounded-xl bg-[#060412]/90 border border-amber-950/45 hover:border-amber-500/20 transition-all duration-200 text-left flex items-start gap-3 relative overflow-hidden"
                         >
                           {/* Inner Category Visual Side Stripe */}
-                          <div className={`absolute top-0 bottom-0 left-0 w-1 ${log.category === 'auth' ? 'bg-cyan-500' : log.category === 'courses' ? 'bg-indigo-500' : log.category === 'notification' ? 'bg-pink-500' : log.category === 'system' ? 'bg-amber-500' : 'bg-purple-500'}`} />
+                          <div className={`absolute top-0 bottom-0 left-0 w-1 ${log.category === 'auth' ? 'bg-cyan-500' : log.category === 'courses' ? 'bg-yellow-500' : log.category === 'notification' ? 'bg-pink-500' : log.category === 'system' ? 'bg-amber-500' : 'bg-amber-500'}`} />
 
                           <div className="space-y-1.5 flex-1 pl-1">
                             {/* Action message and category */}
@@ -766,7 +766,7 @@ export default function ProfileSettings() {
                             </div>
 
                             {/* Details: timestamp and administrative actor */}
-                            <div className="flex items-center justify-between text-[10px] text-gray-550 font-mono pt-1 border-t border-purple-950/20">
+                            <div className="flex items-center justify-between text-[10px] text-gray-550 font-mono pt-1 border-t border-amber-950/20">
                               <span className="flex items-center gap-1.5">
                                 <User className="w-3.5 h-3.5 text-gray-500 shrink-0" />
                                 <span className="text-gray-400">{log.user}</span>
@@ -783,22 +783,22 @@ export default function ProfileSettings() {
                   )}
                 </div>
 
-                <div className="border-t border-purple-950/30 pt-3.5 mt-4 flex items-center justify-between text-[10px] text-gray-500 font-mono">
-                  <span className="flex items-center gap-1.5"><Shield className="w-3.5 h-3.5 text-purple-600" /> Trilha de Auditoria Validada</span>
-                  <span className="text-purple-400 hover:text-purple-300 transition-all font-bold">Nzila Audit Engine v2.5</span>
+                <div className="border-t border-amber-950/30 pt-3.5 mt-4 flex items-center justify-between text-[10px] text-gray-500 font-mono">
+                  <span className="flex items-center gap-1.5"><Shield className="w-3.5 h-3.5 text-amber-600" /> Trilha de Auditoria Validada</span>
+                  <span className="text-amber-400 hover:text-amber-300 transition-all font-bold">Nzila Audit Engine v2.5</span>
                 </div>
               </div>
             </>
           ) : (
             /* STUDENT SECTION RENDER - BEAUTIFUL NOTIFICATION INBOX */
-            <div className="glass-card p-5 sm:p-6 rounded-2xl border border-purple-500/10 bg-[#0c091f]/60 relative h-[560px] flex flex-col justify-between" id="student-notifications">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-550/5 rounded-full blur-[60px] pointer-events-none" />
+            <div className="glass-card p-5 sm:p-6 rounded-2xl border border-amber-500/10 bg-[#0c091f]/60 relative h-[560px] flex flex-col justify-between" id="student-notifications">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-550/5 rounded-full blur-[60px] pointer-events-none" />
               
               <div className="space-y-4">
-                <div className="flex items-center justify-between border-b border-purple-950/20 pb-4">
+                <div className="flex items-center justify-between border-b border-amber-950/20 pb-4">
                   <div className="flex items-center gap-3">
-                    <div className="p-2 bg-indigo-950/25 rounded-lg border border-indigo-500/20">
-                      <Bell className="w-5 h-5 text-indigo-400 animate-pulse" />
+                    <div className="p-2 bg-yellow-950/25 rounded-lg border border-yellow-500/20">
+                      <Bell className="w-5 h-5 text-yellow-400 animate-pulse" />
                     </div>
                     <div>
                       <h3 className="text-sm font-semibold text-white">Central de Comunicações</h3>
@@ -808,7 +808,7 @@ export default function ProfileSettings() {
 
                   <button 
                     onClick={markNotificationsAsRead}
-                    className="text-[10px] font-mono text-purple-400 hover:text-purple-300 font-bold bg-[#140b2a]/60 border border-purple-500/20 px-2 py-1 rounded-lg transition-all hover:cursor-pointer"
+                    className="text-[10px] font-mono text-amber-400 hover:text-amber-300 font-bold bg-[#140b2a]/60 border border-amber-500/20 px-2 py-1 rounded-lg transition-all hover:cursor-pointer"
                   >
                     Ler Todas
                   </button>
@@ -817,20 +817,20 @@ export default function ProfileSettings() {
                 {/* Filters for notifications */}
                 <div className="flex gap-2">
                   <div className="relative flex-1">
-                    <Search className="absolute left-2.5 top-2 w-3.5 h-3.5 text-indigo-500" />
+                    <Search className="absolute left-2.5 top-2 w-3.5 h-3.5 text-yellow-500" />
                     <input 
                       type="text" 
                       value={filterSearch}
                       onChange={(e) => setFilterSearch(e.target.value)}
                       placeholder="Buscar avisos..."
-                      className="w-full bg-[#070514]/90 border border-purple-950/40 focus:border-indigo-500/30 rounded-lg py-1 px-3 pl-8 text-[11px] font-mono text-white outline-none placeholder-gray-500"
+                      className="w-full bg-[#0A0A0A]/90 border border-amber-950/40 focus:border-yellow-500/30 rounded-lg py-1 px-3 pl-8 text-[11px] font-mono text-white outline-none placeholder-gray-500"
                     />
                   </div>
 
                   <select
                     value={categoryFilter}
                     onChange={(e) => setCategoryFilter(e.target.value)}
-                    className="bg-[#070514]/90 border border-purple-950/40 text-gray-400 text-[11px] font-mono rounded-lg py-1 px-2 outline-none focus:border-indigo-500/30"
+                    className="bg-[#0A0A0A]/90 border border-amber-950/40 text-gray-400 text-[11px] font-mono rounded-lg py-1 px-2 outline-none focus:border-yellow-500/30"
                   >
                     <option value="all">Todas</option>
                     <option value="info">Info</option>
@@ -844,7 +844,7 @@ export default function ProfileSettings() {
               <div className="flex-grow overflow-y-auto space-y-3 pr-1 my-4 custom-scrollbar max-h-[350px]">
                 {filteredNotifications.length === 0 ? (
                   <div className="flex flex-col items-center justify-center py-16 text-center space-y-3">
-                    <Inbox className="w-10 h-10 text-purple-900/45 animate-bounce" />
+                    <Inbox className="w-10 h-10 text-amber-900/45 animate-bounce" />
                     <div className="space-y-1">
                       <p className="text-xs font-mono font-bold text-gray-400">Nenhum aviso ativo</p>
                       <p className="text-[10px] text-gray-500 leading-normal max-w-xs font-sans">
@@ -868,7 +868,7 @@ export default function ProfileSettings() {
                     return (
                       <div 
                         key={notif.id} 
-                        className={`p-3.5 rounded-xl border transition-all text-left flex items-start gap-3 relative ${notif.read ? 'bg-[#060411]/50 border-purple-950/20 opacity-80' : 'bg-[#0f0a28]/60 border-[#a78bfa]/25 shadow-[0_0_15px_rgba(167,139,250,0.06)]'}`}
+                        className={`p-3.5 rounded-xl border transition-all text-left flex items-start gap-3 relative ${notif.read ? 'bg-[#060411]/50 border-amber-950/20 opacity-80' : 'bg-[#0f0a28]/60 border-[#a78bfa]/25 shadow-[0_0_15px_rgba(167,139,250,0.06)]'}`}
                       >
                         {/* Static categories visual icon */}
                         <div className="shrink-0 pt-0.5">
@@ -883,7 +883,7 @@ export default function ProfileSettings() {
                             </h4>
                             <div className="flex items-center gap-1">
                               {notif.targetCourseId ? (
-                                <span className="text-[7.5px] font-mono text-purple-300 bg-purple-950/40 border border-purple-500/20 px-1.5 py-0.5 rounded uppercase max-w-[100px] truncate" title={courses.find(c => c.id === notif.targetCourseId)?.title}>
+                                <span className="text-[7.5px] font-mono text-amber-300 bg-amber-950/40 border border-amber-500/20 px-1.5 py-0.5 rounded uppercase max-w-[100px] truncate" title={courses.find(c => c.id === notif.targetCourseId)?.title}>
                                   {courses.find(c => c.id === notif.targetCourseId)?.title.substring(0, 10)}...
                                 </span>
                               ) : (
@@ -917,9 +917,9 @@ export default function ProfileSettings() {
               </div>
 
               {/* Box Footer status indicators */}
-              <div className="border-t border-purple-950/20 pt-3 flex items-center justify-between text-[9px] text-gray-500 font-mono">
+              <div className="border-t border-amber-950/20 pt-3 flex items-center justify-between text-[9px] text-gray-500 font-mono">
                 <span className="flex items-center gap-1">📡 Canal Pedagógico Nzila Core</span>
-                <span className="text-[#a78bfa]">
+                <span className="text-[#C9A84C]">
                   {notifications.filter(n => !n.read).length} não lidas
                 </span>
               </div>
