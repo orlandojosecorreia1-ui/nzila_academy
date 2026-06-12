@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useApp, Post } from '@/lib/context/AppContext';
 import { motion, AnimatePresence } from 'motion/react';
-import { MessageSquare, Heart, Pin, Send, Plus, Filter, AlertCircle, Share2, Award, ExternalLink, X, Users } from 'lucide-react';
+import { MessageSquare, Heart, Pin, Send, Plus, Filter, AlertCircle, Share2, Award, ExternalLink, X, Users, Star } from 'lucide-react';
 
 export default function StudentFeed() {
   const { posts, currentUser, students, addNewPost, likePost, addComment, deletePost } = useApp();

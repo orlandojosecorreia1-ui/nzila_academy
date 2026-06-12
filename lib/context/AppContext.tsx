@@ -149,7 +149,6 @@ interface AppContextType {
   triggerSystemNotification: (title: string, message: string, category: SystemNotification['category'], targetCourseId?: string) => void;
   markNotificationsAsRead: () => void;
   supabaseConnected: boolean;
-  supabaseConnected: boolean;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -884,6 +883,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       addNewPost,
       likePost,
       addComment,
+      pinComment,
       deletePost,
       updateProfile,
       addActivityLog,
