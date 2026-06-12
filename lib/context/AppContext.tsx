@@ -240,6 +240,15 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       if (storedUser) setCurrentUser(JSON.parse(storedUser));
       // eslint-disable-next-line react-hooks/set-state-in-effect
       if (storedIsAdmin) setIsAdmin(JSON.parse(storedIsAdmin));
+
+      // SEGURANÇA: Limpar access_token da URL após confirmação de e-mail do Supabase
+      // O Supabase usa o fluxo implícito e redireciona de volta com os tokens na URL (#access_token=...)
+      // Limpamos para que o utilizador não veja nem consiga copiar/partilhar o seu token
+      if (window.location.hash && window.location.hash.includes('access_token=')) {
+        setTimeout(() => {
+          window.history.replaceState(null, '', window.location.pathname + window.location.search);
+        }, 1000); // 1 segundo é suficiente para o cliente do Supabase capturar a sessão
+      }
     }
 
     loadSupabaseData();
